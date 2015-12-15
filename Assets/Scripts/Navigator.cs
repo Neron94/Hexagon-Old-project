@@ -103,14 +103,18 @@ public class Navigator : MonoBehaviour {
                 return obj;
                 
             }
+            else
+            {
+                cif[1] = cif[0];
+                cif[2] = cif[0];
+                cif[3] = cif[0];
+                cif[4] = cif[0];
+                cif[5] = cif[0];
+                cif[6] = cif[0];
+            }
         }
         return null;
-        cif[1] = cif[0];
-        cif[2] = cif[0];
-        cif[3] = cif[0];
-        cif[4] = cif[0];
-        cif[5] = cif[0];
-        cif[6] = cif[0];
+        
     } // Возвращает Обьект рационального пути Path_Finder*у
     public void OnTriggerEnter(Collider obj)
     {

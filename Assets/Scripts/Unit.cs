@@ -13,6 +13,7 @@ public class Unit : MonoBehaviour {
     public bool unit_chosen = false;
     public GameObject unit_selector;
     public int action_points = 3;
+    public GameObject navigator_obj;
     
     #endregion
     void Start () {
@@ -43,16 +44,20 @@ public class Unit : MonoBehaviour {
     {
         if(unit_chosen == false)
         {
+            
             unit_chosen = true;
             unit_selector.SetActive(unit_chosen);
             DB.chose_unit.Add(gameObject);
-           
+            Instantiate(navigator_obj, transform.position, Quaternion.identity);
+            
         }
         else if(unit_chosen == true)
         {
             unit_chosen = false;
             unit_selector.SetActive(unit_chosen);
             DB.chose_unit.Remove(gameObject);
+            GameObject.FindGameObjectWithTag("Navigator").GetComponent<Navigator>().Chose_another_unit();
+            
            
             
         }
