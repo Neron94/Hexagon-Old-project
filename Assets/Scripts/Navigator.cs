@@ -47,8 +47,10 @@ public class Navigator : MonoBehaviour {
            
         if(curPos != ctrl.position_to_go)
             {
+                Debug.Log("Мы не находимся на точке назн");
                 if(curPos != Path_finder())
                 {
+                    Debug.Log("Мы не на рациональном пути но начинаем двигаться туда");
                     curPos = Path_finder();
                     DB.Path.Add(curPos);
                     
@@ -59,6 +61,7 @@ public class Navigator : MonoBehaviour {
             }
             else
             {
+                Debug.Log("Мы  находимся на точке назн");
                 Move_Nav(curPos);
                 LineDraw();
                 nna = false;

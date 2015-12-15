@@ -40,7 +40,7 @@ public class Control : MonoBehaviour
                 foreach (GameObject obj in DB.hex_comb){
                     if (hit.collider.gameObject == obj){
                         position_to_go = obj.transform.position;
-                        
+                        target_object = obj;
                         if(DB.chose_unit.Count == 1){
                             GameObject.FindGameObjectWithTag("Navigator").GetComponent<Navigator>().nna = true;
                         }
@@ -67,7 +67,7 @@ public class Control : MonoBehaviour
                             foreach(GameObject unit in DB.player_units){
                                           if (hit.collider.gameObject == unit){
                                                   unit.GetComponent<Unit>().Unit_Chouse();
-                                                  target_object = unit;
+                                                  
                                              }
                                      }
                         }
