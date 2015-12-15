@@ -34,7 +34,7 @@ public class Unit : MonoBehaviour {
         for (int i = 0; i < action_points; i++)
         {
             
-            gameObject.transform.position = new Vector3(DB.Path[i].x, DB.Path[i].y, DB.Path[i].z);
+            gameObject.transform.position = new Vector3(path[i].x, path[i].y, path[i].z);
             action_points--;
   
             

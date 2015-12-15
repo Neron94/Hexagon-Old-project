@@ -44,9 +44,9 @@ public class Control : MonoBehaviour
                         if(DB.chose_unit.Count == 1){
                             GameObject.FindGameObjectWithTag("Navigator").GetComponent<Navigator>().nna = true;
                         }
-                       
-                        if(DB.chose_unit[0].transform.position == position_to_go){
-                            if(DB.chose_unit.Count == 1){
+                        if (DB.chose_unit.Count == 1){
+                        if(target_object.transform.position == position_to_go){
+                            
                                 GameObject.FindGameObjectWithTag("Navigator").GetComponent<Navigator>().End_move();
                             }
                                
