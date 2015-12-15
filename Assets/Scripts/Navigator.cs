@@ -8,7 +8,6 @@ public class Navigator : MonoBehaviour {
     //******** Класс Навигатор Прокладывает Путь для Юнита********\\
 
     #region Variables
-    public Unit unt; //Ссылка На Класс Юнит
     public int ind = 0; // Счет перечесления элементов Массива
     public float[] cif = new float[7]; //Массив Дистанции до цели 
     public Control ctrl; // Ссылка на Контроль
@@ -20,13 +19,11 @@ public class Navigator : MonoBehaviour {
     #endregion
 
     void Start () {
-        unt = gameObject.GetComponent<Unit>();
         ctrl = GameObject.Find("Logic").GetComponent<Control>();
         DB = GameObject.Find("Logic").GetComponent<DataBase>();
         l_r = gameObject.GetComponent<LineRenderer>();
         start_point = gameObject.transform.position;
-     
-	}
+    }
 	void Update () {
         if(nna)
         {
@@ -40,13 +37,15 @@ public class Navigator : MonoBehaviour {
     
     public void Path_find_cicle()
         {
+        //Сводим к первому значению массив Дистанций окружающих обьектов до цели
             cif[1] = cif[0];
             cif[2] = cif[0];
             cif[3] = cif[0];
             cif[4] = cif[0];
             cif[5] = cif[0];
             cif[6] = cif[0];
-           if(curPos != ctrl.position_to_go)
+           
+        if(curPos != ctrl.position_to_go)
             {
                 if(curPos != Path_finder())
                 {
@@ -80,7 +79,7 @@ public class Navigator : MonoBehaviour {
         {
             return Min().gameObject.transform.position;
         }
-        catch (Exception)
+        catch
         {
 
             return Path_finder();
@@ -104,18 +103,14 @@ public class Navigator : MonoBehaviour {
                 return obj;
                 
             }
-            else
-            {
-                cif[1] = cif[0];
-                cif[2] = cif[0];
-                cif[3] = cif[0];
-                cif[4] = cif[0];
-                cif[5] = cif[0];
-                cif[6] = cif[0];
-            }
-            
         }
         return null;
+        cif[1] = cif[0];
+        cif[2] = cif[0];
+        cif[3] = cif[0];
+        cif[4] = cif[0];
+        cif[5] = cif[0];
+        cif[6] = cif[0];
     } // Возвращает Обьект рационального пути Path_Finder*у
     public void OnTriggerEnter(Collider obj)
     {
@@ -171,19 +166,15 @@ public class Navigator : MonoBehaviour {
         Destroy(gameObject);
         DB.hex_eight.Clear();
         DB.chose_unit[0].GetComponent<Unit>().Move(DB.Path);
-        
-
+        DB.Path.Clear();
     }
     public void Chose_another_unit()
     {
+        
         Destroy(gameObject);
         DB.hex_eight.Clear();
+        DB.Path.Clear();
     }
 
-    
-   
-
-  
-
-    
+      
 }
