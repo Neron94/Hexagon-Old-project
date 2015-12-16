@@ -10,16 +10,6 @@ public class Control : MonoBehaviour
     public DataBase DB;
     public Vector3 position_to_go; //Позиция Гекса куда нужно добраться
     public GameObject target_object; //Обьект (юнит) от которого мерится дистанция до целевого гекса
-    public Vector3 start_point;
-    public Vector3 end_point;
-    public bool camera_move = false;
-    public float distance;
-    public GameObject camera;
-    public float min_pos_x;
-    public float max_pos_x;
-    public float min_pos_y;
-    public float max_pos_y;
-    
     #endregion
     void Start()
     {
