@@ -38,10 +38,15 @@ public class cameraContr : MonoBehaviour {
                 if (distance >= 0.1)
                 {
                     camera.transform.position += start_point - end_point;
-                    
+
                 }
 
             }
+        if(Input.GetMouseButtonUp(0))
+        {
+            camera_move = false;
+        }
+        
         
 	}
 }
