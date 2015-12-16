@@ -14,6 +14,14 @@ public class Unit : MonoBehaviour {
     public GameObject unit_selector;
     public int action_points = 3;
     public GameObject navigator_obj;
+
+
+    public string unit_type;
+    public string unit_fraction;
+    public int number_of_soldiers;
+    public float unit_defence;
+    public int unit_fire_power;
+    public int fire_distance;
     #endregion
     void Start () {
         ctrl = GameObject.Find("Logic").GetComponent<Control>();
