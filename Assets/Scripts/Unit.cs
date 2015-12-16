@@ -10,10 +10,13 @@ public class Unit : MonoBehaviour {
     public Control ctrl;
     public float speed = 10;
     public DataBase DB;
+    public UI ui;
     public bool unit_chosen = false;
     public GameObject unit_selector;
     public int action_points = 3;
     public GameObject navigator_obj;
+    public float rotation;
+    
 
 
     public string unit_type;
@@ -28,6 +31,8 @@ public class Unit : MonoBehaviour {
         unit_selector = gameObject.transform.GetChild(0).gameObject;
         DB = GameObject.Find("Logic").GetComponent<DataBase>();
         DB.player_units.Add(gameObject);
+        ui = GameObject.Find("UI").GetComponent<UI>();
+        
         
                   }
 	void Update () {
@@ -41,6 +46,7 @@ public class Unit : MonoBehaviour {
         for (int i = 0; action_points != 0; i++)
         {
 
+            gameObject.transform.LookAt(ctrl.target_object.transform.position);
             gameObject.transform.position = new Vector3(DB.Path[i].x, DB.Path[i].y, DB.Path[i].z);
             action_points--;
             if(gameObject.transform.position == ctrl.position_to_go)
@@ -49,7 +55,10 @@ public class Unit : MonoBehaviour {
             }
             
             
+            
         }
+        
+        
         
     } // Метод движения Юнита
     public void Unit_Chouse()
@@ -61,6 +70,8 @@ public class Unit : MonoBehaviour {
             unit_selector.SetActive(unit_chosen);
             DB.chose_unit.Add(gameObject);
             Instantiate(navigator_obj, transform.position, Quaternion.identity);
+            ui.ButtonHider("turnUnit");
+
             
         }
         else if(unit_chosen == true)
@@ -69,12 +80,18 @@ public class Unit : MonoBehaviour {
             unit_selector.SetActive(unit_chosen);
             DB.chose_unit.Remove(gameObject);
             GameObject.FindGameObjectWithTag("Navigator").GetComponent<Navigator>().Chose_another_unit();
+            ui.ButtonHider("hide");
             
            
             
         }
     }
 
+    public void Unit_rotation()
+    {
+
+        gameObject.transform.LookAt(ctrl.target_object.transform.position);
+    }
 
     
 }

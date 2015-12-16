@@ -72,6 +72,7 @@
     <Compile Include="Assets\Scripts\DataBase.cs" />
     <Compile Include="Assets\Scripts\HexComb.cs" />
     <Compile Include="Assets\Scripts\Navigator.cs" />
+    <Compile Include="Assets\Scripts\UI.cs" />
     <Compile Include="Assets\Scripts\Unit.cs" />
     <Compile Include="Assets\Scripts\cameraContr.cs" />
   </ItemGroup>
