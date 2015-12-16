@@ -14,7 +14,6 @@ public class Unit : MonoBehaviour {
     public GameObject unit_selector;
     public int action_points = 3;
     public GameObject navigator_obj;
-    
     #endregion
     void Start () {
         ctrl = GameObject.Find("Logic").GetComponent<Control>();
@@ -31,12 +30,19 @@ public class Unit : MonoBehaviour {
 	}
     public void Move()
     {
-        for (int i = 0; i < action_points; i++)
+        for (int i = 0; action_points != 0; i++)
         {
 
             gameObject.transform.position = new Vector3(DB.Path[i].x, DB.Path[i].y, DB.Path[i].z);
+            action_points--;
+            if(gameObject.transform.position == ctrl.position_to_go)
+            {
+                break;
+            }
+            
+            
         }
-        action_points = 0;
+        
     } // Метод движения Юнита
     public void Unit_Chouse()
     {

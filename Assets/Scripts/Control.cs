@@ -48,6 +48,7 @@ public class Control : MonoBehaviour
                                         if(target_object.transform.position == position_to_go){
                             
                                             GameObject.FindGameObjectWithTag("Navigator").GetComponent<Navigator>().End_move();
+                                            DB.chose_unit[0].GetComponent<Unit>().Unit_Chouse();
 
                                         }
                                
@@ -61,6 +62,7 @@ public class Control : MonoBehaviour
             }
             
                         else if(hit.collider.gameObject.tag == "player_unit"){
+                            Debug.Log("Попали в юнита");
                             if(DB.chose_unit.Count == 1){
                                 DB.chose_unit[0].GetComponent<Unit>().Unit_Chouse();
                             }
@@ -68,6 +70,7 @@ public class Control : MonoBehaviour
                             
                             foreach(GameObject unit in DB.player_units){
                                           if (hit.collider.gameObject == unit){
+                                           
                                                   unit.GetComponent<Unit>().Unit_Chouse();
                                                   
                                              }
