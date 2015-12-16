@@ -170,11 +170,11 @@ public class Navigator : MonoBehaviour {
     } //Рисует путь обьекта
     public void End_move()
     {
-        
-        DB.hex_eight.Clear();
-        DB.chose_unit[0].GetComponent<Unit>().Move(DB.Path);
-        //DB.Path.Clear();
         Destroy(gameObject);
+        DB.hex_eight.Clear();
+        DB.chose_unit[0].GetComponent<Unit>().Move();
+        //DB.Path.Clear();
+        
     }
     public void Chose_another_unit()
     {

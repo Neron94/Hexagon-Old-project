@@ -40,20 +40,21 @@ public class Control : MonoBehaviour
                 foreach (GameObject obj in DB.hex_comb){
                     if (hit.collider.gameObject == obj){
                         position_to_go = obj.transform.position;
-                        target_object = obj;
-                        if(DB.chose_unit.Count == 1){
-                            GameObject.FindGameObjectWithTag("Navigator").GetComponent<Navigator>().nna = true;
-                        }
-                        if (DB.chose_unit.Count == 1){
-                        if(target_object.transform.position == position_to_go){
-                            
-                                GameObject.FindGameObjectWithTag("Navigator").GetComponent<Navigator>().End_move();
-                            }
-                               
-                               
-                        }
                         
+                            if(DB.chose_unit.Count == 1){
+                                GameObject.FindGameObjectWithTag("Navigator").GetComponent<Navigator>().nna = true;
+                            }
+                                    if (DB.chose_unit.Count == 1){
+                                        if(target_object.transform.position == position_to_go){
+                            
+                                            GameObject.FindGameObjectWithTag("Navigator").GetComponent<Navigator>().End_move();
+                                        }
+                               
+                               
+                                    }
+                                    target_object = obj;
                         DB.Path.Clear();
+                        
                     }
                 }
             }

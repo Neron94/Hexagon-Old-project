@@ -29,16 +29,14 @@ public class Unit : MonoBehaviour {
         
 
 	}
-    public void Move(List<Vector3> path)
+    public void Move()
     {
         for (int i = 0; i < action_points; i++)
         {
-            
-            gameObject.transform.position = new Vector3(path[i].x, path[i].y, path[i].z);
-            action_points--;
-  
-            
+
+            gameObject.transform.position = new Vector3(DB.Path[i].x, DB.Path[i].y, DB.Path[i].z);
         }
+        action_points = 0;
     } // Метод движения Юнита
     public void Unit_Chouse()
     {
