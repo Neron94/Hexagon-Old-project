@@ -48,6 +48,7 @@ public class Control : MonoBehaviour
                                         if(target_object.transform.position == position_to_go){
                             
                                             GameObject.FindGameObjectWithTag("Navigator").GetComponent<Navigator>().End_move();
+
                                         }
                                
                                

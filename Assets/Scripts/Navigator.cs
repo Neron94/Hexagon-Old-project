@@ -173,7 +173,7 @@ public class Navigator : MonoBehaviour {
         Destroy(gameObject);
         DB.hex_eight.Clear();
         DB.chose_unit[0].GetComponent<Unit>().Move();
-        //DB.Path.Clear();
+        DB.chose_unit[0].GetComponent<Unit>().Unit_Chouse();
         
     }
     public void Chose_another_unit()
