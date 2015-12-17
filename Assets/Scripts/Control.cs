@@ -73,6 +73,7 @@ public class Control : MonoBehaviour
                 
                 if(DB.chose_unit.Count == 1)
                 {
+                    if(DB.chose_unit[0].GetComponent<Unit>().action_points >= 2)
                     foreach(GameObject enemy in DB.enemy_units)
                     {
                       
@@ -88,17 +89,21 @@ public class Control : MonoBehaviour
                             break;
                         }
                     }
+                }
+
                     
                 }
+            else
+            {
+                Debug.Log("Что то не так");
+            }
             }
                                    
-                                    else{
-                                        Debug.Log("Что то не так");
-                                    }
+                                    
         }
 
     }
-}
+
 
 
 

@@ -12,6 +12,8 @@ public class HexComb : MonoBehaviour {
     public Sprite point_go;
     public Sprite def;
 
+    public float bonus_defence;
+    public int bonus_atack;
     #endregion
 
 
@@ -19,7 +21,7 @@ public class HexComb : MonoBehaviour {
         DB = GameObject.FindGameObjectWithTag("Logic").GetComponent<DataBase>();
         DB.hex_comb.Add(gameObject);
         sp = gameObject.GetComponentInChildren<SpriteRenderer>();
-                }
+                  }
 	void Update () {
         
 	}

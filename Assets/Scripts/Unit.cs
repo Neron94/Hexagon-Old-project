@@ -23,16 +23,21 @@ public class Unit : MonoBehaviour {
     public string unit_fraction;
     public int number_of_soldiers;
     public float unit_defence;
+    public float unit_cur_defence;
+    public int unit_cur_fire_power;
     public int unit_fire_power;
     public int fire_distance;
     public float max_hp;
     public float cur_hp;
+    public Vector3 my_position;
+    public GameObject my_hex;
     #endregion
     void Start () {
         ctrl = GameObject.Find("Logic").GetComponent<Control>();
         unit_selector = gameObject.transform.GetChild(0).gameObject;
         DB = GameObject.Find("Logic").GetComponent<DataBase>();
         ui = GameObject.Find("UI").GetComponent<UI>();
+        my_position = gameObject.transform.position;
         if(gameObject.tag == "player_unit")
         {
             DB.player_units.Add(gameObject);
@@ -42,14 +47,22 @@ public class Unit : MonoBehaviour {
             DB.enemy_units.Add(gameObject);
         }
         
+     
         
-                  }
+        }
 	void Update () {
-        
-        
-        
+
+        End_of_the_Turn();
+        Unit_death();
 
 	}
+    public void Unit_death()
+    {
+        if(cur_hp == 0)
+        {
+            Destroy(gameObject, 3);
+        }
+    }
     public void Move()
     {
         for (int i = 0; action_points != 0; i++)
@@ -66,7 +79,7 @@ public class Unit : MonoBehaviour {
             
             
         }
-        
+        my_position = gameObject.transform.position;
         
         
     } // Метод движения Юнита
@@ -96,10 +109,44 @@ public class Unit : MonoBehaviour {
         }
     }
 
-    public void Unit_rotation()
+    public void Unit_rotation(GameObject gmj)
     {
 
-        gameObject.transform.LookAt(ctrl.target_object.transform.position);
+        gameObject.transform.LookAt(gmj.transform.position);
+    }
+
+    public void OnTriggerEnter(Collider col)
+    {
+        if(col.gameObject.tag == "Hex")
+        {
+            my_hex = col.gameObject;
+            if(gameObject.tag == "player_unit")
+            {
+                my_hex.GetComponent<HexComb>().Change(2);
+            }
+            else if(gameObject.tag == "Enemy")
+            {
+                my_hex.GetComponent<HexComb>().Change(3);
+            }
+            
+        }
+    }
+    public void OnTriggerExit(Collider col)
+    {
+        if(col.gameObject.tag == "Hex")
+        {
+            my_hex.GetComponent<HexComb>().Change(1);
+        }
+    }
+    
+    public void End_of_the_Turn()
+    {
+        unit_cur_fire_power = unit_fire_power;
+        unit_cur_defence = unit_defence;
+        
+        unit_cur_defence += my_hex.GetComponent<HexComb>().bonus_defence;
+        unit_cur_fire_power += my_hex.GetComponent<HexComb>().bonus_atack;
+       
     }
 
     
