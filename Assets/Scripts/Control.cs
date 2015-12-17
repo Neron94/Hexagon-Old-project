@@ -102,6 +102,14 @@ public class Control : MonoBehaviour
                                     
         }
 
+    public void End_of_Turn()
+    {
+        foreach(GameObject units in DB.player_units)
+        {
+            units.GetComponent<Unit>().End_Turn();
+        }
+    }
+
     }
 
 

@@ -13,7 +13,7 @@ public class Unit : MonoBehaviour {
     public UI ui;
     public bool unit_chosen = false;
     public GameObject unit_selector;
-    public int action_points = 3;
+    public int action_points = 5;
     public GameObject navigator_obj;
     public float rotation;
     
@@ -52,7 +52,7 @@ public class Unit : MonoBehaviour {
         }
 	void Update () {
 
-        End_of_the_Turn();
+        Bonus_Calculating();
         Unit_death();
 
 	}
@@ -93,7 +93,7 @@ public class Unit : MonoBehaviour {
             DB.chose_unit.Add(gameObject);
             Instantiate(navigator_obj, transform.position, Quaternion.identity);
             ui.ButtonHider("turnUnit");
-
+            
             
         }
         else if(unit_chosen == true)
@@ -139,14 +139,20 @@ public class Unit : MonoBehaviour {
         }
     }
     
-    public void End_of_the_Turn()
+    public void Bonus_Calculating()
     {
         unit_cur_fire_power = unit_fire_power;
         unit_cur_defence = unit_defence;
         
         unit_cur_defence += my_hex.GetComponent<HexComb>().bonus_defence;
         unit_cur_fire_power += my_hex.GetComponent<HexComb>().bonus_atack;
+
+        
        
+    }
+    public void End_Turn()
+    {
+        action_points = 5;
     }
 
     
