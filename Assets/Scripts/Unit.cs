@@ -25,13 +25,22 @@ public class Unit : MonoBehaviour {
     public float unit_defence;
     public int unit_fire_power;
     public int fire_distance;
+    public float max_hp;
+    public float cur_hp;
     #endregion
     void Start () {
         ctrl = GameObject.Find("Logic").GetComponent<Control>();
         unit_selector = gameObject.transform.GetChild(0).gameObject;
         DB = GameObject.Find("Logic").GetComponent<DataBase>();
-        DB.player_units.Add(gameObject);
         ui = GameObject.Find("UI").GetComponent<UI>();
+        if(gameObject.tag == "player_unit")
+        {
+            DB.player_units.Add(gameObject);
+        }
+        else if(gameObject.tag == "Enemy")
+        {
+            DB.enemy_units.Add(gameObject);
+        }
         
         
                   }

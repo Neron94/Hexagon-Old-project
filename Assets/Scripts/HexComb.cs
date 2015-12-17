@@ -11,6 +11,7 @@ public class HexComb : MonoBehaviour {
     public Sprite avail_hex;
     public Sprite point_go;
     public Sprite def;
+
     #endregion
 
 
