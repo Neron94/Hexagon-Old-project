@@ -81,6 +81,7 @@ public class Control : MonoBehaviour
                         {
                             
                             float enemy_Distance = Vector3.Distance(DB.chose_unit[0].transform.position, enemy.transform.position);
+                            Debug.Log(enemy_Distance);
                             if(DB.chose_unit[0].GetComponent<Unit>().fire_distance > enemy_Distance)
                             {
                                 

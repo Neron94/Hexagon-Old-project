@@ -16,6 +16,11 @@ public class Unit : MonoBehaviour {
     public int action_points = 5;
     public GameObject navigator_obj;
     public float rotation;
+    public bool but_rotation = false;
+    public GameObject rotation_object_direction;
+    public int barrikade_power;
+    public GameObject barrikade;
+    public GameObject barrik_have;
     
 
 
@@ -38,6 +43,7 @@ public class Unit : MonoBehaviour {
         DB = GameObject.Find("Logic").GetComponent<DataBase>();
         ui = GameObject.Find("UI").GetComponent<UI>();
         my_position = gameObject.transform.position;
+        DB.all_units.Add(gameObject);
         if(gameObject.tag == "player_unit")
         {
             DB.player_units.Add(gameObject);
@@ -55,9 +61,57 @@ public class Unit : MonoBehaviour {
         Bonus_Calculating();
         Unit_death();
 
+        if(but_rotation)
+        {
+            if(Input.GetMouseButtonDown(0))
+            {
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit;
+                Physics.Raycast(ray, out hit, Mathf.Infinity);
+                if(hit.collider.gameObject.tag == "Hex")
+                {
+                    foreach(GameObject gmj in DB.hex_comb)
+                    {
+                        if(hit.collider.gameObject == gmj)
+                        {
+                            rotation_object_direction =hit.collider.gameObject;
+                            Unit_rotation(rotation_object_direction);
+                            break;
+                        }
+                    }
+                }
+                if(hit.collider.gameObject.tag == "Enemy")
+                {
+                    foreach(GameObject gbj in DB.enemy_units)
+                    if(gbj == hit.collider.gameObject)
+                    {
+                        GameObject hexik = gbj.GetComponent<Unit>().my_hex;
+                        foreach(GameObject ggmg in DB.hex_eight)
+                        {
+                            if(hexik == ggmg)
+                            {
+                                rotation_object_direction = hexik;
+                                Unit_rotation(rotation_object_direction);
+                                break;
+                            }
+                        }
+                        break;
+                    }
+
+                }
+                
+            }
+            
+        }
+        
+
 	}
     public void Unit_death()
     {
+        if (barrik_have != null)
+        {
+            Destroy(barrik_have);
+        }
         if(cur_hp == 0)
         {
             Destroy(gameObject, 3);
@@ -65,6 +119,10 @@ public class Unit : MonoBehaviour {
     }
     public void Move()
     {
+        if(barrik_have != null)
+        {
+            Destroy(barrik_have);
+        }
         for (int i = 0; action_points != 0; i++)
         {
 
@@ -93,6 +151,7 @@ public class Unit : MonoBehaviour {
             DB.chose_unit.Add(gameObject);
             Instantiate(navigator_obj, transform.position, Quaternion.identity);
             ui.ButtonHider("turnUnit");
+            ui.ButtonHider("build_barrikade");
             
             
         }
@@ -111,9 +170,68 @@ public class Unit : MonoBehaviour {
 
     public void Unit_rotation(GameObject gmj)
     {
-
-        gameObject.transform.LookAt(gmj.transform.position);
+        if(action_points >= 1)
+        {
+            
+           foreach(GameObject hex in DB.hex_eight)
+           {
+               if(gmj == hex)
+               {
+                   gameObject.transform.LookAt(gmj.transform.position);
+                   but_rotation = false;
+                   Unit_Chouse();
+                   action_points -= 1;
+               }
+               else
+               {
+                   Debug.Log("Выберите ближайший Хекс");
+               }
+           }
+            
+        }
+        
     }
+    public void Unit_rotation(GameObject gmj, GameObject gbb)
+    {
+        if (action_points >= 1)
+        {
+
+            
+                    gameObject.transform.LookAt(gmj.transform.position);
+                    but_rotation = false;
+                    Unit_Chouse();
+                    action_points -= 1;
+                
+               
+                    
+                
+            
+
+        }
+
+    }
+    public void Unit_rotation()
+    {
+        but_rotation = true;
+        
+    }
+    public void Build_barricade()
+    {
+        
+      if(action_points >= 3)
+      {
+          unit_cur_defence += barrikade_power;
+          float z = gameObject.transform.position.z;
+          z += 3.8f;
+          Vector3 position_of_spawn = gameObject.transform.FindChild("spawn_pos").transform.position;
+          barrik_have = Instantiate(barrikade, position_of_spawn, gameObject.transform.rotation) as GameObject;
+          barrik_have.transform.SetParent(gameObject.transform);
+          Unit_Chouse();
+          action_points -= 3;
+      }
+        
+    }
+    
 
     public void OnTriggerEnter(Collider col)
     {
