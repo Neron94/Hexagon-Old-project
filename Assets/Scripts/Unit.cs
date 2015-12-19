@@ -7,17 +7,16 @@ public class Unit : MonoBehaviour {
     //*******Класс Юнита*******\\
 
     #region Variables
-    public Control ctrl;
-    public DataBase DB;
-    public  UI ui;
-    public  bool unit_chosen = false;
-    public bool enemy_chose = false;
-    public  GameObject unit_selector;
-    public GameObject enemy_selector;
+    private Control ctrl;
+    private DataBase DB;
+    private  UI ui;
+    private  bool unit_chosen = false;
+    private bool enemy_chose = false;
+    private  GameObject unit_selector;
+    private GameObject enemy_selector;
+    public GameObject navigator_obj;
     public int action_points = 5;
-    public  GameObject navigator_obj;
-    public float rotation;
-    public bool but_rotation = false;
+    private bool but_rotation = false;
     public GameObject rotation_object_direction;
     public int barrikade_power;
     public GameObject barrikade;
@@ -58,14 +57,13 @@ public class Unit : MonoBehaviour {
         
 
 
-        unit_cur_fire_power = unit_fire_power;
-        unit_cur_defence = unit_defence;
+       
         
      
         
         }
 	void Update () {
-        Bonus_Calculating();
+       
         
         Unit_death();
 
@@ -120,7 +118,7 @@ public class Unit : MonoBehaviour {
     {
         
        
-        if(cur_hp == 0)
+        if(cur_hp <= 0)
         {
             Destroy(gameObject, 1);
             if (have_barrikade)
@@ -148,12 +146,14 @@ public class Unit : MonoBehaviour {
             action_points--;
             if(gameObject.transform.position == ctrl.position_to_go)
             {
+                
                 break;
             }
             
             
             
         }
+        
         my_position = gameObject.transform.position;
         
         
@@ -266,6 +266,7 @@ public class Unit : MonoBehaviour {
         if(col.gameObject.tag == "Hex")
         {
             my_hex = col.gameObject;
+            Bonus_Calculating();
             if(gameObject.tag == "player_unit")
             {
                // my_hex.GetComponent<HexComb>().Change(2);
@@ -287,7 +288,8 @@ public class Unit : MonoBehaviour {
     
     public void Bonus_Calculating()
     {
-        
+        unit_cur_fire_power = unit_fire_power;
+        unit_cur_defence = unit_defence;
         
         unit_cur_defence += my_hex.GetComponent<HexComb>().bonus_defence;
         unit_cur_fire_power += my_hex.GetComponent<HexComb>().bonus_atack;

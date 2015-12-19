@@ -4,7 +4,7 @@ using System.Collections;
 
 public class Fractions : MonoBehaviour {
 
-    public string name;
+    public string fraction_name;
     public DataBase DB;
     public int Salary;
     public bool buy_time = false;

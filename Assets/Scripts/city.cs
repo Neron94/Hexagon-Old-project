@@ -4,7 +4,7 @@ using System.Collections;
 public class city : MonoBehaviour {
     public DataBase DB;
     public Control ctrl;
-    public string name;
+    public string city_name;
     public int salary_bonus;
     public bool switcher = false;
     public string fraction_name;

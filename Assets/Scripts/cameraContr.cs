@@ -14,13 +14,12 @@ public class cameraContr : MonoBehaviour {
     public Vector3 end_point;
     public bool camera_move = false;
     public float distance;
-    public GameObject camera;
+    public GameObject camera_object;
     public bool on_terrain;
-    
     #endregion
 
     void Start () {
-	
+        camera_object = Camera.main.gameObject;
 	}
 	void Update () {
         
@@ -55,7 +54,7 @@ public class cameraContr : MonoBehaviour {
                 if (distance >= 0.1)
                 {
                     
-                        camera.transform.position += start_point - end_point;
+                        camera_object.transform.position += start_point - end_point;
                     
                    
                     
