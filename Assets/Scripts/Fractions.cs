@@ -22,13 +22,16 @@ public class Fractions : MonoBehaviour {
         ui = GameObject.FindGameObjectWithTag("myUI").GetComponent<UI>();
 	}
 	void Update () {
+        if(Salary <= 0)
+        {
+            Salary = 0;
+        }
         ui.money_monitor(Salary);
         if(buy_time)
         {
             if(Input.GetMouseButtonDown(0))
             {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                
                 Physics.Raycast(ray, out hit, Mathf.Infinity);
                 if (buy_time)
                 {
@@ -37,6 +40,18 @@ public class Fractions : MonoBehaviour {
                         if (hit.collider.gameObject == gmj)
                         {
                             Instantiate(spawn_Object, hit.collider.gameObject.transform.position, Quaternion.identity);
+                            if (spawn_Object.name == "wehrmacht_Cannon")
+                            {
+                                Salary -= cannon_cost;
+                            }
+                            else if (spawn_Object.name == "wehrmacht_infantry")
+                            {
+                                Salary -= infantry_costs;
+                            }
+                            else if (spawn_Object.name == "wehrmacht_Tank")
+                            {
+                                Salary -= tank_cost;
+                            }
                             foreach(GameObject gnn in DB.arrivel_list)
                             {
                                 gnn.GetComponent<HexComb>().Change(1);
@@ -75,8 +90,8 @@ public class Fractions : MonoBehaviour {
                     city.GetComponent<city>().my_hex.GetComponent<HexComb>().Change(2);
                     DB.arrivel_list.Add(city.GetComponent<city>().my_hex);
                     spawn_Object = DB.unit_Pref_types[0];
-                    Salary -= tank_cost;
-
+                   
+                    
                 }
             }
             else
@@ -95,7 +110,7 @@ public class Fractions : MonoBehaviour {
                     city.GetComponent<city>().my_hex.GetComponent<HexComb>().Change(2);
                     DB.arrivel_list.Add(city.GetComponent<city>().my_hex);
                     spawn_Object = DB.unit_Pref_types[1];
-                    Salary -= cannon_cost;
+                    
                 }
             }
             else
@@ -114,7 +129,7 @@ public class Fractions : MonoBehaviour {
                     city.GetComponent<city>().my_hex.GetComponent<HexComb>().Change(2);
                     DB.arrivel_list.Add(city.GetComponent<city>().my_hex);
                     spawn_Object = DB.unit_Pref_types[2];
-                    Salary -= infantry_costs;
+                    
 
                 }
             }
