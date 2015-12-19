@@ -25,24 +25,17 @@ public class Control : MonoBehaviour
    
    
     void Update(){
-        if (Input.GetMouseButtonDown(0)){
-            
-            
+        
+            if(Input.GetMouseButtonDown(0))
+            {
+                if(DB.enemy_chose.Count == 1)
+                {
+                    DB.enemy_chose[0].GetComponent<Unit>().Enemy_Chose();
+                }
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             Physics.Raycast(ray, out hit, Mathf.Infinity);
-            if(frc.buy_time)
-            {
-                foreach(GameObject gmj in DB.arrivel_list)
-                {
-                    if(hit.collider.gameObject == gmj)
-                    {
-                       
-                    }
-                }
-            }
             if (hit.collider.gameObject.tag == "Hex"){
-                
                 foreach (GameObject obj in DB.hex_comb){
                     if (hit.collider.gameObject == obj){
                         position_to_go = obj.transform.position;
@@ -106,6 +99,16 @@ public class Control : MonoBehaviour
                                 
                             }
                             break;
+                        }
+                    }
+                }
+                else
+                {
+                    foreach(GameObject gj in DB.enemy_units)
+                    {
+                        if(hit.collider.gameObject == gj)
+                        {
+                            gj.GetComponent<Unit>().Enemy_Chose();
                         }
                     }
                 }

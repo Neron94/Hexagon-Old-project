@@ -11,7 +11,9 @@ public class Unit : MonoBehaviour {
     public DataBase DB;
     public  UI ui;
     public  bool unit_chosen = false;
+    public bool enemy_chose = false;
     public  GameObject unit_selector;
+    public GameObject enemy_selector;
     public int action_points = 5;
     public  GameObject navigator_obj;
     public float rotation;
@@ -39,6 +41,7 @@ public class Unit : MonoBehaviour {
     void Start () {
         ctrl = GameObject.Find("Logic").GetComponent<Control>();
         unit_selector = gameObject.transform.GetChild(0).gameObject;
+        enemy_selector = gameObject.transform.GetChild(1).gameObject;
         DB = GameObject.Find("Logic").GetComponent<DataBase>();
         ui = GameObject.Find("UI").GetComponent<UI>();
         my_position = gameObject.transform.position;
@@ -63,6 +66,7 @@ public class Unit : MonoBehaviour {
         {
             if(Input.GetMouseButtonDown(0))
             {
+                
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
                 Physics.Raycast(ray, out hit, Mathf.Infinity);
@@ -167,6 +171,27 @@ public class Unit : MonoBehaviour {
             
         }
     }
+    public void Enemy_Chose()
+    {
+    if(!enemy_chose)
+    {
+        enemy_chose = true;
+        ui.enemyStats(cur_hp);
+        DB.enemy_chose.Add(gameObject);
+        enemy_selector.SetActive(enemy_chose);
+
+    }
+    else if(enemy_chose)
+    {
+        enemy_chose = false;
+        DB.enemy_chose.Remove(gameObject);
+        enemy_selector.SetActive(enemy_chose);
+        ui.ButtonHider("hide");
+
+    }
+    
+    }
+
 
     public void Unit_rotation(GameObject gmj)
     {

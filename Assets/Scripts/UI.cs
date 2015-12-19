@@ -8,10 +8,12 @@ public class UI : MonoBehaviour {
     public GameObject but_build_barrikade;
     public GameObject but_buy;
     public GameObject unitStats;
+    public GameObject enemy_stats;
   
 
     public Text money;
     public Text tx;
+    public Text enemyStat;
 
 
     public void Start()
@@ -30,6 +32,7 @@ public class UI : MonoBehaviour {
             but_build_barrikade.SetActive(false);
             but_buy.SetActive(false);
             unitStats.SetActive(false);
+            enemy_stats.SetActive(false);
         }
         else if(button_name == "build_barrikade")
         {
@@ -52,6 +55,11 @@ public class UI : MonoBehaviour {
     {
         unitStats.SetActive(true);
         tx.text = "AP :  " + ap  + " Damage  " +  unit_damage  +  " Def  " +  unit_defence + "  HP: " + hp;
+    }
+    public void enemyStats(float hp)
+    {
+        enemy_stats.SetActive(true);
+        enemyStat.text = "Enemy HP  " + hp;
     }
     public void money_monitor(int mon)
     {

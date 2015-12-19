@@ -17,6 +17,7 @@ public class DataBase : MonoBehaviour {
     public List<GameObject> all_cities;
     public List<GameObject> arrivel_list;
     public List<GameObject> unit_Pref_types;
+    public List<GameObject> enemy_chose;
     #endregion
 
 
