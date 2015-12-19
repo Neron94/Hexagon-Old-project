@@ -151,7 +151,7 @@ public class Unit : MonoBehaviour {
             Instantiate(navigator_obj, transform.position, Quaternion.identity);
             ui.ButtonHider("turnUnit");
             ui.ButtonHider("build_barrikade");
-            ui.unitSats(action_points, unit_cur_fire_power, unit_cur_defence);
+            ui.unitSats(action_points, unit_cur_fire_power, unit_cur_defence, cur_hp);
             
             
         }
@@ -193,22 +193,9 @@ public class Unit : MonoBehaviour {
     }
     public void Unit_rotation(GameObject gmj, GameObject gbb)
     {
-        if (action_points >= 1)
-        {
-
-            
                     gameObject.transform.LookAt(gmj.transform.position);
-                    but_rotation = false;
-                    Unit_Chouse();
-                    action_points -= 1;
-                
-               
                     
-                
-            
-
-        }
-
+                   
     }
     public void Unit_rotation()
     {

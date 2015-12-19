@@ -99,7 +99,11 @@ public class Control : MonoBehaviour
                             if(DB.chose_unit[0].GetComponent<Unit>().fire_distance > enemy_Distance)
                             {
                                 
-                                BC.Side_of_atack(DB.chose_unit[0], enemy);
+                                    DB.chose_unit[0].GetComponent<Unit>().Unit_rotation(enemy, enemy);
+                                    BC.BattleModeller(DB.chose_unit[0], enemy);
+                                
+                                
+                                
                             }
                             break;
                         }

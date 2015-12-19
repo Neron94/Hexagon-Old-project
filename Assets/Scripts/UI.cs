@@ -48,12 +48,10 @@ public class UI : MonoBehaviour {
         
         
     }
-    public void unitSats(int ap, int unit_damage, float unit_defence)
+    public void unitSats(int ap, int unit_damage, float unit_defence, float hp)
     {
         unitStats.SetActive(true);
-        tx.text = "AP :  " + ap  + " Damage  " +  unit_damage  +  " Def  " +  unit_defence ;
-        
-        
+        tx.text = "AP :  " + ap  + " Damage  " +  unit_damage  +  " Def  " +  unit_defence + "  HP: " + hp;
     }
     public void money_monitor(int mon)
     {
