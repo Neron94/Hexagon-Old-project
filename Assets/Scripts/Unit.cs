@@ -151,6 +151,7 @@ public class Unit : MonoBehaviour {
             Instantiate(navigator_obj, transform.position, Quaternion.identity);
             ui.ButtonHider("turnUnit");
             ui.ButtonHider("build_barrikade");
+            ui.unitSats(action_points, unit_cur_fire_power, unit_cur_defence);
             
             
         }

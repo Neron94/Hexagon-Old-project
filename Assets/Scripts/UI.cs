@@ -1,11 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class UI : MonoBehaviour {
     public DataBase DB;
     public GameObject but_turn_Unit;
     public GameObject but_build_barrikade;
     public GameObject but_buy;
+    public GameObject unitStats;
+  
+
+    public Text money;
+    public Text tx;
 
 
     public void Start()
@@ -23,6 +29,7 @@ public class UI : MonoBehaviour {
             but_turn_Unit.SetActive(false);
             but_build_barrikade.SetActive(false);
             but_buy.SetActive(false);
+            unitStats.SetActive(false);
         }
         else if(button_name == "build_barrikade")
         {
@@ -39,6 +46,18 @@ public class UI : MonoBehaviour {
             
         }
         
+        
+    }
+    public void unitSats(int ap, int unit_damage, float unit_defence)
+    {
+        unitStats.SetActive(true);
+        tx.text = "AP :  " + ap  + " Damage  " +  unit_damage  +  " Def  " +  unit_defence ;
+        
+        
+    }
+    public void money_monitor(int mon)
+    {
+        money.text = "$" + mon;
     }
     
 	

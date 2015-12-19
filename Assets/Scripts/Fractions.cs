@@ -12,13 +12,16 @@ public class Fractions : MonoBehaviour {
     public RaycastHit hit;
     public int tank_cost;
     public int cannon_cost;
+    public UI ui;
     
    
 
 	void Start () {
         DB = GameObject.FindGameObjectWithTag("Logic").GetComponent<DataBase>();
+        ui = GameObject.FindGameObjectWithTag("myUI").GetComponent<UI>();
 	}
 	void Update () {
+        ui.money_monitor(Salary);
         if(buy_time)
         {
             if(Input.GetMouseButtonDown(0))
