@@ -51,15 +51,15 @@ public class UI : MonoBehaviour {
         
         
     }
-    public void unitSats(int ap, int unit_damage, float unit_defence, float hp)
+    public void unitSats(int ap, int unit_damage, float unit_defence, float hp , float max_hp)
     {
         unitStats.SetActive(true);
-        tx.text = "AP :  " + ap  + " Damage  " +  unit_damage  +  " Def  " +  unit_defence + "  HP: " + hp;
+        tx.text = "AP :  " + ap  + " Damage  " +  unit_damage  +  " Def  " +  unit_defence + "  HP: " + hp + "/ " + max_hp;
     }
-    public void enemyStats(float hp)
+    public void enemyStats(float hp, float max_hp)
     {
         enemy_stats.SetActive(true);
-        enemyStat.text = "Enemy HP  " + hp;
+        enemyStat.text = "Enemy HP: " + hp + "/" + max_hp;
     }
     public void money_monitor(int mon)
     {

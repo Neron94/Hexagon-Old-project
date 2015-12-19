@@ -22,6 +22,7 @@ public class Unit : MonoBehaviour {
     public int barrikade_power;
     public GameObject barrikade;
     public GameObject barrik_have;
+    public bool have_barrikade = false;
     
 
 
@@ -39,6 +40,7 @@ public class Unit : MonoBehaviour {
     public GameObject my_hex;
     #endregion
     void Start () {
+        
         ctrl = GameObject.Find("Logic").GetComponent<Control>();
         unit_selector = gameObject.transform.GetChild(0).gameObject;
         enemy_selector = gameObject.transform.GetChild(1).gameObject;
@@ -54,12 +56,17 @@ public class Unit : MonoBehaviour {
             DB.enemy_units.Add(gameObject);
         }
         
+
+
+        unit_cur_fire_power = unit_fire_power;
+        unit_cur_defence = unit_defence;
+        
      
         
         }
 	void Update () {
-
         Bonus_Calculating();
+        
         Unit_death();
 
         if(but_rotation)
@@ -111,21 +118,28 @@ public class Unit : MonoBehaviour {
 	}
     public void Unit_death()
     {
-        if (barrik_have != null)
-        {
-            Destroy(barrik_have);
-        }
+        
+       
         if(cur_hp == 0)
         {
             Destroy(gameObject, 1);
+            if (have_barrikade)
+            {
+                Destroy(barrik_have);
+                unit_cur_defence -= barrikade_power;
+                have_barrikade = false;
+            }
         }
     }
     public void Move()
     {
-        if(barrik_have != null)
+        if (have_barrikade)
         {
             Destroy(barrik_have);
+            unit_cur_defence -= barrikade_power;
+            have_barrikade = false;
         }
+        
         for (int i = 0; action_points != 0; i++)
         {
 
@@ -155,7 +169,7 @@ public class Unit : MonoBehaviour {
             Instantiate(navigator_obj, transform.position, Quaternion.identity);
             ui.ButtonHider("turnUnit");
             ui.ButtonHider("build_barrikade");
-            ui.unitSats(action_points, unit_cur_fire_power, unit_cur_defence, cur_hp);
+            ui.unitSats(action_points, unit_cur_fire_power, unit_cur_defence, cur_hp, max_hp);
             
             
         }
@@ -176,7 +190,7 @@ public class Unit : MonoBehaviour {
     if(!enemy_chose)
     {
         enemy_chose = true;
-        ui.enemyStats(cur_hp);
+        ui.enemyStats(cur_hp, max_hp);
         DB.enemy_chose.Add(gameObject);
         enemy_selector.SetActive(enemy_chose);
 
@@ -232,14 +246,16 @@ public class Unit : MonoBehaviour {
         
       if(action_points >= 3)
       {
-          unit_cur_defence += barrikade_power;
+          
           float z = gameObject.transform.position.z;
           z += 3.8f;
           Vector3 position_of_spawn = gameObject.transform.FindChild("spawn_pos").transform.position;
-          barrik_have = Instantiate(barrikade, position_of_spawn, gameObject.transform.rotation) as GameObject;
+          barrik_have = Instantiate(barrikade, position_of_spawn, gameObject.transform.rotation)as GameObject;
           barrik_have.transform.SetParent(gameObject.transform);
+          unit_cur_defence += barrikade_power;
           Unit_Chouse();
           action_points -= 3;
+          have_barrikade = true;
       }
         
     }
@@ -271,8 +287,7 @@ public class Unit : MonoBehaviour {
     
     public void Bonus_Calculating()
     {
-        unit_cur_fire_power = unit_fire_power;
-        unit_cur_defence = unit_defence;
+        
         
         unit_cur_defence += my_hex.GetComponent<HexComb>().bonus_defence;
         unit_cur_fire_power += my_hex.GetComponent<HexComb>().bonus_atack;
