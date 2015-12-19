@@ -8,13 +8,12 @@ public class Unit : MonoBehaviour {
 
     #region Variables
     public Control ctrl;
-    public float speed = 10;
     public DataBase DB;
-    public UI ui;
-    public bool unit_chosen = false;
-    public GameObject unit_selector;
+    public  UI ui;
+    public  bool unit_chosen = false;
+    public  GameObject unit_selector;
     public int action_points = 5;
-    public GameObject navigator_obj;
+    public  GameObject navigator_obj;
     public float rotation;
     public bool but_rotation = false;
     public GameObject rotation_object_direction;
@@ -43,7 +42,6 @@ public class Unit : MonoBehaviour {
         DB = GameObject.Find("Logic").GetComponent<DataBase>();
         ui = GameObject.Find("UI").GetComponent<UI>();
         my_position = gameObject.transform.position;
-        DB.all_units.Add(gameObject);
         if(gameObject.tag == "player_unit")
         {
             DB.player_units.Add(gameObject);
@@ -115,7 +113,7 @@ public class Unit : MonoBehaviour {
         }
         if(cur_hp == 0)
         {
-            Destroy(gameObject, 3);
+            Destroy(gameObject, 1);
         }
     }
     public void Move()
@@ -241,11 +239,11 @@ public class Unit : MonoBehaviour {
             my_hex = col.gameObject;
             if(gameObject.tag == "player_unit")
             {
-                my_hex.GetComponent<HexComb>().Change(2);
+               // my_hex.GetComponent<HexComb>().Change(2);
             }
             else if(gameObject.tag == "Enemy")
             {
-                my_hex.GetComponent<HexComb>().Change(3);
+               // my_hex.GetComponent<HexComb>().Change(3);
             }
             
         }

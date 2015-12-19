@@ -11,12 +11,15 @@ public class Control : MonoBehaviour
     public BattleCalculator BC;
     public Vector3 position_to_go; //Позиция Гекса куда нужно добраться
     public GameObject target_object; //Обьект (юнит) от которого мерится дистанция до целевого гекса
+    public int count_of_Turns= 0;
+    public Fractions frc;
     #endregion
     void Start()
     {
         DB = GameObject.FindGameObjectWithTag("Logic").GetComponent<DataBase>();
         BC = GameObject.FindGameObjectWithTag("Logic").GetComponent<BattleCalculator>();
         target_object = gameObject;
+        frc = gameObject.transform.GetComponent<Fractions>();
         
     }
    
@@ -24,11 +27,22 @@ public class Control : MonoBehaviour
     void Update(){
         if (Input.GetMouseButtonDown(0)){
             
+            
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             Physics.Raycast(ray, out hit, Mathf.Infinity);
-            
+            if(frc.buy_time)
+            {
+                foreach(GameObject gmj in DB.arrivel_list)
+                {
+                    if(hit.collider.gameObject == gmj)
+                    {
+                       
+                    }
+                }
+            }
             if (hit.collider.gameObject.tag == "Hex"){
+                
                 foreach (GameObject obj in DB.hex_comb){
                     if (hit.collider.gameObject == obj){
                         position_to_go = obj.transform.position;
@@ -94,6 +108,7 @@ public class Control : MonoBehaviour
 
                     
                 }
+            
             else
             {
                 Debug.Log("Что то не так");
@@ -108,8 +123,14 @@ public class Control : MonoBehaviour
         foreach(GameObject units in DB.player_units)
         {
             units.GetComponent<Unit>().End_Turn();
+            foreach(GameObject ct in DB.all_cities)
+            {
+                ct.GetComponent<city>().Money_pay();
+            }
         }
+        DB.chose_unit[0].GetComponent<Unit>().Unit_Chouse();
     }
+   
 
     }
 

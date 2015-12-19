@@ -71,11 +71,13 @@
     <Compile Include="Assets\Scripts\BattleCalculator.cs" />
     <Compile Include="Assets\Scripts\Control.cs" />
     <Compile Include="Assets\Scripts\DataBase.cs" />
+    <Compile Include="Assets\Scripts\Fractions.cs" />
     <Compile Include="Assets\Scripts\HexComb.cs" />
     <Compile Include="Assets\Scripts\Navigator.cs" />
     <Compile Include="Assets\Scripts\UI.cs" />
     <Compile Include="Assets\Scripts\Unit.cs" />
     <Compile Include="Assets\Scripts\cameraContr.cs" />
+    <Compile Include="Assets\Scripts\city.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2013\UnityVS.CSharp.targets" />
 </Project>
