@@ -7,6 +7,8 @@ public class Unit : MonoBehaviour {
     //*******Класс Юнита*******\\
 
     #region Variables
+    
+    
     private Control ctrl;
     private DataBase DB;
     private  UI ui;
@@ -14,28 +16,37 @@ public class Unit : MonoBehaviour {
     private bool enemy_chose = false;
     private  GameObject unit_selector;
     private GameObject enemy_selector;
+    [HideInInspector]
     public GameObject navigator_obj;
+    [HideInInspector]
     public int action_points = 5;
     private bool but_rotation = false;
-    public GameObject rotation_object_direction;
-    public int barrikade_power;
+    [HideInInspector]
+    public GameObject rotation_object_direction; //для обьекта поворота будь то Хекс или Юнит
+    [HideInInspector]
+    public int barrikade_power; // бонус барикад
+    [HideInInspector]
     public GameObject barrikade;
+    [HideInInspector]
     public GameObject barrik_have;
+    [HideInInspector]
     public bool have_barrikade = false;
+
     
 
 
     public string unit_type;
     public string unit_fraction;
-    public int number_of_soldiers;
     public float unit_defence;
+    [HideInInspector]
     public float unit_cur_defence;
+    [HideInInspector]
     public int unit_cur_fire_power;
     public int unit_fire_power;
     public int fire_distance;
     public float max_hp;
+    [HideInInspector]
     public float cur_hp;
-    public Vector3 my_position;
     public GameObject my_hex;
     #endregion
     void Start () {
@@ -45,7 +56,6 @@ public class Unit : MonoBehaviour {
         enemy_selector = gameObject.transform.GetChild(1).gameObject;
         DB = GameObject.Find("Logic").GetComponent<DataBase>();
         ui = GameObject.Find("UI").GetComponent<UI>();
-        my_position = gameObject.transform.position;
         if(gameObject.tag == "player_unit")
         {
             DB.player_units.Add(gameObject);
@@ -153,8 +163,7 @@ public class Unit : MonoBehaviour {
             
             
         }
-        
-        my_position = gameObject.transform.position;
+
         
         
     } // Метод движения Юнита

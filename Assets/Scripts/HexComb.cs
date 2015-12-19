@@ -6,12 +6,11 @@ public class HexComb : MonoBehaviour {
     //**********Класс Гекса Запиывает себя в Базу Данных Гексов*********\\
 
     #region Variables
-    public DataBase DB;
+    private DataBase DB;
     public SpriteRenderer sp;
     public Sprite avail_hex;
     public Sprite point_go;
     public Sprite def;
-
     public float bonus_defence;
     public int bonus_atack;
     #endregion

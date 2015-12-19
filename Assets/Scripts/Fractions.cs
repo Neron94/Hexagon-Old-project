@@ -2,10 +2,12 @@
 using System.Collections;
 
 
-public class Fractions : MonoBehaviour {
+public class Fractions : MonoBehaviour
+{
 
+    #region Variables
     public string fraction_name;
-    public DataBase DB;
+    private DataBase DB;
     public int Salary;
     public bool buy_time = false;
     public GameObject spawn_Object;
@@ -14,10 +16,11 @@ public class Fractions : MonoBehaviour {
     public int cannon_cost;
     public int infantry_costs;
     public UI ui;
-    
-   
+    #endregion
 
-	void Start () {
+
+
+    void Start () {
         DB = GameObject.FindGameObjectWithTag("Logic").GetComponent<DataBase>();
         ui = GameObject.FindGameObjectWithTag("myUI").GetComponent<UI>();
 	}

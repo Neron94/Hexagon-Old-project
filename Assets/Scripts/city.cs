@@ -2,8 +2,7 @@
 using System.Collections;
 
 public class city : MonoBehaviour {
-    public DataBase DB;
-    public Control ctrl;
+    private DataBase DB;
     public string city_name;
     public int salary_bonus;
     public bool switcher = false;
@@ -13,7 +12,6 @@ public class city : MonoBehaviour {
     public GameObject my_hex;
 	void Start () {
         DB = GameObject.FindGameObjectWithTag("Logic").GetComponent<DataBase>();
-        ctrl = GameObject.FindGameObjectWithTag("Logic").GetComponent<Control>();
         DB.all_cities.Add(gameObject);
         
         

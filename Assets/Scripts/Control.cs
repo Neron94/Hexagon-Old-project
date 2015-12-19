@@ -7,19 +7,17 @@ public class Control : MonoBehaviour
     //******Класс Оперирующий Элементы управления******\\
 
     #region Variables
-    public DataBase DB;
-    public BattleCalculator BC;
+    private DataBase DB;
+    private BattleCalculator BC;
     public Vector3 position_to_go; //Позиция Гекса куда нужно добраться
-    public GameObject target_object; //Обьект (юнит) от которого мерится дистанция до целевого гекса
+    public GameObject target_object; //Обьект (юнит) от которого мерится дистнция до целевого гекса
     public int count_of_Turns= 0;
-    public Fractions frc;
     #endregion
     void Start()
     {
         DB = GameObject.FindGameObjectWithTag("Logic").GetComponent<DataBase>();
         BC = GameObject.FindGameObjectWithTag("Logic").GetComponent<BattleCalculator>();
         target_object = gameObject;
-        frc = gameObject.transform.GetComponent<Fractions>();
         
     }
    

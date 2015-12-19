@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 
 public class UI : MonoBehaviour {
-    public DataBase DB;
+    private DataBase DB;
     public GameObject but_turn_Unit;
     public GameObject but_build_barrikade;
     public GameObject but_buy;
