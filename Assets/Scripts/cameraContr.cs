@@ -15,16 +15,31 @@ public class cameraContr : MonoBehaviour {
     public bool camera_move = false;
     public float distance;
     public GameObject camera;
+    public bool on_terrain;
+    
     #endregion
 
     void Start () {
 	
 	}
 	void Update () {
+        
         Ray first_ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         Ray second_ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-      
+        /*Ray ray = new Ray(transform.position, Vector3.down);
+        RaycastHit hiit;
+        Physics.Raycast(ray, out hiit, Mathf.Infinity);
+        
+        ДОДЕЛАТЬ ОГРАНИЧИТЕЛЬ КАМЕРЫ
+         
+        if(hiit.collider)
+        {
+            on_terrain = true;
+        }
+        else
+        {
+            on_terrain = false;
+        }*/
             if (Input.GetMouseButtonDown(0))
             {
                 start_point = first_ray.GetPoint(40);
@@ -39,7 +54,11 @@ public class cameraContr : MonoBehaviour {
 
                 if (distance >= 0.1)
                 {
-                    camera.transform.position += start_point - end_point;
+                    
+                        camera.transform.position += start_point - end_point;
+                    
+                   
+                    
 
                 }
 

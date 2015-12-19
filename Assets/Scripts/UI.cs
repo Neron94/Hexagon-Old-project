@@ -9,6 +9,7 @@ public class UI : MonoBehaviour {
     public GameObject but_buy;
     public GameObject unitStats;
     public GameObject enemy_stats;
+    public GameObject but_menu;
   
 
     public Text money;
@@ -48,7 +49,20 @@ public class UI : MonoBehaviour {
             but_buy.SetActive(true);
             
         }
-        
+        else if (button_name == "menu")
+        {
+            but_menu.SetActive(true);
+            
+        }
+        else if (button_name == "close_menu")
+        {
+            but_menu.SetActive(false);
+            
+        }    
+        else if (button_name == "exit")
+        {
+            Application.Quit();
+        }
         
     }
     public void unitSats(int ap, int unit_damage, float unit_defence, float hp , float max_hp)

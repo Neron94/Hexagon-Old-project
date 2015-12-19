@@ -12,6 +12,7 @@ public class Fractions : MonoBehaviour {
     public RaycastHit hit;
     public int tank_cost;
     public int cannon_cost;
+    public int infantry_costs;
     public UI ui;
     
    
@@ -102,6 +103,26 @@ public class Fractions : MonoBehaviour {
                 buy_time = false;
             }
             
+        }
+        if (name == "infantry")
+        {
+            if (Salary >= infantry_costs)
+            {
+                DB.arrivel_list.Clear();
+                foreach (GameObject city in DB.player_cities)
+                {
+                    city.GetComponent<city>().my_hex.GetComponent<HexComb>().Change(2);
+                    DB.arrivel_list.Add(city.GetComponent<city>().my_hex);
+                    spawn_Object = DB.unit_Pref_types[2];
+                    Salary -= infantry_costs;
+
+                }
+            }
+            else
+            {
+                buy_time = false;
+            }
+
         }
 
         }
