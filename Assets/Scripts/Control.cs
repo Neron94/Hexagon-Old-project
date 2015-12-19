@@ -127,12 +127,18 @@ public class Control : MonoBehaviour
         foreach(GameObject units in DB.player_units)
         {
             units.GetComponent<Unit>().End_Turn();
-            foreach(GameObject ct in DB.all_cities)
-            {
-                ct.GetComponent<city>().Money_pay();
-            }
+        
         }
-        DB.chose_unit[0].GetComponent<Unit>().Unit_Chouse();
+        foreach (GameObject ct in DB.all_cities)
+        {
+            ct.GetComponent<city>().Money_pay();
+            
+        }
+        if(DB.chose_unit.Count == 1)
+        {
+            DB.chose_unit[0].GetComponent<Unit>().Unit_Chouse();
+        }
+        
     }
    
 

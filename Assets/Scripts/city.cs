@@ -6,12 +6,10 @@ public class city : MonoBehaviour {
     public Control ctrl;
     public string name;
     public int salary_bonus;
-    public float per_time;
     public bool switcher = false;
     public string fraction_name;
     public int defence_bonus;
     public Fractions frac;
-    public int next_salary;
     public GameObject my_hex;
 	void Start () {
         DB = GameObject.FindGameObjectWithTag("Logic").GetComponent<DataBase>();

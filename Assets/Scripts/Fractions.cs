@@ -54,7 +54,7 @@ public class Fractions : MonoBehaviour {
 	}
     public void Salary_plus(int count)
     {
-        Salary += count;
+       Salary += count;
     }
     public void Salary_minus(int count)
     {
