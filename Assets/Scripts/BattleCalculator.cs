@@ -14,10 +14,10 @@ public class BattleCalculator : MonoBehaviour {
     
     public void BattleModeller(GameObject atacker, GameObject defender)
     {
-        
 
-     
-        
+
+
+        atacker.GetComponent<Unit>().fire_effect.SetActive(true);
         float def = defender.GetComponent<Unit>().unit_defence;
         int atk = atacker.GetComponent<Unit>().unit_fire_power;
         Debug.Log("ВЫСТРЕЛ!!!");

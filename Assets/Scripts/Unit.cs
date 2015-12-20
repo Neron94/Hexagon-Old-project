@@ -14,6 +14,9 @@ public class Unit : MonoBehaviour {
     public bool movve = false;
     public List<Vector3> myPath;
 
+    public GameObject move;
+    public GameObject fire_effect;
+
 
     private Control ctrl;
     private DataBase DB;
@@ -59,6 +62,8 @@ public class Unit : MonoBehaviour {
     void Start () {
         
         ctrl = GameObject.Find("Logic").GetComponent<Control>();
+        fire_effect = gameObject.transform.GetChild(4).gameObject;
+        move = gameObject.transform.GetChild(5).gameObject;
         unit_selector = gameObject.transform.GetChild(0).gameObject;
         enemy_selector = gameObject.transform.GetChild(1).gameObject;
         DB = GameObject.Find("Logic").GetComponent<DataBase>();
@@ -81,6 +86,8 @@ public class Unit : MonoBehaviour {
         }
 	void Update ()
     {
+        move.SetActive(movve);
+
         #region Move(Cicle)
         if (movve)
         {
@@ -88,14 +95,25 @@ public class Unit : MonoBehaviour {
             {
                 if (gameObject.transform.position != ctrl.position_to_go)
                 {
+                    
                     Debug.Log("cicle poshol");
                     if (!moving)
                     {
                         if(myPath.Count != 0)
                         {
-                            gameObject.transform.LookAt(myPath[c]);
-                            gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, myPath[c], speed * Time.deltaTime);
+                            try
+                            {
+                                gameObject.transform.LookAt(myPath[c]);
+                                gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, myPath[c], speed * Time.deltaTime);
                     
+                            }
+                            catch
+                            {
+                                movve = false;
+                                myPath.Clear();
+                                c = 0;
+                            }
+                            
                         }
                         }
                     if (gameObject.transform.position == myPath[c])
