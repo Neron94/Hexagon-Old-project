@@ -16,6 +16,7 @@ public class Navigator : MonoBehaviour {
     public bool nna = false; // переменная включатель поиска пути
     public LineRenderer l_r;
     public Vector3 start_point; // Начальная точка при спавне навигатора
+    public int c =0;
     #endregion
 
     void Start () {
@@ -47,16 +48,24 @@ public class Navigator : MonoBehaviour {
            
         if(curPos != ctrl.position_to_go)
             {
+                
                 Debug.Log("Мы не находимся на точке назн");
                 if(curPos != Path_finder())
                 {
                     Debug.Log("Мы не на рациональном пути но начинаем двигаться туда");
                     curPos = Path_finder();
+                   
                     DB.Path.Add(curPos);
+                    Move_Nav(curPos);
                     
                 }
+            else if(curPos == Path_finder())
+                {
+                    curPos = new Vector3(0,0,0);
+                }
+          
                 
-                Move_Nav(curPos);
+                
 
             }
             else
@@ -158,12 +167,21 @@ public class Navigator : MonoBehaviour {
     {
        
         
-        l_r.SetVertexCount(DB.Path.Count);
-        for (int i = 0; i < DB.Path.Count; i++)
+        l_r.SetVertexCount(DB.Path.Count + 1);
+        for (int i = 0; i < DB.Path.Count + 1; i++)
         {
-
-            l_r.SetPosition(i, DB.Path[i]);
+            if(i > 0)
+            {
+                l_r.SetPosition(i, DB.Path[c]);
+                c++;
+            }
+            if(i <= 0)
+            {
+                l_r.SetPosition(i, start_point);
+            }
+            
         }
+        c = 0;
         
        
 
