@@ -16,6 +16,7 @@ public class Unit : MonoBehaviour {
 
     public GameObject move;
     public GameObject fire_effect;
+    public GameObject explosion;
 
 
     private Control ctrl;
@@ -67,6 +68,7 @@ public class Unit : MonoBehaviour {
         unit_selector = gameObject.transform.GetChild(0).gameObject;
         enemy_selector = gameObject.transform.GetChild(1).gameObject;
         DB = GameObject.Find("Logic").GetComponent<DataBase>();
+        explosion = DB.unit_Pref_types[5];
         ui = GameObject.Find("UI").GetComponent<UI>();
         if(gameObject.tag == "player_unit")
         {
@@ -197,9 +199,11 @@ public class Unit : MonoBehaviour {
        
         if(cur_hp <= 0)
         {
-            Destroy(gameObject, 1);
+            Instantiate(explosion, gameObject.transform.position, Quaternion.identity);
+            Destroy(gameObject);
             if (have_barrikade)
             {
+                
                 Destroy(barrik_have);
                 unit_cur_defence -= barrikade_power;
                 have_barrikade = false;
