@@ -12,6 +12,7 @@ public class Control : MonoBehaviour
     public Vector3 position_to_go; //Позиция Гекса куда нужно добраться
     public GameObject target_object; //Обьект (юнит) от которого мерится дистнция до целевого гекса
     public int count_of_Turns= 0;
+    private GameObject enemy_correct;
     #endregion
     void Start()
     {
@@ -39,6 +40,12 @@ public class Control : MonoBehaviour
             RaycastHit hit;
             Physics.Raycast(ray, out hit, Mathf.Infinity);
             if (hit.collider.gameObject.tag == "Hex"){
+                if(enemy_correct != null)
+                {
+                    enemy_correct.GetComponent<Unit>().my_hex.GetComponent<HexComb>().Change(1);
+                    enemy_correct = null;
+                }
+               
                 foreach (GameObject obj in DB.hex_comb){
                     if (hit.collider.gameObject == obj){
                         position_to_go = obj.transform.position;
@@ -68,6 +75,11 @@ public class Control : MonoBehaviour
             }
             
                         else if(hit.collider.gameObject.tag == "player_unit"){
+                            if (enemy_correct != null)
+                            {
+                                enemy_correct.GetComponent<Unit>().my_hex.GetComponent<HexComb>().Change(1);
+                                enemy_correct = null;
+                            }
                             Debug.Log("Попали в юнита");
                             if(DB.chose_unit.Count == 1){
                                 DB.chose_unit[0].GetComponent<Unit>().Unit_Chouse();
@@ -100,7 +112,24 @@ public class Control : MonoBehaviour
                             {
                                 
                                     DB.chose_unit[0].GetComponent<Unit>().Unit_rotation(enemy, enemy);
+                                    hit.collider.gameObject.GetComponent<Unit>().my_hex.GetComponent<HexComb>().Change(4);
+                                    if(hit.collider.gameObject == enemy_correct)
+                                    {
                                     BC.BattleModeller(DB.chose_unit[0], enemy);
+                                    enemy_correct.GetComponent<Unit>().my_hex.GetComponent<HexComb>().Change(1);
+                                    enemy_correct = null;
+                                        
+                                    }
+                                    else
+                                    {
+                                        if (enemy_correct != null)
+                                        {
+                                            enemy_correct.GetComponent<Unit>().my_hex.GetComponent<HexComb>().Change(1);
+                                            enemy_correct = null;
+                                        }
+                                    }
+                                    enemy_correct = hit.collider.gameObject;
+                                    
                                 
                                 
                                 

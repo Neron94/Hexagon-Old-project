@@ -11,6 +11,7 @@ public class HexComb : MonoBehaviour {
     public SpriteRenderer sp;
     public Sprite avail_hex;
     public Sprite point_go;
+    public Sprite enemy_target;
     public Sprite def;
     public float bonus_defence;
     public int bonus_atack;
@@ -41,6 +42,9 @@ public class HexComb : MonoBehaviour {
                 break;
             case 3:
                 sp.sprite = point_go;
+                break;
+            case 4:
+                sp.sprite = enemy_target;
                 break;
                 
         }
