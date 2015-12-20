@@ -12,12 +12,13 @@ public class DataBase : MonoBehaviour {
     public List<GameObject> player_units; //список Юнитов Игрока
     public List<GameObject> enemy_units; // список Юнитов противника
     public List<GameObject> chose_unit; // список выбранных юнитов 
-    public List<GameObject> player_cities;
-    public List<GameObject> enemy_cities;
-    public List<GameObject> all_cities;
-    public List<GameObject> arrivel_list;
-    public List<GameObject> unit_Pref_types;
-    public List<GameObject> enemy_chose;
+    public List<GameObject> player_cities; //города игрока
+    public List<GameObject> enemy_cities; // вражеские города
+    public List<GameObject> all_cities; // список всех городов
+    public List<GameObject> arrivel_list; // города игрока только для высадки юнитов
+    public List<GameObject> unit_Pref_types; // склад исходников префабов для спавна
+    public List<GameObject> enemy_chose; // выбранный вражеский юнит
+    public List<GameObject> city_selected; // выбранный город
     #endregion
 
 

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+
 public class HexComb : MonoBehaviour {
 
     //**********Класс Гекса Запиывает себя в Базу Данных Гексов*********\\
@@ -13,6 +14,9 @@ public class HexComb : MonoBehaviour {
     public Sprite def;
     public float bonus_defence;
     public int bonus_atack;
+
+    public GameObject unit_on_hex;
+    public GameObject city_on_hex;
     #endregion
 
 

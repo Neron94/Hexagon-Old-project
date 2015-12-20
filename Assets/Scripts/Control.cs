@@ -30,6 +30,11 @@ public class Control : MonoBehaviour
                 {
                     DB.enemy_chose[0].GetComponent<Unit>().Enemy_Chose();
                 }
+                if(DB.city_selected.Count == 1)
+                {
+                    DB.city_selected[0].GetComponent<city>().City_Chosen();
+                }
+                
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             Physics.Raycast(ray, out hit, Mathf.Infinity);
@@ -37,20 +42,24 @@ public class Control : MonoBehaviour
                 foreach (GameObject obj in DB.hex_comb){
                     if (hit.collider.gameObject == obj){
                         position_to_go = obj.transform.position;
-                        
                             if(DB.chose_unit.Count == 1){
                                 GameObject.FindGameObjectWithTag("Navigator").GetComponent<Navigator>().nna = true;
-                            }
-                                    if (DB.chose_unit.Count == 1){
-                                        if(target_object.transform.position == position_to_go){
-                            
-                                            GameObject.FindGameObjectWithTag("Navigator").GetComponent<Navigator>().End_move();
-                                            DB.chose_unit[0].GetComponent<Unit>().Unit_Chouse();
+                                if (target_object.transform.position == position_to_go)
+                                {
+                                    GameObject.FindGameObjectWithTag("Navigator").GetComponent<Navigator>().End_move();
+                                    DB.chose_unit[0].GetComponent<Unit>().Unit_Chouse();
 
-                                        }
-                               
-                               
-                                    }
+                                }
+                            }
+                            else
+                            {
+                                if(obj.GetComponent<HexComb>().city_on_hex != null)
+                                {
+                                    obj.GetComponent<HexComb>().city_on_hex.GetComponent<city>().City_Chosen();
+                                }
+                                
+                            }
+                                    
                                     target_object = obj;
                         DB.Path.Clear();
                         

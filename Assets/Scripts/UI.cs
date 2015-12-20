@@ -10,16 +10,20 @@ public class UI : MonoBehaviour {
     public GameObject unitStats;
     public GameObject enemy_stats;
     public GameObject but_menu;
+    public GameObject city_stats;
   
 
     public Text money;
     public Text tx;
     public Text enemyStat;
+    public Text cityStats;
+
 
 
     public void Start()
     {
         DB = GameObject.FindGameObjectWithTag("Logic").GetComponent<DataBase>();
+        
     }
 	public void ButtonHider(string button_name)
     {
