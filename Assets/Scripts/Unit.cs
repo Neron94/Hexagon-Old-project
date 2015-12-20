@@ -7,8 +7,14 @@ public class Unit : MonoBehaviour {
     //*******Класс Юнита*******\\
 
     #region Variables
-    
-    
+
+    private bool moving = false;
+    public int speed;
+    public int c = 0;
+    public bool movve = false;
+    public List<Vector3> myPath;
+
+
     private Control ctrl;
     private DataBase DB;
     private  UI ui;
@@ -48,6 +54,7 @@ public class Unit : MonoBehaviour {
     [HideInInspector]
     public float cur_hp;
     public GameObject my_hex;
+
     #endregion
     void Start () {
         
@@ -72,12 +79,53 @@ public class Unit : MonoBehaviour {
      
         
         }
-	void Update () {
-       
-        
-        Unit_death();
+	void Update ()
+    {
+        #region Move(Cicle)
+        if (movve)
+        {
+            if(action_points > 0)
+            {
+                if (gameObject.transform.position != ctrl.position_to_go)
+                {
+                    Debug.Log("cicle poshol");
+                    if (!moving)
+                    {
+                        if(myPath.Count != 0)
+                        {
+                            gameObject.transform.LookAt(myPath[c]);
+                            gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, myPath[c], speed * Time.deltaTime);
+                    
+                        }
+                        }
+                    if (gameObject.transform.position == myPath[c])
+                    {
+                        moving = false;
+                        c++;
+                        action_points--;
+                    }
+                }
+                else
+                {
+                    movve = false;
+                    myPath.Clear();
+                    c = 0;
+                    
+                }
+            }
+            else
+            {
+                moving = false;
+                movve = false;
+                myPath.Clear();
+                c = 0;
+            }
 
-        if(but_rotation)
+        }
+        #endregion
+        Unit_death();
+        #region Rotation_On_Button(Cicle)
+        if (but_rotation)
         {
             if(Input.GetMouseButtonDown(0))
             {
@@ -119,11 +167,12 @@ public class Unit : MonoBehaviour {
                 }
                 
             }
-            
-        }
-        
 
-	}
+        }
+        #endregion
+
+
+    }
     public void Unit_death()
     {
         
@@ -147,26 +196,8 @@ public class Unit : MonoBehaviour {
             unit_cur_defence -= barrikade_power;
             have_barrikade = false;
         }
-        
-        for (int i = 0; action_points != 0; i++)
-        {
-
-            gameObject.transform.LookAt(ctrl.target_object.transform.position);
-            gameObject.transform.position = new Vector3(DB.Path[i].x, DB.Path[i].y, DB.Path[i].z);
-            action_points--;
-            if(gameObject.transform.position == ctrl.position_to_go)
-            {
-                
-                break;
-            }
-            
-            
-            
-        }
-
-        
-        
-    } // Метод движения Юнита
+        movve = true;
+     } // Метод движения Юнита
     public void Unit_Chouse()
     {
         if(unit_chosen == false)

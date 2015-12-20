@@ -19,6 +19,7 @@ public class DataBase : MonoBehaviour {
     public List<GameObject> unit_Pref_types; // склад исходников префабов для спавна
     public List<GameObject> enemy_chose; // выбранный вражеский юнит
     public List<GameObject> city_selected; // выбранный город
+    public List<Vector3> unit_Path; // путь для юнита //чистится после прибытия на точку
     #endregion
 
 

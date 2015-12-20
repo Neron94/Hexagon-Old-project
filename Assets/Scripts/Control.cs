@@ -68,7 +68,7 @@ public class Control : MonoBehaviour
                             }
                                     
                                     target_object = obj;
-                        DB.Path.Clear();
+                                    DB.Path.Clear();
                         
                     }
                 }
