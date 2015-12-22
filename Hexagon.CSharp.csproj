@@ -80,6 +80,7 @@
     <Compile Include="Assets\Scripts\cameraContr.cs" />
     <Compile Include="Assets\Scripts\city.cs" />
     <Compile Include="Assets\Scripts\effect_switcher.cs" />
+    <Compile Include="Assets\Scripts\playButton.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\iMG Explosion FX\ReadME.txt" />

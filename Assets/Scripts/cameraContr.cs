@@ -16,6 +16,10 @@ public class cameraContr : MonoBehaviour {
     public float distance;
     public GameObject camera_object;
     public bool on_terrain;
+
+    public Vector3 zoom_start;
+    public Vector3 zoom_end;
+    public float speed = 3;
     #endregion
 
     void Start () {
@@ -39,6 +43,8 @@ public class cameraContr : MonoBehaviour {
         {
             on_terrain = false;
         }*/
+        if(Input.touchCount == 1)
+        {
             if (Input.GetMouseButtonDown(0))
             {
                 start_point = first_ray.GetPoint(40);
@@ -53,15 +59,33 @@ public class cameraContr : MonoBehaviour {
 
                 if (distance >= 0.1)
                 {
-                    
-                        camera_object.transform.position += start_point - end_point;
-                    
-                   
-                    
+
+                    camera_object.transform.position += start_point - end_point;
+
+
+
 
                 }
 
             }
+        }
+        else if (Input.touchCount == 2)
+        {
+            Touch touchzero = Input.GetTouch(0);
+            Touch toucheone = Input.GetTouch(1);
+
+            Vector2 touchZeroPrevPos = touchzero.position - touchzero.deltaPosition;
+            Vector2 touchOnePrevPos = toucheone.position - toucheone.deltaPosition;
+
+            float prevTouchDeltaMag = (touchZeroPrevPos - touchOnePrevPos).magnitude;
+            float touchdeltaMag = (touchzero.position - toucheone.position).magnitude;
+
+            float deltaMagnitudeDiff = prevTouchDeltaMag - touchdeltaMag;
+
+            Camera.main.fieldOfView += deltaMagnitudeDiff * speed;
+            Camera.main.fieldOfView = Mathf.Clamp(Camera.main.fieldOfView, 41.9f, 86.9f);
+        }
+           
         if(Input.GetMouseButtonUp(0))
         {
             camera_move = false;
