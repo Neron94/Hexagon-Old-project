@@ -46,6 +46,7 @@ public class Unit : MonoBehaviour {
 
 
     public string unit_type;
+    public GameObject another_unit;
     public string unit_fraction;
     public float unit_defence;
     [HideInInspector]
@@ -338,6 +339,10 @@ public class Unit : MonoBehaviour {
                // my_hex.GetComponent<HexComb>().Change(3);
             }
             
+        }
+        else if (col.gameObject.tag == "player_unit")
+        {
+
         }
     }
     public void OnTriggerExit(Collider col)

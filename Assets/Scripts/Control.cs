@@ -27,6 +27,7 @@ public class Control : MonoBehaviour
         
             if(Input.GetMouseButtonDown(0))
             {
+                
                 if(DB.enemy_chose.Count == 1)
                 {
                     DB.enemy_chose[0].GetComponent<Unit>().Enemy_Chose();
@@ -35,6 +36,7 @@ public class Control : MonoBehaviour
                 {
                     DB.city_selected[0].GetComponent<city>().City_Chosen();
                 }
+                
                 
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
@@ -50,6 +52,8 @@ public class Control : MonoBehaviour
                     if (hit.collider.gameObject == obj){
                         position_to_go = obj.transform.position;
                             if(DB.chose_unit.Count == 1){
+                                
+                                
                                 GameObject.FindGameObjectWithTag("Navigator").GetComponent<Navigator>().nna = true;
                                 if (target_object.transform.position == position_to_go)
                                 {
@@ -80,9 +84,18 @@ public class Control : MonoBehaviour
                                 enemy_correct.GetComponent<Unit>().my_hex.GetComponent<HexComb>().Change(1);
                                 enemy_correct = null;
                             }
-                            Debug.Log("Попали в юнита");
+                            
                             if(DB.chose_unit.Count == 1){
-                                DB.chose_unit[0].GetComponent<Unit>().Unit_Chouse();
+                           
+                                if(DB.chose_unit[0].tag == "Army")
+                                {
+                                    DB.chose_unit[0].GetComponent<Army>().Army_Chose();
+                                }
+                                else
+                                {
+                                    DB.chose_unit[0].GetComponent<Unit>().Unit_Chouse();
+                                }
+                                
                             }
                             
                             
@@ -99,6 +112,7 @@ public class Control : MonoBehaviour
                 
                 if(DB.chose_unit.Count == 1)
                 {
+                   
                     if(DB.chose_unit[0].GetComponent<Unit>().action_points >= 2)
                     foreach(GameObject enemy in DB.enemy_units)
                     {
@@ -151,6 +165,21 @@ public class Control : MonoBehaviour
 
                     
                 }
+            else if (hit.collider.gameObject.tag == "Army")
+            {
+                if (DB.chose_unit.Count == 1)
+                {
+
+                    if (DB.chose_unit[0].tag == "Army")
+                    {
+                        DB.chose_unit[0].GetComponent<Army>().Army_Chose();
+                    }
+                    DB.chose_unit[0].GetComponent<Unit>().Unit_Chouse();
+                }
+               hit.collider.gameObject.GetComponent<Army>().Army_Chose();
+                
+                
+            }
             
             else
             {
