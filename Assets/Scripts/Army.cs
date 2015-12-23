@@ -2,16 +2,18 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class Army : MonoBehaviour {
+public class Army : MonoBehaviour
+{
 
+    #region Variables
     public List<GameObject> army_contain;
     private bool army_chose = false;
     public GameObject army_selector;
     public GameObject my_Hex;
     private DataBase DB;
-    private UI ui; 
-
-	void Start () {
+    private UI ui;
+    #endregion
+    void Start () {
         army_selector = gameObject.transform.GetChild(1).gameObject;
         DB = GameObject.FindGameObjectWithTag("Logic").GetComponent<DataBase>();
         ui = GameObject.FindGameObjectWithTag("myUI").GetComponent<UI>();

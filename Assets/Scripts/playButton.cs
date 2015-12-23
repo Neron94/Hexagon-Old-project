@@ -6,7 +6,7 @@ public class playButton : MonoBehaviour {
     public GameObject canvas_main;
     public GameObject canvas_settings;
 
-    public void Star()
+    public void Start()
     {
         canvas_main = GameObject.Find("Canvas");
         canvas_settings = GameObject.Find("Canvas_settings");

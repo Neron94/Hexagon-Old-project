@@ -8,24 +8,27 @@ public class Control : MonoBehaviour
 
     #region Variables
     private DataBase DB;
+    private StateManager SM;
     private BattleCalculator BC;
     public Vector3 position_to_go; //Позиция Гекса куда нужно добраться
     public GameObject target_object; //Обьект (юнит) от которого мерится дистнция до целевого гекса
-    public int count_of_Turns= 0;
-    private GameObject enemy_correct;
+    public int count_of_Turns = 0; // сторит число прошедших ходов
+    private GameObject enemy_correct; // сторит первый вражеский юнит цель при повторном нажатие стреляет
     #endregion
     void Start()
     {
         DB = GameObject.FindGameObjectWithTag("Logic").GetComponent<DataBase>();
         BC = GameObject.FindGameObjectWithTag("Logic").GetComponent<BattleCalculator>();
+        SM = GameObject.FindGameObjectWithTag("Logic").GetComponent<StateManager>();
         target_object = gameObject;
         
     }
    
    
     void Update(){
-        
-            if(Input.GetMouseButtonDown(0))
+        if(!SM.state_pause && !SM.state_unit_movement)
+        {
+             if(Input.GetMouseButtonDown(0))
             {
                 
                 if(DB.enemy_chose.Count == 1)
@@ -186,12 +189,14 @@ public class Control : MonoBehaviour
                 Debug.Log("Что то не так");
             }
             }
+    }
                                    
                                     
         }
 
     public void End_of_Turn()
     {
+        count_of_Turns++;
         foreach(GameObject units in DB.player_units)
         {
             units.GetComponent<Unit>().End_Turn();

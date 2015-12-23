@@ -2,8 +2,12 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class UI : MonoBehaviour {
+public class UI : MonoBehaviour
+{
+
+    #region variables
     private DataBase DB;
+    private StateManager SM;
     public GameObject but_turn_Unit;
     public GameObject but_build_barrikade;
     public GameObject but_buy;
@@ -26,13 +30,14 @@ public class UI : MonoBehaviour {
     public Text ar_panel_1;
     public Text ar_panel_2;
     public Text ar_panel_3;
+    #endregion
 
 
 
     public void Start()
     {
         DB = GameObject.FindGameObjectWithTag("Logic").GetComponent<DataBase>();
-        
+        SM = GameObject.FindGameObjectWithTag("Logic").GetComponent<StateManager>();
     }
 	public void ButtonHider(string button_name)
     {
@@ -66,11 +71,14 @@ public class UI : MonoBehaviour {
         else if (button_name == "menu")
         {
             but_menu.SetActive(true);
+            SM.state_pause = true;
+            
             
         }
         else if (button_name == "close_menu")
         {
             but_menu.SetActive(false);
+            SM.state_pause = false;
             
         }    
         else if (button_name == "exit")
@@ -84,6 +92,7 @@ public class UI : MonoBehaviour {
             but_army_panel_2.SetActive(false);
             but_army_panel_3.SetActive(false);
         }
+       
         
         
     }

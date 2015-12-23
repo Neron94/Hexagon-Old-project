@@ -6,15 +6,15 @@ public class Fractions : MonoBehaviour
 {
 
     #region Variables
-    public string fraction_name;
+    public string fraction_name; // Название фракции 
     private DataBase DB;
-    public int Salary;
-    public bool buy_time = false;
-    public GameObject spawn_Object;
-    public RaycastHit hit;
-    public int tank_cost;
-    public int cannon_cost;
-    public int infantry_costs;
+    public int Salary; // кол-во средств фракции
+    private  bool buy_time = false; // обозначает что идет покупка юнита
+    private GameObject spawn_Object; // содержит юнита покупки обозначается по разному
+    private RaycastHit hit;
+    public int tank_cost; //цена танка
+    public int cannon_cost; // цена пушки
+    public int infantry_costs; // цена пехоты
     public UI ui;
     #endregion
 

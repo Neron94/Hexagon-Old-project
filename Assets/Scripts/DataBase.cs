@@ -20,19 +20,8 @@ public class DataBase : MonoBehaviour {
     public List<GameObject> enemy_chose; // выбранный вражеский юнит
     public List<GameObject> city_selected; // выбранный город
     public List<Vector3> unit_Path; // путь для юнита //чистится после прибытия на точку
+    public List<GameObject> unit_is_moving; // стор движ юнита
     #endregion
-
-
-    void Start () {
-
-
-        
-
-	}
-	void Update () {
-
-	
-	}
     public void Clear_select_list()
     {
         if(chose_unit.Count == 1)

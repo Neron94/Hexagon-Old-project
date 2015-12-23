@@ -2,16 +2,6 @@
 using System.Collections;
 
 public class BattleCalculator : MonoBehaviour {
-
-    
-    
-	void Start () {
-	
-	}
-    void Update () {
-	
-	}
-    
     public void BattleModeller(GameObject atacker, GameObject defender)
     {
         atacker.GetComponent<Unit>().fire_effect.SetActive(true);

@@ -10,39 +10,34 @@ public class cameraContr : MonoBehaviour {
 
 
     #region Variables
-    public Vector3 start_point;
-    public Vector3 end_point;
-    public bool camera_move = false;
-    public float distance;
-    public GameObject camera_object;
-    public bool on_terrain;
-
-    public Vector3 zoom_start;
-    public Vector3 zoom_end;
-    public float speed = 3;
+    private StateManager SM;
+    private DataBase DB;
+    private  Vector3 start_point;  // обозначене первой точки начала касания для передвижения
+    private  Vector3 end_point; // обозначение конечной точки движение 
+    private  bool camera_move = false; // включатель движения камеры
+    private float distance; // определение дистанции между стартом касания и концом
+    private  GameObject camera_object; // обьект камер
+    private  Vector3 zoom_start;
+    private  Vector3 zoom_end;
+    public  float speed = 3;
     #endregion
 
     void Start () {
         camera_object = Camera.main.gameObject;
+        SM = GameObject.FindGameObjectWithTag("Logic").GetComponent<StateManager>();
+        DB = GameObject.FindGameObjectWithTag("Logic").GetComponent<DataBase>();
 	}
 	void Update () {
         
+        if(SM.state_unit_movement)
+        {          
+            Camera.main.gameObject.transform.position = new Vector3(DB.unit_is_moving[0].transform.position.x, Camera.main.gameObject.transform.position.y, DB.unit_is_moving[0].transform.position.z);
+            
+        }
+     
         Ray first_ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         Ray second_ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        /*Ray ray = new Ray(transform.position, Vector3.down);
-        RaycastHit hiit;
-        Physics.Raycast(ray, out hiit, Mathf.Infinity);
-        
-        ДОДЕЛАТЬ ОГРАНИЧИТЕЛЬ КАМЕРЫ
-         
-        if(hiit.collider)
-        {
-            on_terrain = true;
-        }
-        else
-        {
-            on_terrain = false;
-        }*/
+       
         if(Input.touchCount == 1)
         {
             if (Input.GetMouseButtonDown(0))

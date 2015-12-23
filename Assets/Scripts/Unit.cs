@@ -22,6 +22,7 @@ public class Unit : MonoBehaviour {
     private Control ctrl;
     private DataBase DB;
     private  UI ui;
+    private StateManager SM;
     private  bool unit_chosen = false;
     private bool enemy_chose = false;
     private  GameObject unit_selector;
@@ -64,6 +65,7 @@ public class Unit : MonoBehaviour {
     void Start () {
         
         ctrl = GameObject.Find("Logic").GetComponent<Control>();
+        SM = GameObject.FindGameObjectWithTag("Logic").GetComponent<StateManager>();
         fire_effect = gameObject.transform.GetChild(4).gameObject;
         move = gameObject.transform.GetChild(5).gameObject;
         unit_selector = gameObject.transform.GetChild(0).gameObject;
@@ -112,9 +114,11 @@ public class Unit : MonoBehaviour {
                             }
                             catch
                             {
+                                /*
                                 movve = false;
                                 myPath.Clear();
                                 c = 0;
+                                 */
                             }
                             
                         }
@@ -124,6 +128,7 @@ public class Unit : MonoBehaviour {
                         moving = false;
                         c++;
                         action_points--;
+                        
                     }
                 }
                 else
@@ -131,6 +136,8 @@ public class Unit : MonoBehaviour {
                     movve = false;
                     myPath.Clear();
                     c = 0;
+                    SM.state_unit_movement = false;
+                    DB.unit_is_moving.Remove(gameObject);
                     
                 }
             }
@@ -140,6 +147,8 @@ public class Unit : MonoBehaviour {
                 movve = false;
                 myPath.Clear();
                 c = 0;
+                SM.state_unit_movement = false;
+                DB.unit_is_moving.Remove(gameObject);
             }
 
         }
@@ -194,7 +203,7 @@ public class Unit : MonoBehaviour {
 
 
     }
-    public void Unit_death()
+    private void Unit_death()
     {
         
        
@@ -220,6 +229,9 @@ public class Unit : MonoBehaviour {
             have_barrikade = false;
         }
         movve = true;
+        DB.unit_is_moving.Add(gameObject);
+        SM.state_unit_movement = true;
+        
      } // Метод движения Юнита
     public void Unit_Chouse()
     {
@@ -324,7 +336,7 @@ public class Unit : MonoBehaviour {
     }
     
 
-    public void OnTriggerEnter(Collider col)
+    private void OnTriggerEnter(Collider col)
     {
         if(col.gameObject.tag == "Hex")
         {
@@ -345,7 +357,7 @@ public class Unit : MonoBehaviour {
 
         }
     }
-    public void OnTriggerExit(Collider col)
+    private void OnTriggerExit(Collider col)
     {
         if(col.gameObject.tag == "Hex")
         {
@@ -353,7 +365,7 @@ public class Unit : MonoBehaviour {
         }
     }
     
-    public void Bonus_Calculating()
+    private void Bonus_Calculating()
     {
         unit_cur_fire_power = unit_fire_power;
         unit_cur_defence = unit_defence;

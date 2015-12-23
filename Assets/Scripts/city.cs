@@ -1,20 +1,24 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class city : MonoBehaviour {
-    private DataBase DB;
+public class city : MonoBehaviour
+{
 
-    public string city_name;
-    public int salary_bonus;
-    public bool switcher = false;
-    public string fraction_name;
-    public int defence_bonus;
+
+    #region Variables
+    private DataBase DB;
     public Fractions frac;
-    public GameObject my_hex;
-    private GameObject flag_spawn;
-    private bool flag_spawn_stop;
-    private bool city_selected = false;
-	void Start () {
+    public string city_name; // название города
+    public int salary_bonus; // кол-во денег которые дает город по окончанию хоода
+    public bool switcher = false; // включатель обладания городом
+    public string fraction_name; // название фракции города
+    public int defence_bonus; // бонус к защите юнита если он в городе
+    public GameObject my_hex; // сторим хекс на котором стоит город
+    private GameObject flag_spawn; // флаг фракции в городе
+    private bool flag_spawn_stop; // включатель спавна флага 
+    private bool city_selected = false; // селекнут ли город
+    #endregion 
+    void Start () {
         
         DB = GameObject.FindGameObjectWithTag("Logic").GetComponent<DataBase>();
         DB.all_cities.Add(gameObject);
@@ -41,7 +45,7 @@ public class city : MonoBehaviour {
             frac.Salary_plus(salary_bonus);
         }
     }
-    public void OnTriggerEnter(Collider col)
+    private void OnTriggerEnter(Collider col)
     {
         if(col.gameObject.tag == "player_unit")
         {
@@ -95,7 +99,7 @@ public class city : MonoBehaviour {
 
     }
 
-    public void OnTriggerExit(Collider col)
+    private  void OnTriggerExit(Collider col)
     {
         if (col.gameObject.tag == "player_unit")
         {
@@ -120,7 +124,7 @@ public class city : MonoBehaviour {
 
         }
     }
-    public void Flag_spawner()
+    private void Flag_spawner()
     {
         if (!flag_spawn_stop)
         {

@@ -36,7 +36,7 @@ public class Navigator : MonoBehaviour {
         
     }
     
-    public void Path_find_cicle()
+    private void Path_find_cicle()
         {
         //Сводим к первому значению массив Дистанций окружающих обьектов до цели
             cif[1] = cif[0];
@@ -79,7 +79,7 @@ public class Navigator : MonoBehaviour {
             }
        
         } // Метод запускатор Поиска пути
-    public Vector3 Path_finder()   //Возвращает позицию рационального пути
+    private Vector3 Path_finder()   //Возвращает позицию рационального пути
     {
         foreach(GameObject gj in DB.hex_eight)
         {
@@ -99,7 +99,7 @@ public class Navigator : MonoBehaviour {
         
         
      }
-    public GameObject Min()
+    private GameObject Min()
     {
         
         float minimum;
@@ -128,7 +128,7 @@ public class Navigator : MonoBehaviour {
         return null;
         
     } // Возвращает Обьект рационального пути Path_Finder*у
-    public void OnTriggerEnter(Collider obj)
+    private void OnTriggerEnter(Collider obj)
     {
         if (obj.gameObject.tag == "Hex")
         {
@@ -142,11 +142,11 @@ public class Navigator : MonoBehaviour {
 
 
     } // Инициализирует рядом стоящие Гексы
-    public void OnTriggerExit(Collider exit_obj)
+    private void OnTriggerExit(Collider exit_obj)
     {
         DB.hex_eight.Remove(exit_obj.gameObject);
     } // Удаляет Гексы при отдаление от ближайших
-    public bool InList(GameObject obj)
+    private bool InList(GameObject obj)
     {
 
         foreach (GameObject objk in DB.hex_eight)
@@ -159,11 +159,11 @@ public class Navigator : MonoBehaviour {
         }
         return false;
     } // Не позволяет записывать одни и те же гексы раз за разом
-    public void Move_Nav(Vector3 point)
+    private void Move_Nav(Vector3 point)
     {
         gameObject.transform.position = new Vector3(point.x, point.y, point.z);
     } // Метод двигает Навигатор
-    public void LineDraw()
+    private void LineDraw()
     {
        
         
