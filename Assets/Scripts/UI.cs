@@ -20,14 +20,19 @@ public class UI : MonoBehaviour
     public GameObject but_army_panel_2;
     public GameObject but_army_panel_3;
 
+    public GameObject but_city_Menu;
+    
+
     public Button menu;
     public Button next_turn;
   
 
     public Text money;
+    public Text money_plusing;
     public Text tx;
     public Text enemyStat;
     public Text cityStats;
+   
 
 
     public Text ar_panel_1;
@@ -124,9 +129,10 @@ public class UI : MonoBehaviour
         enemy_stats.SetActive(true);
         enemyStat.text = "Enemy HP: " + hp + "/" + max_hp;
     }
-    public void money_monitor(int mon)
+    public void money_monitor(int mon, int plusing)
     {
-        money.text = "$" + mon;
+        money.text = "" + mon;
+        money_plusing.text = "" + plusing;
     }
     public void ArmyPanel(GameObject first, GameObject second, GameObject third)
     {
@@ -174,6 +180,7 @@ public class UI : MonoBehaviour
       }
     }
 
+    
   
     
 	

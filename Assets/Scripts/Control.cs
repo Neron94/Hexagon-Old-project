@@ -26,8 +26,9 @@ public class Control : MonoBehaviour
    
    
     void Update(){
-        if(!SM.state_pause || !SM.state_unit_movement)
+        if(!SM.state_pause&&!SM.state_unit_movement&&!SM.state_On_UI)
         {
+            
              if(Input.GetMouseButtonDown(0))
             {
                 
@@ -56,20 +57,23 @@ public class Control : MonoBehaviour
                         position_to_go = obj.transform.position;
                             if(DB.chose_unit.Count == 1){
                                 
-                                
-                                GameObject.FindGameObjectWithTag("Navigator").GetComponent<Navigator>().nna = true;
-                                if (target_object.transform.position == position_to_go)
-                                {
-                                    GameObject.FindGameObjectWithTag("Navigator").GetComponent<Navigator>().End_move();
-                                    DB.chose_unit[0].GetComponent<Unit>().Unit_Chouse();
 
-                                }
+                                    GameObject.FindGameObjectWithTag("Navigator").GetComponent<Navigator>().nna = true;
+                                    if (target_object.transform.position == position_to_go)
+                                    {
+                                        GameObject.FindGameObjectWithTag("Navigator").GetComponent<Navigator>().End_move();
+                                        DB.chose_unit[0].GetComponent<Unit>().Unit_Chouse();
+
+                                    }
+                                
+                            
                             }
                             else
                             {
                                 if(obj.GetComponent<HexComb>().city_on_hex != null)
                                 {
                                     obj.GetComponent<HexComb>().city_on_hex.GetComponent<city>().City_Chosen();
+                                    
                                 }
                                 
                             }

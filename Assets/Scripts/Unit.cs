@@ -96,62 +96,59 @@ public class Unit : MonoBehaviour {
         #region Move(Cicle)
         if (movve)
         {
-            if(action_points > 0)
+            if (myPath != null)
             {
-                if (gameObject.transform.position != ctrl.position_to_go)
+                if (action_points > 0)
                 {
-                    
-                    Debug.Log("cicle poshol");
-                    if (!moving)
+                    if (gameObject.transform.position != ctrl.position_to_go)
                     {
-                        if(myPath.Count != 0)
+
+                        if (!moving)
                         {
-                            try
+                            if (myPath.Count != 0)
                             {
-                                gameObject.transform.LookAt(myPath[c]);
-                                gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, myPath[c], speed * Time.deltaTime);
-                    
+                               
+                                    gameObject.transform.LookAt(myPath[c]);
+                                    gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, myPath[c], speed * Time.deltaTime);
+
+
                             }
-                            catch
+                        }
+                        if (myPath.Count != 0)
+                        {
+                            if (gameObject.transform.position == myPath[c])
                             {
-                                /*
-                                movve = false;
-                                myPath.Clear();
-                                c = 0;
-                                 */
+                                moving = false;
+                                c++;
+                                action_points--;
+
                             }
-                            
                         }
-                        }
-                    if (gameObject.transform.position == myPath[c])
+                    }
+                    else
                     {
-                        moving = false;
-                        c++;
-                        action_points--;
-                        
+                        movve = false;
+                        myPath.Clear();
+                        c = 0;
+                        SM.state_unit_movement = false;
+                        DB.unit_is_moving.Remove(gameObject);
+
                     }
                 }
                 else
                 {
+                    moving = false;
                     movve = false;
                     myPath.Clear();
                     c = 0;
                     SM.state_unit_movement = false;
                     DB.unit_is_moving.Remove(gameObject);
-                    
                 }
             }
-            else
-            {
-                moving = false;
-                movve = false;
-                myPath.Clear();
-                c = 0;
-                SM.state_unit_movement = false;
-                DB.unit_is_moving.Remove(gameObject);
-            }
+            
 
         }
+        
         #endregion
         Unit_death();
         #region Rotation_On_Button(Cicle)

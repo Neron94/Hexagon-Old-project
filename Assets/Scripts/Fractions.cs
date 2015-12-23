@@ -16,6 +16,7 @@ public class Fractions : MonoBehaviour
     public int cannon_cost; // цена пушки
     public int infantry_costs; // цена пехоты
     public UI ui;
+    public int all_money;
     #endregion
 
 
@@ -25,11 +26,12 @@ public class Fractions : MonoBehaviour
         ui = GameObject.FindGameObjectWithTag("myUI").GetComponent<UI>();
 	}
 	void Update () {
+        Money_from_citys();
         if(Salary <= 0)
         {
             Salary = 0;
         }
-        ui.money_monitor(Salary);
+        ui.money_monitor(Salary, all_money);
         if(buy_time)
         {
             if(Input.GetMouseButtonDown(0))
@@ -144,5 +146,15 @@ public class Fractions : MonoBehaviour
         }
 
         }
+    public void Money_from_citys()
+    {
+        all_money = 0;
+        foreach(GameObject city in DB.player_cities)
+        {
+            
+            all_money += city.GetComponent<city>().salary_bonus;
+            
+        }
+    }
    
 }

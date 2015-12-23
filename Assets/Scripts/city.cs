@@ -23,6 +23,7 @@ public class city : MonoBehaviour
         DB = GameObject.FindGameObjectWithTag("Logic").GetComponent<DataBase>();
         DB.all_cities.Add(gameObject);
         flag_spawn = gameObject.transform.FindChild("spawn_flag").gameObject;
+        frac = GameObject.FindGameObjectWithTag("Logic").GetComponent<Fractions>();
         
         
 	}
@@ -155,6 +156,8 @@ public class city : MonoBehaviour
             DB.city_selected.Remove(gameObject);
             my_hex.GetComponent<HexComb>().Change(1);
             GameObject.FindGameObjectWithTag("myUI").GetComponent<UI>().city_stats.SetActive(false);
+            GameObject.FindGameObjectWithTag("myUI").GetComponent<UI>().but_city_Menu.SetActive(false);
+            
         }
         else
         {
@@ -162,8 +165,15 @@ public class city : MonoBehaviour
             DB.city_selected.Add(gameObject);
             my_hex.GetComponent<HexComb>().Change(3);
             GameObject.FindGameObjectWithTag("myUI").GetComponent<UI>().city_stats.SetActive(true);
-            GameObject.FindGameObjectWithTag("myUI").GetComponent<UI>().cityStats.text = "" + city_name + "  Cash  " + salary_bonus + "  Def  " + defence_bonus;
+            GameObject.FindGameObjectWithTag("myUI").GetComponent<UI>().cityStats.text = "" + city_name + "  Cash  " + salary_bonus + " Def  " + defence_bonus;
+            if(fraction_name == frac.fraction_name)
+            {
+                GameObject.FindGameObjectWithTag("myUI").GetComponent<UI>().but_city_Menu.SetActive(true);
+
+            }
+          
         }
     }
+  
 
 }
