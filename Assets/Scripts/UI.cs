@@ -19,6 +19,9 @@ public class UI : MonoBehaviour
     public GameObject but_army_panel_1;
     public GameObject but_army_panel_2;
     public GameObject but_army_panel_3;
+
+    public Button menu;
+    public Button next_turn;
   
 
     public Text money;
@@ -38,6 +41,21 @@ public class UI : MonoBehaviour
     {
         DB = GameObject.FindGameObjectWithTag("Logic").GetComponent<DataBase>();
         SM = GameObject.FindGameObjectWithTag("Logic").GetComponent<StateManager>();
+        
+    }
+
+    public void Update()
+    {
+        if(SM.state_pause || SM.state_unit_movement)
+        {
+            menu.interactable = false;
+            next_turn.interactable = false;
+        }
+        else if (!SM.state_unit_movement || !SM.state_pause)
+        {
+            menu.interactable = true;
+            next_turn.interactable = true;
+        }
     }
 	public void ButtonHider(string button_name)
     {

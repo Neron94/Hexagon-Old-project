@@ -26,7 +26,7 @@ public class Control : MonoBehaviour
    
    
     void Update(){
-        if(!SM.state_pause && !SM.state_unit_movement)
+        if(!SM.state_pause || !SM.state_unit_movement)
         {
              if(Input.GetMouseButtonDown(0))
             {
