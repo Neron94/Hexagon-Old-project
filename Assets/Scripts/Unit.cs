@@ -17,6 +17,7 @@ public class Unit : MonoBehaviour {
     public GameObject move;
     public GameObject fire_effect;
     public GameObject explosion;
+   
 
 
     private Control ctrl;
@@ -29,7 +30,7 @@ public class Unit : MonoBehaviour {
     private GameObject enemy_selector;
     [HideInInspector]
     public GameObject navigator_obj;
-    [HideInInspector]
+    
     public int action_points = 5;
     private bool but_rotation = false;
     [HideInInspector]
@@ -57,7 +58,7 @@ public class Unit : MonoBehaviour {
     public int unit_fire_power;
     public int fire_distance;
     public float max_hp;
-    [HideInInspector]
+    
     public float cur_hp;
     public GameObject my_hex;
 
@@ -65,6 +66,7 @@ public class Unit : MonoBehaviour {
     void Start () {
         
         ctrl = GameObject.Find("Logic").GetComponent<Control>();
+       
         SM = GameObject.FindGameObjectWithTag("Logic").GetComponent<StateManager>();
         fire_effect = gameObject.transform.GetChild(4).gameObject;
         move = gameObject.transform.GetChild(5).gameObject;
@@ -132,6 +134,7 @@ public class Unit : MonoBehaviour {
                         c = 0;
                         SM.state_unit_movement = false;
                         DB.unit_is_moving.Remove(gameObject);
+                        ctrl.target_object = ctrl.gameObject;
 
                     }
                 }
@@ -143,6 +146,8 @@ public class Unit : MonoBehaviour {
                     c = 0;
                     SM.state_unit_movement = false;
                     DB.unit_is_moving.Remove(gameObject);
+                    ctrl.target_object = ctrl.gameObject;
+                    
                 }
             }
             
@@ -207,6 +212,8 @@ public class Unit : MonoBehaviour {
         if(cur_hp <= 0)
         {
             Instantiate(explosion, gameObject.transform.position, Quaternion.identity);
+            DB.enemy_units.Remove(gameObject);
+            DB.player_units.Remove(gameObject);
             Destroy(gameObject);
             if (have_barrikade)
             {
@@ -225,6 +232,7 @@ public class Unit : MonoBehaviour {
             unit_cur_defence -= barrikade_power;
             have_barrikade = false;
         }
+        
         movve = true;
         DB.unit_is_moving.Add(gameObject);
         SM.state_unit_movement = true;
@@ -240,8 +248,14 @@ public class Unit : MonoBehaviour {
             DB.chose_unit.Add(gameObject);
             Instantiate(navigator_obj, transform.position, Quaternion.identity);
             ui.ButtonHider("turnUnit");
-            ui.ButtonHider("build_barrikade");
+            if(my_hex.GetComponent<HexComb>().city_on_hex == null)
+            {
+                ui.ButtonHider("build_barrikade");
+            }
+            
             ui.unitSats(action_points, unit_cur_fire_power, unit_cur_defence, cur_hp, max_hp);
+            
+
             
             
         }
@@ -251,6 +265,7 @@ public class Unit : MonoBehaviour {
             unit_selector.SetActive(unit_chosen);
             DB.chose_unit.Remove(gameObject);
             GameObject.FindGameObjectWithTag("Navigator").GetComponent<Navigator>().Chose_another_unit();
+            
             ui.ButtonHider("hide");
             
            
@@ -321,7 +336,7 @@ public class Unit : MonoBehaviour {
           
           float z = gameObject.transform.position.z;
           z += 3.8f;
-          Vector3 position_of_spawn = gameObject.transform.FindChild("spawn_pos").transform.position;
+          Vector3 position_of_spawn = gameObject.transform.position;
           barrik_have = Instantiate(barrikade, position_of_spawn, gameObject.transform.rotation)as GameObject;
           barrik_have.transform.SetParent(gameObject.transform);
           unit_cur_defence += barrikade_power;

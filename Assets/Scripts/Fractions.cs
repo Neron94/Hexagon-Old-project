@@ -9,7 +9,6 @@ public class Fractions : MonoBehaviour
     public string fraction_name; // Название фракции 
     private DataBase DB;
     public int Salary; // кол-во средств фракции
-    private  bool buy_time = false; // обозначает что идет покупка юнита
     private GameObject spawn_Object; // содержит юнита покупки обозначается по разному
     private RaycastHit hit;
     public int tank_cost; //цена танка
@@ -32,45 +31,7 @@ public class Fractions : MonoBehaviour
             Salary = 0;
         }
         ui.money_monitor(Salary, all_money);
-        if(buy_time)
-        {
-            if(Input.GetMouseButtonDown(0))
-            {
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                Physics.Raycast(ray, out hit, Mathf.Infinity);
-                if (buy_time)
-                {
-                    foreach (GameObject gmj in DB.arrivel_list)
-                    {
-                        if (hit.collider.gameObject == gmj)
-                        {
-                            Instantiate(spawn_Object, hit.collider.gameObject.transform.position, Quaternion.identity);
-                            if (spawn_Object.name == "wehrmacht_Cannon")
-                            {
-                                Salary -= cannon_cost;
-                            }
-                            else if (spawn_Object.name == "wehrmacht_infantry")
-                            {
-                                Salary -= infantry_costs;
-                            }
-                            else if (spawn_Object.name == "wehrmacht_Tank")
-                            {
-                                Salary -= tank_cost;
-                            }
-                            foreach(GameObject gnn in DB.arrivel_list)
-                            {
-                                gnn.GetComponent<HexComb>().Change(1);
-                            }
-                            buy_time = false;
-                            break;
-                        }
-                        
-                    }
-                }
-
-            }
-           
-        }
+        
         
 	}
     public void Salary_plus(int count)
@@ -79,69 +40,63 @@ public class Fractions : MonoBehaviour
     }
     public void Salary_minus(int count)
     {
+        
         Salary -= count;
     }
     public void buy_unit(string name)
     {
         spawn_Object = null;
-        buy_time = true;
         if(name == "tank")
         {
             if(Salary >= tank_cost)
             {
-                DB.arrivel_list.Clear();
-                foreach (GameObject city in DB.player_cities)
+                
+                
+             spawn_Object = DB.unit_Pref_types[0];
+                if(DB.city_selected.Count != 0)
                 {
-                    city.GetComponent<city>().my_hex.GetComponent<HexComb>().Change(2);
-                    DB.arrivel_list.Add(city.GetComponent<city>().my_hex);
-                    spawn_Object = DB.unit_Pref_types[0];
-                   
-                    
+                    Instantiate(spawn_Object, DB.city_selected[0].transform.position, Quaternion.identity);
                 }
+           
+                   
             }
-            else
-            {
-                buy_time = false;
-            }
+            
+            
             
         }
         else if (name == "cannon")
         {
             if(Salary >= cannon_cost)
             {
-                DB.arrivel_list.Clear();
-                foreach (GameObject city in DB.player_cities)
-                {
-                    city.GetComponent<city>().my_hex.GetComponent<HexComb>().Change(2);
-                    DB.arrivel_list.Add(city.GetComponent<city>().my_hex);
-                    spawn_Object = DB.unit_Pref_types[1];
-                    
-                }
-            }
-            else
+               
+            spawn_Object = DB.unit_Pref_types[1];
+            if (DB.city_selected.Count != 0)
             {
-                buy_time = false;
+                Instantiate(spawn_Object, DB.city_selected[0].transform.position, Quaternion.identity);
             }
+             
+                    
+                
+            }
+            
             
         }
         if (name == "infantry")
         {
             if (Salary >= infantry_costs)
             {
-                DB.arrivel_list.Clear();
-                foreach (GameObject city in DB.player_cities)
-                {
-                    city.GetComponent<city>().my_hex.GetComponent<HexComb>().Change(2);
-                    DB.arrivel_list.Add(city.GetComponent<city>().my_hex);
-                    spawn_Object = DB.unit_Pref_types[2];
+                
+              
+             spawn_Object = DB.unit_Pref_types[2];
+             if (DB.city_selected.Count != 0)
+             {
+                 Instantiate(spawn_Object, DB.city_selected[0].transform.position, Quaternion.identity);
+             }
                     
 
-                }
+                
             }
-            else
-            {
-                buy_time = false;
-            }
+            
 
         }
 

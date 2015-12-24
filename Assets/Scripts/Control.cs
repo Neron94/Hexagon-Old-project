@@ -14,6 +14,7 @@ public class Control : MonoBehaviour
     public GameObject target_object; //Обьект (юнит) от которого мерится дистнция до целевого гекса
     public int count_of_Turns = 0; // сторит число прошедших ходов
     private GameObject enemy_correct; // сторит первый вражеский юнит цель при повторном нажатие стреляет
+    public GameObject marker;
     #endregion
     void Start()
     {
@@ -28,9 +29,10 @@ public class Control : MonoBehaviour
     void Update(){
         if(!SM.state_pause&&!SM.state_unit_movement&&!SM.state_On_UI)
         {
-            
+          
              if(Input.GetMouseButtonDown(0))
             {
+                 
                 
                 if(DB.enemy_chose.Count == 1)
                 {
@@ -46,6 +48,9 @@ public class Control : MonoBehaviour
             RaycastHit hit;
             Physics.Raycast(ray, out hit, Mathf.Infinity);
             if (hit.collider.gameObject.tag == "Hex"){
+                
+               
+
                 if(enemy_correct != null)
                 {
                     enemy_correct.GetComponent<Unit>().my_hex.GetComponent<HexComb>().Change(1);
@@ -55,14 +60,20 @@ public class Control : MonoBehaviour
                 foreach (GameObject obj in DB.hex_comb){
                     if (hit.collider.gameObject == obj){
                         position_to_go = obj.transform.position;
-                            if(DB.chose_unit.Count == 1){
+                       
+                        if(DB.chose_unit.Count == 1){
                                 
-
-                                    GameObject.FindGameObjectWithTag("Navigator").GetComponent<Navigator>().nna = true;
-                                    if (target_object.transform.position == position_to_go)
-                                    {
+                                GameObject.FindGameObjectWithTag("Navigator").GetComponent<Navigator>().nna = true;
+                               
+                                
+                                   
+                                if (target_object.transform.position == position_to_go)
+                                {
+                                    target_object = gameObject;
                                         GameObject.FindGameObjectWithTag("Navigator").GetComponent<Navigator>().End_move();
+                                        
                                         DB.chose_unit[0].GetComponent<Unit>().Unit_Chouse();
+                                        
 
                                     }
                                 
@@ -79,13 +90,18 @@ public class Control : MonoBehaviour
                             }
                                     
                                     target_object = obj;
+                        
                                     DB.Path.Clear();
                         
                     }
                 }
+                
             }
             
                         else if(hit.collider.gameObject.tag == "player_unit"){
+                           
+                            
+
                             if (enemy_correct != null)
                             {
                                 enemy_correct.GetComponent<Unit>().my_hex.GetComponent<HexComb>().Change(1);
@@ -116,6 +132,7 @@ public class Control : MonoBehaviour
                         }
             else if (hit.collider.gameObject.tag == "Enemy")
             {
+               
                 
                 if(DB.chose_unit.Count == 1)
                 {
@@ -174,6 +191,12 @@ public class Control : MonoBehaviour
                 }
             else if (hit.collider.gameObject.tag == "Army")
             {
+               
+                /*if (marker != null)
+                {
+                    marker.GetComponent<HexComb>().Change(1);
+                }*/
+
                 if (DB.chose_unit.Count == 1)
                 {
 

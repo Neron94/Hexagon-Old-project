@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class city : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class city : MonoBehaviour
     #region Variables
     private DataBase DB;
     public Fractions frac;
+    private UI ui;
     public string city_name; // название города
     public int salary_bonus; // кол-во денег которые дает город по окончанию хоода
     public bool switcher = false; // включатель обладания городом
@@ -17,6 +19,8 @@ public class city : MonoBehaviour
     private GameObject flag_spawn; // флаг фракции в городе
     private bool flag_spawn_stop; // включатель спавна флага 
     private bool city_selected = false; // селекнут ли город
+    public List<GameObject> units_in_city; //юниты в городе
+    
     #endregion 
     void Start () {
         
@@ -24,6 +28,8 @@ public class city : MonoBehaviour
         DB.all_cities.Add(gameObject);
         flag_spawn = gameObject.transform.FindChild("spawn_flag").gameObject;
         frac = GameObject.FindGameObjectWithTag("Logic").GetComponent<Fractions>();
+        ui = GameObject.FindGameObjectWithTag("myUI").GetComponent<UI>();
+        
         
         
 	}
@@ -38,6 +44,14 @@ public class city : MonoBehaviour
     {
         
     }
+        if(units_in_city.Count > 0)
+        {
+            gameObject.transform.GetChild(5).gameObject.SetActive(true);
+        }
+        else if (units_in_city.Count == 0)
+        {
+            gameObject.transform.GetChild(5).gameObject.SetActive(false);
+        }
 	}
     public void Money_pay()
     {
@@ -50,6 +64,11 @@ public class city : MonoBehaviour
     {
         if(col.gameObject.tag == "player_unit")
         {
+          
+            units_in_city.Add(col.gameObject);
+            col.gameObject.transform.GetChild(2).gameObject.SetActive(false);
+            col.gameObject.layer = 2;
+            
             if(flag_spawn_stop)
             {
                 if(fraction_name != col.gameObject.GetComponent<Unit>().unit_fraction)
@@ -61,7 +80,11 @@ public class city : MonoBehaviour
             }
             switcher = false;
             switcher = true;
-            DB.player_cities.Add(gameObject);
+            if(!City_almost_DB(gameObject))
+            {
+                DB.player_cities.Add(gameObject);
+            }
+            
             fraction_name = DB.player_units[0].GetComponent<Unit>().unit_fraction;
             frac = GameObject.FindGameObjectWithTag("Logic").GetComponent<Fractions>();
         }
@@ -104,6 +127,13 @@ public class city : MonoBehaviour
     {
         if (col.gameObject.tag == "player_unit")
         {
+            
+            col.gameObject.transform.GetChild(2).gameObject.SetActive(true);
+            units_in_city.Remove(col.gameObject);
+            col.gameObject.layer = 0;
+            
+
+
             DB.player_units[0].GetComponent<Unit>().unit_cur_defence -= defence_bonus;
             
             
@@ -165,14 +195,39 @@ public class city : MonoBehaviour
             DB.city_selected.Add(gameObject);
             my_hex.GetComponent<HexComb>().Change(3);
             GameObject.FindGameObjectWithTag("myUI").GetComponent<UI>().city_stats.SetActive(true);
+            GameObject.FindGameObjectWithTag("myUI").GetComponent<UI>().city_name.text = city_name;
             GameObject.FindGameObjectWithTag("myUI").GetComponent<UI>().cityStats.text = "" + city_name + "  Cash  " + salary_bonus + " Def  " + defence_bonus;
             if(fraction_name == frac.fraction_name)
             {
                 GameObject.FindGameObjectWithTag("myUI").GetComponent<UI>().but_city_Menu.SetActive(true);
 
             }
-          
+          if(units_in_city.Count == 1)
+          {
+              ui.InCity(units_in_city[0]);
+          }
+          else if (units_in_city.Count == 2)
+          {
+              ui.InCity(units_in_city[0], units_in_city[1]);
+
+          }
+          else if (units_in_city.Count == 3)
+          {
+              ui.InCity(units_in_city[0], units_in_city[1],units_in_city[0]);
+          }
         }
+    }
+   public bool City_almost_DB(GameObject city)
+    {
+       foreach(GameObject db in DB.player_cities)
+       {
+        if(city == db)
+        {
+            return true;
+        }
+        
+       }
+       return false;
     }
   
 

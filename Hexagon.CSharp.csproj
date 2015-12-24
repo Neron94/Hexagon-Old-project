@@ -51,17 +51,11 @@
     <Reference Include="UnityEngine">
       <HintPath>Library\UnityAssemblies\UnityEngine.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.Advertisements">
-      <HintPath>Library\UnityAssemblies\UnityEngine.Advertisements.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Networking">
       <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.Analytics">
-      <HintPath>Library\UnityAssemblies\UnityEngine.Analytics.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
@@ -81,12 +75,14 @@
     <Compile Include="Assets\Scripts\Fractions.cs" />
     <Compile Include="Assets\Scripts\HexComb.cs" />
     <Compile Include="Assets\Scripts\Navigator.cs" />
+    <Compile Include="Assets\Scripts\RulesManager.cs" />
     <Compile Include="Assets\Scripts\StateManager.cs" />
     <Compile Include="Assets\Scripts\UI.cs" />
     <Compile Include="Assets\Scripts\Unit.cs" />
     <Compile Include="Assets\Scripts\cameraContr.cs" />
     <Compile Include="Assets\Scripts\canvasLook.cs" />
     <Compile Include="Assets\Scripts\city.cs" />
+    <Compile Include="Assets\Scripts\city_UI.cs" />
     <Compile Include="Assets\Scripts\effect_switcher.cs" />
     <Compile Include="Assets\Scripts\playButton.cs" />
   </ItemGroup>

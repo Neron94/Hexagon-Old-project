@@ -68,50 +68,56 @@ public class HexComb : MonoBehaviour {
         }
         else if(unit_on_hex != null)
         {
-          if(army_on_hex != null)
-          {
-              if(unit_on_hex.tag == "player_unit")
-              {
-                  if (col.gameObject.tag == "player_unit")
-                  {
-                      army_on_hex.GetComponent<Army>().army_contain.Add(col.gameObject);
-                      col.gameObject.transform.GetChild(2).gameObject.SetActive(false);
-                  }
-              }
-             
-          }
-          else
-          {
-              if (unit_on_hex.tag == "player_unit")
-              {
-                  if (col.gameObject.tag == "player_unit")
-                  {
-                      unit_on_hex.transform.GetChild(2).gameObject.SetActive(false);
-                      col.gameObject.transform.GetChild(2).gameObject.SetActive(false);
-                      army = Instantiate(DB.unit_Pref_types[6], unit_on_hex.transform.position, unit_on_hex.transform.rotation) as GameObject;
-                      army_on_hex = army;
-                      army.GetComponent<Army>().army_contain.Add(unit_on_hex);
-                      army.GetComponent<Army>().army_contain.Add(col.gameObject);
-                  }
-                  else
-                  {
+            if (city_on_hex == null)
+            {
+                if (army_on_hex != null)
+                {
 
-                  }
-              }
-              else if (unit_on_hex.tag == "Enemy")
-              {
-                  if (col.gameObject.tag == "Enemy")
-                  {
-                      //process sozdaniya dlia vragov poshol dlia vragov
-                  }
-                  else
-                  {
 
-                  }
-          }
-            
-            }
-            
+
+                    if (unit_on_hex.tag == "player_unit")
+                    {
+                        if (col.gameObject.tag == "player_unit")
+                        {
+                            army_on_hex.GetComponent<Army>().army_contain.Add(col.gameObject);
+                            col.gameObject.transform.GetChild(2).gameObject.SetActive(false);
+                        }
+                    }
+
+
+                }
+                else
+                {
+                    if (unit_on_hex.tag == "player_unit")
+                    {
+                        if (col.gameObject.tag == "player_unit")
+                        {
+                            unit_on_hex.transform.GetChild(2).gameObject.SetActive(false);
+                            col.gameObject.transform.GetChild(2).gameObject.SetActive(false);
+                            army = Instantiate(DB.unit_Pref_types[6], unit_on_hex.transform.position, unit_on_hex.transform.rotation) as GameObject;
+                            army_on_hex = army;
+                            army.GetComponent<Army>().army_contain.Add(unit_on_hex);
+                            army.GetComponent<Army>().army_contain.Add(col.gameObject);
+                        }
+                        else
+                        {
+
+                        }
+                    }
+                    else if (unit_on_hex.tag == "Enemy")
+                    {
+                        if (col.gameObject.tag == "Enemy")
+                        {
+                            //process sozdaniya dlia vragov poshol dlia vragov
+                        }
+                        else
+                        {
+
+                        }
+                    }
+
+                }
+            }  
         }
         
     }

@@ -6,6 +6,7 @@ public class DataBase : MonoBehaviour {
 
     //*********Класс Базы Данных*********\\
     #region Variables
+    public bool start_games = false;
     public List<GameObject> hex_comb; //БД Всех Гексов на карте
     public List<GameObject> hex_eight; //БД Окружающих Гексов
     public List<Vector3> Path; // Список посещенных точек
@@ -21,6 +22,8 @@ public class DataBase : MonoBehaviour {
     public List<GameObject> city_selected; // выбранный город
     public List<Vector3> unit_Path; // путь для юнита //чистится после прибытия на точку
     public List<GameObject> unit_is_moving; // стор движ юнита
+    public List<GameObject> path_drawer;
+    
     #endregion
     public void Clear_select_list()
     {
@@ -51,5 +54,20 @@ public class DataBase : MonoBehaviour {
         }
         
     }
-   
+    public void GameStarts()
+    {
+       if(player_units.Count > 0)
+       {
+           start_games = true;
+       }
+    }
+
+    void Update()
+    {
+        if(start_games == false)
+        {
+            GameStarts();
+        }
+        
+    }
 }
