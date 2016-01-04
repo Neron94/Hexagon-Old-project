@@ -13,6 +13,8 @@ public class Unit : MonoBehaviour {
     public int c = 0;
     public bool movve = false;
     public List<Vector3> myPath;
+    public  Sprite icon;
+    
 
     public GameObject move;
     public GameObject fire_effect;
@@ -86,13 +88,7 @@ public class Unit : MonoBehaviour {
             DB.enemy_units.Add(gameObject);
         }
         
-
-
-       
-        
-     
-        
-        }
+       }
 	void Update ()
     {
         move.SetActive(movve);
@@ -257,13 +253,16 @@ public class Unit : MonoBehaviour {
             unit_selector.SetActive(unit_chosen);
             DB.chose_unit.Add(gameObject);
             Instantiate(navigator_obj, transform.position, Quaternion.identity);
-            ui.ButtonHider("turnUnit");
             if(my_hex.GetComponent<HexComb>().city_on_hex == null)
             {
-                ui.ButtonHider("build_barrikade");
+                if(have_barrikade == false)
+                {
+                    ui.ButtonHider("build_barrikade");
+                }
+                
             }
-            
-            ui.unitSats(action_points, unit_cur_fire_power, unit_cur_defence, cur_hp, max_hp);
+
+            ui.unitStats_method(action_points,unit_cur_fire_power,unit_cur_defence,icon, cur_hp);
             
 
             
@@ -287,7 +286,7 @@ public class Unit : MonoBehaviour {
     if(!enemy_chose)
     {
         enemy_chose = true;
-        ui.enemyStats(cur_hp, max_hp);
+        ui.enemyStats(cur_hp, icon);
         DB.enemy_chose.Add(gameObject);
         enemy_selector.SetActive(enemy_chose);
 

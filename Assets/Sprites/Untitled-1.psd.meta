@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 944c9677c6e0f9d4abdffe2ffe0ff93b
-timeCreated: 1451740359
+timeCreated: 1451930865
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -74,17 +74,17 @@ TextureImporter:
         width: 491
         height: 429
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Untitled-1_1
       rect:
         serializedVersion: 2
-        x: 615
-        y: 1528
-        width: 536
+        x: 613
+        y: 1529
+        width: 492
         height: 429
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Untitled-1_2
       rect:
@@ -94,7 +94,7 @@ TextureImporter:
         width: 491
         height: 429
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Untitled-1_5
       rect:
@@ -104,7 +104,7 @@ TextureImporter:
         width: 48
         height: 173
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Untitled-1_6
       rect:
@@ -114,7 +114,7 @@ TextureImporter:
         width: 17
         height: 116
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Untitled-1_7
       rect:
@@ -124,7 +124,7 @@ TextureImporter:
         width: 498
         height: 429
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Untitled-1_8
       rect:
@@ -144,7 +144,7 @@ TextureImporter:
         width: 491
         height: 429
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Untitled-1_10
       rect:
@@ -154,7 +154,7 @@ TextureImporter:
         width: 24
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Untitled-1_12
       rect:
@@ -164,7 +164,7 @@ TextureImporter:
         width: 27
         height: 12
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Untitled-1_13
       rect:
@@ -174,7 +174,7 @@ TextureImporter:
         width: 22
         height: 9
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Untitled-1_14
       rect:
@@ -184,7 +184,7 @@ TextureImporter:
         width: 24
         height: 9
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Untitled-1_15
       rect:
@@ -194,7 +194,7 @@ TextureImporter:
         width: 552
         height: 429
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Untitled-1_16
       rect:
@@ -204,7 +204,7 @@ TextureImporter:
         width: 491
         height: 429
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Untitled-1_17
       rect:
@@ -214,7 +214,7 @@ TextureImporter:
         width: 491
         height: 429
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Untitled-1_18
       rect:
@@ -224,7 +224,7 @@ TextureImporter:
         width: 491
         height: 429
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 

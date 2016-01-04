@@ -36,7 +36,13 @@ public class UI : MonoBehaviour
     public Text tx;
     public Text enemyStat;
     public Text cityStats;
-   
+
+    private GameObject unitStats_panel;
+    private Image icon;
+    private Image hp;
+    private Text ap;
+    private Text atack;
+    private Text defence;
 
 
     public Text ar_panel_1;
@@ -47,7 +53,13 @@ public class UI : MonoBehaviour
     {
         DB = GameObject.FindGameObjectWithTag("Logic").GetComponent<DataBase>();
         SM = GameObject.FindGameObjectWithTag("Logic").GetComponent<StateManager>();
-        
+        unitStats_panel = GameObject.Find("Canvas").gameObject.transform.FindChild("unitStats").gameObject;
+        icon = unitStats_panel.transform.FindChild("unitImage").GetComponent<Image>();
+        ap = unitStats_panel.transform.FindChild("unitAP").GetComponent<Text>();
+        atack = unitStats_panel.transform.FindChild("unitDamage").GetComponent<Text>();
+        defence = unitStats_panel.transform.FindChild("unitDefence").GetComponent<Text>();
+        hp = unitStats_panel.transform.FindChild("hp").GetComponent<Image>();
+
     }
     public void Update()
     {
@@ -68,8 +80,7 @@ public class UI : MonoBehaviour
         {
          
             but_build_barrikade.SetActive(false);
-            
-            unitStats.SetActive(false);
+            unitStats_panel.SetActive(false);
             enemy_stats.SetActive(false);
             
             
@@ -116,15 +127,23 @@ public class UI : MonoBehaviour
         
         
     }
-    public void unitSats(int ap, int unit_damage, float unit_defence, float hp , float max_hp)
+    public void unitStats_method(int app, int unit_damage, float unit_defence, Sprite iccon, float hpp)
     {
-        unitStats.SetActive(true);
-        tx.text = "AP :  " + ap  + " Damage  " +  unit_damage  +  " Def  " +  unit_defence + "  HP: " + hp + "/ " + max_hp;
+        unitStats_panel.SetActive(true);
+        icon.sprite = iccon;
+        ap.text = ""+app;
+        atack.text = "Damage: " + unit_damage;
+        defence.text = "Defence: " + unit_defence;
+        hp.fillAmount = hpp / 10;
+        
+
+        
     }
-    public void enemyStats(float hp, float max_hp)
+    public void enemyStats(float hpp, Sprite iconc)
     {
-        enemy_stats.SetActive(true);
-        enemyStat.text = "Enemy HP: " + hp + "/" + max_hp;
+        unitStats_panel.SetActive(true);
+        hp.fillAmount = hpp / 10;
+        icon.sprite = iconc;
     }
     public void money_monitor(int mon, int plusing)
     {
