@@ -15,7 +15,7 @@ public class Fractions : MonoBehaviour
     public int cannon_cost; // цена пушки
     public int infantry_costs; // цена пехоты
     public UI ui;
-    public int all_money;
+    public int all_money;//Общий доход
     #endregion
 
 

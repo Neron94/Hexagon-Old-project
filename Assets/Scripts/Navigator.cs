@@ -17,6 +17,7 @@ public class Navigator : MonoBehaviour {
     public LineRenderer l_r;
     public Vector3 start_point; // Начальная точка при спавне навигатора
     public int c =0;
+    private Vector3 Proverochnaya_cifra;
     #endregion
 
     void Start () {
@@ -48,35 +49,32 @@ public class Navigator : MonoBehaviour {
            
         if(curPos != ctrl.position_to_go)
             {
-                
-                
                 if(curPos != Path_finder())
                 {
-                    
                     curPos = Path_finder();
-                   
                     DB.Path.Add(curPos);
                     Move_Nav(curPos);
-                    
                 }
-            else if(curPos == Path_finder())
+                else if(curPos == Path_finder())
                 {
                     curPos = new Vector3(0,0,0);
+                    
                 }
-          
-                
-                
-
             }
-            else
+        else
             {
                 
                 Move_Nav(curPos);
-                LineDraw();
                 nna = false;
                 Move_Nav(start_point);
                
             }
+         if (DB.Path.Count >= DB.chose_unit[0].GetComponent<Unit>().action_points)
+         {
+            nna = false;
+            Move_Nav(start_point);
+            
+         }
        
         } // Метод запускатор Поиска пути
     private Vector3 Path_finder()   //Возвращает позицию рационального пути
@@ -90,6 +88,7 @@ public class Navigator : MonoBehaviour {
         try
         {
             return Min().gameObject.transform.position;
+            
             
 
         }
@@ -113,8 +112,10 @@ public class Navigator : MonoBehaviour {
             objDist = Vector3.Distance(obj.transform.position, ctrl.target_object.transform.position);
             if(objDist == minimum)
             {
-                
+                obj.GetComponent<HexComb>().Change(5);
+                DB.path_drawer.Add(obj);
                 return obj;
+                
                 
                 
             }
@@ -166,37 +167,23 @@ public class Navigator : MonoBehaviour {
     {
         gameObject.transform.position = new Vector3(point.x, point.y, point.z);
     } // Метод двигает Навигатор
-    private void LineDraw()
-    {
-       
-        
-        l_r.SetVertexCount(DB.Path.Count + 1);
-        for (int i = 0; i < DB.Path.Count + 1; i++)
-        {
-            if(i > 0)
-            {
-                l_r.SetPosition(i, DB.Path[c]);
-                c++;
-            }
-            if(i <= 0)
-            {
-                l_r.SetPosition(i, start_point);
-            }
-            
-        }
-        c = 0;
-        
-       
-
-    } //Рисует путь обьекта
+    
     public void End_move()
     {
         Destroy(gameObject);
         DB.hex_eight.Clear();
         foreach(Vector3 jj in DB.Path)
         {
-            DB.chose_unit[0].GetComponent<Unit>().myPath.Add(jj);
+            if(Proverochnaya_cifra != jj)
+            {
+                DB.chose_unit[0].GetComponent<Unit>().myPath.Add(jj);
+                Proverochnaya_cifra = jj;
+            }
+          
+              
+            
         }
+        Proverochnaya_cifra = new Vector3(0,0,0);
         DB.chose_unit[0].GetComponent<Unit>().Move();
         
         

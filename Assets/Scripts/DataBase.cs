@@ -39,20 +39,10 @@ public class DataBase : MonoBehaviour {
     }
     public void Current_Unit(string command)
     {
-        if(command == "Rotate")
-        {
-            chose_unit[0].GetComponent<Unit>().Unit_rotation();
-            
-        }
-        else if(command == "Build_barrikade")
+        if(command == "Build_barrikade")
         {
             chose_unit[0].GetComponent<Unit>().Build_barricade();
         }
-        else
-        {
-            Debug.Log("Неизвестная команда");
-        }
-        
     }
     public void GameStarts()
     {

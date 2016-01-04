@@ -27,27 +27,24 @@ public class Control : MonoBehaviour
    
    
     void Update(){
-        if(!SM.state_pause&&!SM.state_unit_movement&&!SM.state_On_UI)
+        if(!SM.state_pause||!SM.state_unit_movement||!SM.state_On_UI)
         {
           
              if(Input.GetMouseButtonDown(0))
             {
-                 
-                
                 if(DB.enemy_chose.Count == 1)
                 {
                     DB.enemy_chose[0].GetComponent<Unit>().Enemy_Chose();
                 }
-                if(DB.city_selected.Count == 1)
-                {
-                    DB.city_selected[0].GetComponent<city>().City_Chosen();
-                }
                 
                 
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            Physics.Raycast(ray, out hit, Mathf.Infinity);
-            if (hit.collider.gameObject.tag == "Hex"){
+                
+            
+                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                 RaycastHit hit;
+                 Physics.Raycast(ray, out hit, Mathf.Infinity);
+           
+                 if (hit.collider.gameObject.tag == "Hex"){
                 
                
 
@@ -56,29 +53,42 @@ public class Control : MonoBehaviour
                     enemy_correct.GetComponent<Unit>().my_hex.GetComponent<HexComb>().Change(1);
                     enemy_correct = null;
                 }
+                if(DB.city_selected.Count != 0)
+                {
+                    DB.city_selected[0].GetComponent<city>().City_Chosen();
+                }
                
                 foreach (GameObject obj in DB.hex_comb){
                     if (hit.collider.gameObject == obj){
-                        position_to_go = obj.transform.position;
-                       
+                        
                         if(DB.chose_unit.Count == 1){
                                 
                                 GameObject.FindGameObjectWithTag("Navigator").GetComponent<Navigator>().nna = true;
-                               
+                                position_to_go = obj.transform.position;
                                 
                                    
                                 if (target_object.transform.position == position_to_go)
                                 {
-                                    target_object = gameObject;
+                                        target_object = gameObject;
+                                    
                                         GameObject.FindGameObjectWithTag("Navigator").GetComponent<Navigator>().End_move();
                                         
                                         DB.chose_unit[0].GetComponent<Unit>().Unit_Chouse();
                                         
 
                                     }
-                                
-                            
+                            if(DB.path_drawer.Count != 0)
+                            {
+                                foreach (GameObject gj in DB.path_drawer)
+                                {
+                                    gj.GetComponent<HexComb>().Change(1);
+                                }
+                                DB.path_drawer.Clear();
                             }
+
+
+                            target_object = obj;
+                        }
                             else
                             {
                                 if(obj.GetComponent<HexComb>().city_on_hex != null)
@@ -89,8 +99,7 @@ public class Control : MonoBehaviour
                                 
                             }
                                     
-                                    target_object = obj;
-                        
+                                    
                                     DB.Path.Clear();
                         
                     }
@@ -106,6 +115,10 @@ public class Control : MonoBehaviour
                             {
                                 enemy_correct.GetComponent<Unit>().my_hex.GetComponent<HexComb>().Change(1);
                                 enemy_correct = null;
+                            }
+                            if (DB.city_selected.Count != 0)
+                            {
+                                DB.city_selected[0].GetComponent<city>().City_Chosen();
                             }
                             
                             if(DB.chose_unit.Count == 1){
@@ -132,8 +145,11 @@ public class Control : MonoBehaviour
                         }
             else if (hit.collider.gameObject.tag == "Enemy")
             {
-               
-                
+
+                if (DB.city_selected.Count != 0)
+                {
+                    DB.city_selected[0].GetComponent<city>().City_Chosen();
+                }
                 if(DB.chose_unit.Count == 1)
                 {
                    
@@ -192,10 +208,11 @@ public class Control : MonoBehaviour
             else if (hit.collider.gameObject.tag == "Army")
             {
                
-                /*if (marker != null)
+                
+                if (DB.city_selected.Count != 0)
                 {
-                    marker.GetComponent<HexComb>().Change(1);
-                }*/
+                    DB.city_selected[0].GetComponent<city>().City_Chosen();
+                }
 
                 if (DB.chose_unit.Count == 1)
                 {

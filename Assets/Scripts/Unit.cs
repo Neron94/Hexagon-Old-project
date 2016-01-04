@@ -34,7 +34,7 @@ public class Unit : MonoBehaviour {
     public int action_points = 5;
     private bool but_rotation = false;
     [HideInInspector]
-    public GameObject rotation_object_direction; //для обьекта поворота будь то Хекс или Юнит
+    private GameObject rotation_object_direction; //для обьекта поворота будь то Хекс или Юнит
     [HideInInspector]
     public int barrikade_power; // бонус барикад
     [HideInInspector]
@@ -63,6 +63,8 @@ public class Unit : MonoBehaviour {
     public GameObject my_hex;
 
     #endregion
+
+
     void Start () {
         
         ctrl = GameObject.Find("Logic").GetComponent<Control>();
@@ -102,30 +104,36 @@ public class Unit : MonoBehaviour {
             {
                 if (action_points > 0)
                 {
-                    if (gameObject.transform.position != ctrl.position_to_go)
+                    if (gameObject.transform.position != ctrl.position_to_go&&gameObject.transform.position != myPath[myPath.Count - 1])
                     {
-
-                        if (!moving)
-                        {
-                            if (myPath.Count != 0)
+                        
+                            if (!moving)
                             {
-                               
+                                if (myPath.Count > 0)
+                                {
+
                                     gameObject.transform.LookAt(myPath[c]);
                                     gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, myPath[c], speed * Time.deltaTime);
-
-
+                                    
+                                }
                             }
-                        }
-                        if (myPath.Count != 0)
-                        {
-                            if (gameObject.transform.position == myPath[c])
+                            if (myPath.Count > 0)
                             {
-                                moving = false;
-                                c++;
-                                action_points--;
+                                if (gameObject.transform.position == myPath[c])
+                                {
+                                    moving = false;
+                                    if(myPath.Count > c)
+                                    {
+                                        c++;
+                                    }
+                                    
+                                    action_points--;
 
+                                }
                             }
-                        }
+                        
+
+                        
                     }
                     else
                     {
@@ -153,6 +161,8 @@ public class Unit : MonoBehaviour {
             
 
         }
+        
+        
         
         #endregion
         Unit_death();

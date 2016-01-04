@@ -20,6 +20,13 @@ public class city : MonoBehaviour
     private bool flag_spawn_stop; // включатель спавна флага 
     private bool city_selected = false; // селекнут ли город
     public List<GameObject> units_in_city; //юниты в городе
+    public GameObject Canvas;
+    public int salary_factory_lvl= 0;
+    public bool baracks;
+    public bool tank_factory;
+    public bool cannon_factory;
+    public bool air_field;
+
     
     #endregion 
     void Start () {
@@ -29,12 +36,8 @@ public class city : MonoBehaviour
         flag_spawn = gameObject.transform.FindChild("spawn_flag").gameObject;
         frac = GameObject.FindGameObjectWithTag("Logic").GetComponent<Fractions>();
         ui = GameObject.FindGameObjectWithTag("myUI").GetComponent<UI>();
-        
-        
-        
-	}
-	
-	
+        Canvas = gameObject.transform.FindChild("Canvas").gameObject;
+     }
 	void Update () {
     if(switcher)
     {
@@ -46,12 +49,16 @@ public class city : MonoBehaviour
     }
         if(units_in_city.Count > 0)
         {
-            gameObject.transform.GetChild(5).gameObject.SetActive(true);
+            gameObject.transform.GetChild(2).gameObject.SetActive(true);
         }
         else if (units_in_city.Count == 0)
         {
-            gameObject.transform.GetChild(5).gameObject.SetActive(false);
+            gameObject.transform.GetChild(2).gameObject.SetActive(false);
         }
+        
+        
+        
+        
 	}
     public void Money_pay()
     {
@@ -66,6 +73,7 @@ public class city : MonoBehaviour
         {
           
             units_in_city.Add(col.gameObject);
+            UnitArrived();
             col.gameObject.transform.GetChild(2).gameObject.SetActive(false);
             col.gameObject.layer = 2;
             
@@ -130,6 +138,7 @@ public class city : MonoBehaviour
             
             col.gameObject.transform.GetChild(2).gameObject.SetActive(true);
             units_in_city.Remove(col.gameObject);
+            UnitArrived();
             col.gameObject.layer = 0;
             
 
@@ -186,38 +195,28 @@ public class city : MonoBehaviour
             DB.city_selected.Remove(gameObject);
             my_hex.GetComponent<HexComb>().Change(1);
             GameObject.FindGameObjectWithTag("myUI").GetComponent<UI>().city_stats.SetActive(false);
-            GameObject.FindGameObjectWithTag("myUI").GetComponent<UI>().but_city_Menu.SetActive(false);
+           gameObject.transform.GetComponent<city_UI_manager>().Back_Button();
+            Canvas.SetActive(false);
             
         }
         else
         {
             city_selected = true;
+            
             DB.city_selected.Add(gameObject);
             my_hex.GetComponent<HexComb>().Change(3);
             GameObject.FindGameObjectWithTag("myUI").GetComponent<UI>().city_stats.SetActive(true);
-            GameObject.FindGameObjectWithTag("myUI").GetComponent<UI>().city_name.text = city_name;
+            
             GameObject.FindGameObjectWithTag("myUI").GetComponent<UI>().cityStats.text = "" + city_name + "  Cash  " + salary_bonus + " Def  " + defence_bonus;
             if(fraction_name == frac.fraction_name)
             {
-                GameObject.FindGameObjectWithTag("myUI").GetComponent<UI>().but_city_Menu.SetActive(true);
+                Canvas.SetActive(true);
 
             }
-          if(units_in_city.Count == 1)
-          {
-              ui.InCity(units_in_city[0]);
-          }
-          else if (units_in_city.Count == 2)
-          {
-              ui.InCity(units_in_city[0], units_in_city[1]);
-
-          }
-          else if (units_in_city.Count == 3)
-          {
-              ui.InCity(units_in_city[0], units_in_city[1],units_in_city[0]);
-          }
+         
         }
     }
-   public bool City_almost_DB(GameObject city)
+    public bool City_almost_DB(GameObject city)
     {
        foreach(GameObject db in DB.player_cities)
        {
@@ -228,6 +227,46 @@ public class city : MonoBehaviour
         
        }
        return false;
+    }
+    
+    public void Build_Salary_Factory(int lvl)
+    {
+        if(lvl ==1)
+        {
+            salary_bonus += 10;
+            salary_factory_lvl = 1;
+        }
+        else if(lvl == 2)
+        {
+            salary_bonus += 5;
+            salary_factory_lvl = 2;
+        }
+        else if(lvl == 3)
+        {
+            salary_bonus += 5;
+            salary_factory_lvl = 3;
+
+        }
+    }
+
+    public void UnitArrived()
+    {
+        if (units_in_city.Count == 1)
+        {
+            gameObject.transform.GetComponent<city_UI_manager>().SoldiersInCity(units_in_city[0]);
+        }
+        else if (units_in_city.Count == 2)
+        {
+            gameObject.transform.GetComponent<city_UI_manager>().SoldiersInCity(units_in_city[0], units_in_city[1]);
+        }
+        else if (units_in_city.Count == 3)
+        {
+            gameObject.transform.GetComponent<city_UI_manager>().SoldiersInCity(units_in_city[0], units_in_city[1], units_in_city[2]);
+        }
+        else if (units_in_city.Count == 0)
+        {
+            gameObject.transform.GetComponent<city_UI_manager>().SoldiersNone();
+        }
     }
   
 

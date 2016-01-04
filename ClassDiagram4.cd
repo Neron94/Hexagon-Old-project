@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Army">
+    <Position X="2.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAEAgAAAAIAgAAAAAAAAAAAAAAAAQAADA=</HashCode>
+      <FileName>Assets\Scripts\Army.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BattleCalculator">
+    <Position X="9.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\BattleCalculator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="cameraContr">
+    <Position X="6" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACABgAAAAAAAQABAAEAAAUAAAAABAAIAABA=</HashCode>
+      <FileName>Assets\Scripts\cameraContr.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="canvasLook">
+    <Position X="9.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\canvasLook.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="city">
+    <Position X="6.75" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQIIAAQACBAEUAAABICEAAACAAAAZAAQABgAEEABBA=</HashCode>
+      <FileName>Assets\Scripts\city.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="city_UI">
+    <Position X="7.75" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\city_UI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="city_UI_manager">
+    <Position X="8.25" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEQKAAAAACABEEAIEACAABiAEAAAYQEATQBAgAFAEAg=</HashCode>
+      <FileName>Assets\Scripts\city_UI_manager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Control">
+    <Position X="3.25" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACQAAAAAACABAAAJAAABQAAAAAAAQAAAAAAAAAABABA=</HashCode>
+      <FileName>Assets\Scripts\Control.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DataBase">
+    <Position X="5" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQgASAAgAgAAAYAEAAAAAAABAAAARAAgAJEAIhAACA=</HashCode>
+      <FileName>Assets\Scripts\DataBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="effect_switcher">
+    <Position X="7.75" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAACAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\effect_switcher.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Fractions">
+    <Position X="0.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQIACgBACAAEgAEAAAAAEAQAQAAAAQAAAAAAEEAABA=</HashCode>
+      <FileName>Assets\Scripts\Fractions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HexComb">
+    <Position X="4.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQDAAAAAKBAAAABAAASgAAABAAAAIQAQAAAggAAABA=</HashCode>
+      <FileName>Assets\Scripts\HexComb.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Navigator">
+    <Position X="12.75" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAYAAAEiAMAAAAEABAAAAAMAACAICAQAABAAAAABk=</HashCode>
+      <FileName>Assets\Scripts\Navigator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="playButton">
+    <Position X="13" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAACAAAAAAAAAAAAAAAAAAAAAAgEAAAAAAABA=</HashCode>
+      <FileName>Assets\Scripts\playButton.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RulesManager">
+    <Position X="11.25" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAABA=</HashCode>
+      <FileName>Assets\Scripts\RulesManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StateManager">
+    <Position X="2.25" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAEAAAAAAAAAAgCAAAAAgAAAAIAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\StateManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UI">
+    <Position X="0.5" Y="7" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>hAQAAQAcBCCIAABAAEgAQAoACliAAAAgACAAgAAClJA=</HashCode>
+      <FileName>Assets\Scripts\UI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Unit">
+    <Position X="10" Y="7" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AKQgMSABJKAQUACAAEACQBDjBACCBYDAQgQAQQABIBA=</HashCode>
+      <FileName>Assets\Scripts\Unit.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
