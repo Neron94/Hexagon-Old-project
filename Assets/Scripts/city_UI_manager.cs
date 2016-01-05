@@ -14,6 +14,8 @@ public class city_UI_manager : MonoBehaviour {
     public GameObject unit_but_2;
     public GameObject unit_but_3;
 
+    public Button structers;
+
     public Image sal_factory;
     
     public Button sal_factory_but;
@@ -36,6 +38,7 @@ public class city_UI_manager : MonoBehaviour {
     public int cannon_fac_price = 150;
     public int tank_fac_price = 200;
     public int air_field_price = 300;
+   
 
 
     
@@ -43,6 +46,7 @@ public class city_UI_manager : MonoBehaviour {
 
     void Start()
     {
+        structers = gameObject.transform.FindChild("Canvas").gameObject.transform.FindChild("Panel_Main").gameObject.transform.FindChild("Structs").GetComponent<Button>();
         panel_main = gameObject.transform.FindChild("Canvas").gameObject.transform.FindChild("Panel_Main").gameObject;
         frac = GameObject.FindGameObjectWithTag("Logic").GetComponent<Fractions>();
         panel_structers = gameObject.transform.FindChild("Canvas").gameObject.transform.FindChild("Panel_Struct").gameObject;
@@ -63,6 +67,8 @@ public class city_UI_manager : MonoBehaviour {
         unit_but_1 = gameObject.transform.FindChild("Canvas").gameObject.transform.FindChild("Panel_Garnizon").gameObject.transform.FindChild("Unit_1").gameObject;
         unit_but_2 = gameObject.transform.FindChild("Canvas").gameObject.transform.FindChild("Panel_Garnizon").gameObject.transform.FindChild("Unit_2").gameObject;
         unit_but_3 = gameObject.transform.FindChild("Canvas").gameObject.transform.FindChild("Panel_Garnizon").gameObject.transform.FindChild("Unit_3").gameObject;
+
+        
     }
     void Update()
     {

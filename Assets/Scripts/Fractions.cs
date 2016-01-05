@@ -16,6 +16,7 @@ public class Fractions : MonoBehaviour
     public int infantry_costs; // цена пехоты
     public UI ui;
     public int all_money;//Общий доход
+    public Sprite icon_of_fraction;
     #endregion
 
 

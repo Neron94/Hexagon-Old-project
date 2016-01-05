@@ -88,6 +88,7 @@
     <Compile Include="Assets\Scripts\cameraContr.cs" />
     <Compile Include="Assets\Scripts\canvasLook.cs" />
     <Compile Include="Assets\Scripts\city.cs" />
+    <Compile Include="Assets\Scripts\city_UI_interpritator.cs" />
     <Compile Include="Assets\Scripts\city_UI_manager.cs" />
     <Compile Include="Assets\Scripts\effect_switcher.cs" />
     <Compile Include="Assets\Scripts\playButton.cs" />

@@ -9,6 +9,7 @@ public class city : MonoBehaviour
     #region Variables
     private DataBase DB;
     public Fractions frac;
+    public Sprite fraction_Icon;
     private UI ui;
     public string city_name; // название города
     public int salary_bonus; // кол-во денег которые дает город по окончанию хоода
@@ -94,6 +95,7 @@ public class city : MonoBehaviour
             }
             
             fraction_name = DB.player_units[0].GetComponent<Unit>().unit_fraction;
+            fraction_Icon = GameObject.FindGameObjectWithTag("Logic").GetComponent<Fractions>().icon_of_fraction; ;
             frac = GameObject.FindGameObjectWithTag("Logic").GetComponent<Fractions>();
         }
         else if (col.gameObject.tag == "Enemy")
@@ -191,23 +193,22 @@ public class city : MonoBehaviour
     {
         if(city_selected)
         {
+            ui.ButtonHider("hide");
             city_selected = false;
             DB.city_selected.Remove(gameObject);
             my_hex.GetComponent<HexComb>().Change(1);
-            GameObject.FindGameObjectWithTag("myUI").GetComponent<UI>().city_stats.SetActive(false);
-           gameObject.transform.GetComponent<city_UI_manager>().Back_Button();
+            
+             gameObject.transform.GetComponent<city_UI_manager>().Back_Button();
             Canvas.SetActive(false);
+            
             
         }
         else
         {
             city_selected = true;
-            
             DB.city_selected.Add(gameObject);
             my_hex.GetComponent<HexComb>().Change(3);
-            GameObject.FindGameObjectWithTag("myUI").GetComponent<UI>().city_stats.SetActive(true);
-            
-            GameObject.FindGameObjectWithTag("myUI").GetComponent<UI>().cityStats.text = "" + city_name + "  Cash  " + salary_bonus + " Def  " + defence_bonus;
+            GameObject.FindGameObjectWithTag("myUI").GetComponent<UI>().cityStats(fraction_Icon,salary_bonus,city_name);
             if(fraction_name == frac.fraction_name)
             {
                 Canvas.SetActive(true);

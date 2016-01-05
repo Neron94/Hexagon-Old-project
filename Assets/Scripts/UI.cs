@@ -12,7 +12,6 @@ public class UI : MonoBehaviour
     public GameObject unitStats;
     public GameObject enemy_stats;
     public GameObject but_menu;
-    public GameObject city_stats;
     public GameObject but_army_panel;
     public GameObject but_army_panel_1;
     public GameObject but_army_panel_2;
@@ -35,7 +34,7 @@ public class UI : MonoBehaviour
     public Text money_plusing;
     public Text tx;
     public Text enemyStat;
-    public Text cityStats;
+    
 
     private GameObject unitStats_panel;
     private Image icon;
@@ -141,8 +140,20 @@ public class UI : MonoBehaviour
     }
     public void enemyStats(float hpp, Sprite iconc)
     {
+        ap.text = "";
+        atack.text = "";
+        defence.text = "";
         unitStats_panel.SetActive(true);
         hp.fillAmount = hpp / 10;
+        icon.sprite = iconc;
+    }
+    public void cityStats(Sprite iconc, int cash, string name)
+    {
+        hp.fillAmount = 1;
+        ap.text = "";
+        atack.text = ""+name;
+        defence.text = "          $ "+ cash;
+        unitStats_panel.SetActive(true);
         icon.sprite = iconc;
     }
     public void money_monitor(int mon, int plusing)

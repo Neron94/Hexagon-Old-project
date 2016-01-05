@@ -27,213 +27,229 @@ public class Control : MonoBehaviour
    
    
     void Update(){
-        if(!SM.state_pause||!SM.state_unit_movement||!SM.state_On_UI)
+        if (!SM.state_pause)
         {
-          
-             if(Input.GetMouseButtonDown(0))
+            if (!SM.state_unit_movement)
             {
-                if(DB.enemy_chose.Count == 1)
-                {
-                    DB.enemy_chose[0].GetComponent<Unit>().Enemy_Chose();
-                }
                 
-                
-                
-            
-                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                 RaycastHit hit;
-                 Physics.Raycast(ray, out hit, Mathf.Infinity);
-           
-                 if (hit.collider.gameObject.tag == "Hex"){
-                
-               
-
-                if(enemy_correct != null)
-                {
-                    enemy_correct.GetComponent<Unit>().my_hex.GetComponent<HexComb>().Change(1);
-                    enemy_correct = null;
-                }
-                if(DB.city_selected.Count != 0)
-                {
-                    DB.city_selected[0].GetComponent<city>().City_Chosen();
-                }
-               
-                foreach (GameObject obj in DB.hex_comb){
-                    if (hit.collider.gameObject == obj){
-                        
-                        if(DB.chose_unit.Count == 1){
-                                
-                                GameObject.FindGameObjectWithTag("Navigator").GetComponent<Navigator>().nna = true;
-                                position_to_go = obj.transform.position;
-                                
-                                   
-                                if (target_object.transform.position == position_to_go)
-                                {
-                                        target_object = gameObject;
-                                    
-                                        GameObject.FindGameObjectWithTag("Navigator").GetComponent<Navigator>().End_move();
-                                        
-                                        DB.chose_unit[0].GetComponent<Unit>().Unit_Chouse();
-                                        
-
-                                    }
-                            if(DB.path_drawer.Count != 0)
-                            {
-                                foreach (GameObject gj in DB.path_drawer)
-                                {
-                                    gj.GetComponent<HexComb>().Change(1);
-                                }
-                                DB.path_drawer.Clear();
-                            }
-
-
-                            target_object = obj;
-                        }
-                            else
-                            {
-                                if(obj.GetComponent<HexComb>().city_on_hex != null)
-                                {
-                                    obj.GetComponent<HexComb>().city_on_hex.GetComponent<city>().City_Chosen();
-                                    
-                                }
-                                
-                            }
-                                    
-                                    
-                                    DB.Path.Clear();
-                        
-                    }
-                }
-                
-            }
-            
-                        else if(hit.collider.gameObject.tag == "player_unit"){
-                           
-                            
-
-                            if (enemy_correct != null)
-                            {
-                                enemy_correct.GetComponent<Unit>().my_hex.GetComponent<HexComb>().Change(1);
-                                enemy_correct = null;
-                            }
-                            if (DB.city_selected.Count != 0)
-                            {
-                                DB.city_selected[0].GetComponent<city>().City_Chosen();
-                            }
-                            
-                            if(DB.chose_unit.Count == 1){
-                           
-                                if(DB.chose_unit[0].tag == "Army")
-                                {
-                                    DB.chose_unit[0].GetComponent<Army>().Army_Chose();
-                                }
-                                else
-                                {
-                                    DB.chose_unit[0].GetComponent<Unit>().Unit_Chouse();
-                                }
-                                
-                            }
-                            
-                            
-                            foreach(GameObject unit in DB.player_units){
-                                          if (hit.collider.gameObject == unit){
-                                           
-                                                  unit.GetComponent<Unit>().Unit_Chouse();
-                                                  
-                                             }
-                                     }
-                        }
-            else if (hit.collider.gameObject.tag == "Enemy")
-            {
-
-                if (DB.city_selected.Count != 0)
-                {
-                    DB.city_selected[0].GetComponent<city>().City_Chosen();
-                }
-                if(DB.chose_unit.Count == 1)
-                {
-                   
-                    if(DB.chose_unit[0].GetComponent<Unit>().action_points >= 2)
-                    foreach(GameObject enemy in DB.enemy_units)
+                    if (!SM.state_On_UI)
                     {
-                      
-                        if(hit.collider.gameObject == enemy)
+
+                        if (Input.GetMouseButtonDown(0))
                         {
-                            
-                            float enemy_Distance = Vector3.Distance(DB.chose_unit[0].transform.position, enemy.transform.position);
-                            Debug.Log(enemy_Distance);
-                            if(DB.chose_unit[0].GetComponent<Unit>().fire_distance > enemy_Distance)
+                            if (DB.enemy_chose.Count == 1)
                             {
-                                
-                                    DB.chose_unit[0].GetComponent<Unit>().Unit_rotation(enemy, enemy);
-                                    hit.collider.gameObject.GetComponent<Unit>().my_hex.GetComponent<HexComb>().Change(4);
-                                    if(hit.collider.gameObject == enemy_correct)
-                                    {
-                                    BC.BattleModeller(DB.chose_unit[0], enemy);
+                                DB.enemy_chose[0].GetComponent<Unit>().Enemy_Chose();
+                            }
+
+
+
+
+                            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                            RaycastHit hit;
+                            Physics.Raycast(ray, out hit, Mathf.Infinity);
+
+                            if (hit.collider.gameObject.tag == "Hex")
+                            {
+
+
+
+                                if (enemy_correct != null)
+                                {
                                     enemy_correct.GetComponent<Unit>().my_hex.GetComponent<HexComb>().Change(1);
                                     enemy_correct = null;
-                                        
+                                }
+                                if (DB.city_selected.Count != 0)
+                                {
+                                    DB.city_selected[0].GetComponent<city>().City_Chosen();
+                                }
+
+                                foreach (GameObject obj in DB.hex_comb)
+                                {
+                                    if (hit.collider.gameObject == obj)
+                                    {
+
+                                        if (DB.chose_unit.Count == 1)
+                                        {
+
+                                            GameObject.FindGameObjectWithTag("Navigator").GetComponent<Navigator>().nna = true;
+                                            position_to_go = obj.transform.position;
+
+
+                                            if (target_object.transform.position == position_to_go)
+                                            {
+                                                target_object = gameObject;
+
+                                                GameObject.FindGameObjectWithTag("Navigator").GetComponent<Navigator>().End_move();
+
+                                                DB.chose_unit[0].GetComponent<Unit>().Unit_Chouse();
+
+
+                                            }
+                                            if (DB.path_drawer.Count != 0)
+                                            {
+                                                foreach (GameObject gj in DB.path_drawer)
+                                                {
+                                                    gj.GetComponent<HexComb>().Change(1);
+                                                }
+                                                DB.path_drawer.Clear();
+                                            }
+
+
+                                            target_object = obj;
+                                        }
+                                        else
+                                        {
+                                            if (obj.GetComponent<HexComb>().city_on_hex != null)
+                                            {
+                                                obj.GetComponent<HexComb>().city_on_hex.GetComponent<city>().City_Chosen();
+
+                                            }
+
+                                        }
+
+
+                                        DB.Path.Clear();
+
+                                    }
+                                }
+
+                            }
+
+                            else if (hit.collider.gameObject.tag == "player_unit")
+                            {
+
+
+
+                                if (enemy_correct != null)
+                                {
+                                    enemy_correct.GetComponent<Unit>().my_hex.GetComponent<HexComb>().Change(1);
+                                    enemy_correct = null;
+                                }
+                                if (DB.city_selected.Count != 0)
+                                {
+                                    DB.city_selected[0].GetComponent<city>().City_Chosen();
+                                }
+
+                                if (DB.chose_unit.Count == 1)
+                                {
+
+                                    if (DB.chose_unit[0].tag == "Army")
+                                    {
+                                        DB.chose_unit[0].GetComponent<Army>().Army_Chose();
                                     }
                                     else
                                     {
-                                        if (enemy_correct != null)
+                                        DB.chose_unit[0].GetComponent<Unit>().Unit_Chouse();
+                                    }
+
+                                }
+
+
+                                foreach (GameObject unit in DB.player_units)
+                                {
+                                    if (hit.collider.gameObject == unit)
+                                    {
+
+                                        unit.GetComponent<Unit>().Unit_Chouse();
+
+                                    }
+                                }
+                            }
+                            else if (hit.collider.gameObject.tag == "Enemy")
+                            {
+
+                                if (DB.city_selected.Count != 0)
+                                {
+                                    DB.city_selected[0].GetComponent<city>().City_Chosen();
+                                }
+                                if (DB.chose_unit.Count == 1)
+                                {
+
+                                    if (DB.chose_unit[0].GetComponent<Unit>().action_points >= 2)
+                                        foreach (GameObject enemy in DB.enemy_units)
                                         {
-                                            enemy_correct.GetComponent<Unit>().my_hex.GetComponent<HexComb>().Change(1);
-                                            enemy_correct = null;
+
+                                            if (hit.collider.gameObject == enemy)
+                                            {
+
+                                                float enemy_Distance = Vector3.Distance(DB.chose_unit[0].transform.position, enemy.transform.position);
+                                                Debug.Log(enemy_Distance);
+                                                if (DB.chose_unit[0].GetComponent<Unit>().fire_distance > enemy_Distance)
+                                                {
+
+                                                    DB.chose_unit[0].GetComponent<Unit>().Unit_rotation(enemy, enemy);
+                                                    hit.collider.gameObject.GetComponent<Unit>().my_hex.GetComponent<HexComb>().Change(4);
+                                                    if (hit.collider.gameObject == enemy_correct)
+                                                    {
+                                                        BC.BattleModeller(DB.chose_unit[0], enemy);
+                                                        enemy_correct.GetComponent<Unit>().my_hex.GetComponent<HexComb>().Change(1);
+                                                        enemy_correct = null;
+
+                                                    }
+                                                    else
+                                                    {
+                                                        if (enemy_correct != null)
+                                                        {
+                                                            enemy_correct.GetComponent<Unit>().my_hex.GetComponent<HexComb>().Change(1);
+                                                            enemy_correct = null;
+                                                        }
+                                                    }
+                                                    enemy_correct = hit.collider.gameObject;
+
+
+
+
+                                                }
+                                                break;
+                                            }
+                                        }
+                                }
+                                else
+                                {
+                                    foreach (GameObject gj in DB.enemy_units)
+                                    {
+                                        if (hit.collider.gameObject == gj)
+                                        {
+                                            gj.GetComponent<Unit>().Enemy_Chose();
                                         }
                                     }
-                                    enemy_correct = hit.collider.gameObject;
-                                    
-                                
-                                
-                                
+                                }
+
+
                             }
-                            break;
+                            else if (hit.collider.gameObject.tag == "Army")
+                            {
+
+
+                                if (DB.city_selected.Count != 0)
+                                {
+                                    DB.city_selected[0].GetComponent<city>().City_Chosen();
+                                }
+
+                                if (DB.chose_unit.Count == 1)
+                                {
+
+                                    if (DB.chose_unit[0].tag == "Army")
+                                    {
+                                        DB.chose_unit[0].GetComponent<Army>().Army_Chose();
+                                    }
+                                    DB.chose_unit[0].GetComponent<Unit>().Unit_Chouse();
+                                }
+                                hit.collider.gameObject.GetComponent<Army>().Army_Chose();
+
+
+                            }
+
+                            else
+                            {
+                                Debug.Log("Что то не так");
+                            }
                         }
                     }
                 }
-                else
-                {
-                    foreach(GameObject gj in DB.enemy_units)
-                    {
-                        if(hit.collider.gameObject == gj)
-                        {
-                            gj.GetComponent<Unit>().Enemy_Chose();
-                        }
-                    }
-                }
-
-                    
-                }
-            else if (hit.collider.gameObject.tag == "Army")
-            {
-               
-                
-                if (DB.city_selected.Count != 0)
-                {
-                    DB.city_selected[0].GetComponent<city>().City_Chosen();
-                }
-
-                if (DB.chose_unit.Count == 1)
-                {
-
-                    if (DB.chose_unit[0].tag == "Army")
-                    {
-                        DB.chose_unit[0].GetComponent<Army>().Army_Chose();
-                    }
-                    DB.chose_unit[0].GetComponent<Unit>().Unit_Chouse();
-                }
-               hit.collider.gameObject.GetComponent<Army>().Army_Chose();
-                
-                
-            }
             
-            else
-            {
-                Debug.Log("Что то не так");
-            }
-            }
-    }
+        }
                                    
                                     
         }
