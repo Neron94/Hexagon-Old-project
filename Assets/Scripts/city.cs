@@ -38,6 +38,10 @@ public class city : MonoBehaviour
         frac = GameObject.FindGameObjectWithTag("Logic").GetComponent<Fractions>();
         ui = GameObject.FindGameObjectWithTag("myUI").GetComponent<UI>();
         Canvas = gameObject.transform.FindChild("Canvas").gameObject;
+        if(fraction_name == "")
+        {
+            GameObject.FindGameObjectWithTag("AI").GetComponent<AI_Data_Base>().city_neutral.Add(gameObject);
+        }
      }
 	void Update () {
     if(switcher)
@@ -55,6 +59,11 @@ public class city : MonoBehaviour
         else if (units_in_city.Count == 0)
         {
             gameObject.transform.GetChild(2).gameObject.SetActive(false);
+        }
+
+        if(fraction_name != "")
+        {
+            GameObject.FindGameObjectWithTag("AI").GetComponent<AI_Data_Base>().city_neutral.Remove(gameObject);
         }
         
         

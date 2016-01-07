@@ -11,7 +11,7 @@ public class BattleCalculator : MonoBehaviour {
         defender.GetComponent<Unit>().cur_hp -= atack_power;
         atacker.GetComponent<Unit>().action_points -= 2;
         BackFire(defender, atacker);
-        atacker.GetComponent<Unit>().Unit_Chouse();
+        
     }
 
     public void BackFire(GameObject firing, GameObject back_target)
@@ -20,5 +20,10 @@ public class BattleCalculator : MonoBehaviour {
         int fire_of_damaged = firing.GetComponent<Unit>().unit_fire_power / 2;
         float damage = fire_of_damaged - back_defence;
         back_target.GetComponent<Unit>().cur_hp -= fire_of_damaged;
+    }
+    public void AirSupportFire(GameObject target, int air_fire_power)
+    {
+        float atack = air_fire_power - target.GetComponent<Unit>().unit_cur_defence;
+        target.GetComponent<Unit>().cur_hp -= atack;
     }
 }

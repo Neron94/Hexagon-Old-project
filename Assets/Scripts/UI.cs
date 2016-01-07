@@ -26,6 +26,9 @@ public class UI : MonoBehaviour
     public GameObject image_of_defeat_enemy;
     public GameObject but_resume;
 
+    
+    public GameObject Air_sup_Button;
+
     public Button menu;
     public Button next_turn;
   
@@ -72,6 +75,9 @@ public class UI : MonoBehaviour
             menu.interactable = true;
             next_turn.interactable = true;
         }
+        Air_sup_Button.SetActive(DB.gameObject.transform.GetComponent<Control>().air_support_is_action);
+        
+
     }
 	public void ButtonHider(string button_name)
     {

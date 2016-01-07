@@ -14,6 +14,9 @@ public class Fractions : MonoBehaviour
     public int tank_cost; //цена танка
     public int cannon_cost; // цена пушки
     public int infantry_costs; // цена пехоты
+    public int air_cost; // цена воздушной поддержки
+    public int air_power; // сила уудара авиации
+
     public UI ui;
     public int all_money;//Общий доход
     public Sprite icon_of_fraction;
@@ -65,7 +68,7 @@ public class Fractions : MonoBehaviour
             
             
         }
-        else if (name == "cannon")
+         if (name == "cannon")
         {
             if(Salary >= cannon_cost)
             {
@@ -100,6 +103,23 @@ public class Fractions : MonoBehaviour
             
 
         }
+        if (name == "air")
+        {
+            if (Salary >= air_cost)
+            {
+                if (DB.city_selected.Count != 0)
+                {
+                    DB.gameObject.transform.GetComponent<Control>().air_support_is_action = true;
+                    DB.city_selected[0].GetComponent<city>().City_Chosen();
+                }
+
+
+
+            }
+
+
+        }
+        
 
         }
     public void Money_from_citys()

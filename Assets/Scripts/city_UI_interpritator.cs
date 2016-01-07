@@ -68,6 +68,10 @@ public class city_UI_interpritator : MonoBehaviour {
         {
             DB.city_selected[0].GetComponent<city_UI_manager>().Naym_Soldat(3);
         }
+        else if (index == 4)
+        {
+            DB.city_selected[0].GetComponent<city_UI_manager>().Naym_Soldat(4);
+        }
     }
     public void Garnizon(int index)
     {

@@ -6,6 +6,7 @@ public class Army : MonoBehaviour
 {
 
     #region Variables
+   
     public List<GameObject> army_contain;
     private bool army_chose = false;
     public GameObject army_selector;
@@ -19,6 +20,7 @@ public class Army : MonoBehaviour
         ui = GameObject.FindGameObjectWithTag("myUI").GetComponent<UI>();
         DB.player_units.Add(gameObject);
         my_Hex = army_contain[0].GetComponent<Unit>().my_hex;
+        
 	}
 	
 	void Update () {

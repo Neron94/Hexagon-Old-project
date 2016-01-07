@@ -15,6 +15,8 @@ public class Control : MonoBehaviour
     public int count_of_Turns = 0; // сторит число прошедших ходов
     private GameObject enemy_correct; // сторит первый вражеский юнит цель при повторном нажатие стреляет
     public GameObject marker;
+    public bool air_support_is_action = false;
+    public bool whoTurn = false;
     #endregion
     void Start()
     {
@@ -51,9 +53,6 @@ public class Control : MonoBehaviour
 
                             if (hit.collider.gameObject.tag == "Hex")
                             {
-
-
-
                                 if (enemy_correct != null)
                                 {
                                     enemy_correct.GetComponent<Unit>().my_hex.GetComponent<HexComb>().Change(1);
@@ -102,6 +101,7 @@ public class Control : MonoBehaviour
                                         {
                                             if (obj.GetComponent<HexComb>().city_on_hex != null)
                                             {
+                                                AirSupCancel();
                                                 obj.GetComponent<HexComb>().city_on_hex.GetComponent<city>().City_Chosen();
 
                                             }
@@ -120,7 +120,7 @@ public class Control : MonoBehaviour
                             {
 
 
-
+                                AirSupCancel();
                                 if (enemy_correct != null)
                                 {
                                     enemy_correct.GetComponent<Unit>().my_hex.GetComponent<HexComb>().Change(1);
@@ -167,6 +167,7 @@ public class Control : MonoBehaviour
                                 {
 
                                     if (DB.chose_unit[0].GetComponent<Unit>().action_points >= 2)
+                                    {
                                         foreach (GameObject enemy in DB.enemy_units)
                                         {
 
@@ -182,7 +183,9 @@ public class Control : MonoBehaviour
                                                     hit.collider.gameObject.GetComponent<Unit>().my_hex.GetComponent<HexComb>().Change(4);
                                                     if (hit.collider.gameObject == enemy_correct)
                                                     {
+                                                        
                                                         BC.BattleModeller(DB.chose_unit[0], enemy);
+                                                        DB.chose_unit[0].GetComponent<Unit>().Unit_Chouse();
                                                         enemy_correct.GetComponent<Unit>().my_hex.GetComponent<HexComb>().Change(1);
                                                         enemy_correct = null;
 
@@ -191,8 +194,10 @@ public class Control : MonoBehaviour
                                                     {
                                                         if (enemy_correct != null)
                                                         {
+                                                            
                                                             enemy_correct.GetComponent<Unit>().my_hex.GetComponent<HexComb>().Change(1);
                                                             enemy_correct = null;
+                                                            
                                                         }
                                                     }
                                                     enemy_correct = hit.collider.gameObject;
@@ -204,7 +209,33 @@ public class Control : MonoBehaviour
                                                 break;
                                             }
                                         }
+                                    }
+                                    
+                                    }
+                                else if (air_support_is_action == true)
+                                {
+                                    hit.collider.gameObject.GetComponent<Unit>().my_hex.GetComponent<HexComb>().Change(4);
+                                    if (hit.collider.gameObject == enemy_correct)
+                                    {
+                                        
+                                        BC.AirSupportFire(hit.collider.gameObject, DB.gameObject.transform.GetComponent<Fractions>().air_power);
+                                        DB.gameObject.transform.GetComponent<Fractions>().Salary_minus(DB.gameObject.transform.GetComponent<Fractions>().air_cost);
+                                        enemy_correct.GetComponent<Unit>().my_hex.GetComponent<HexComb>().Change(1);
+                                        enemy_correct = null;
+                                        air_support_is_action = false;
+                                    }
+                                    else
+                                    {
+                                        if (enemy_correct != null)
+                                        {
+                                            enemy_correct.GetComponent<Unit>().my_hex.GetComponent<HexComb>().Change(1);
+                                            enemy_correct = null;
+                                        }
+                                    }
+                                    enemy_correct = hit.collider.gameObject;
                                 }
+                                
+
                                 else
                                 {
                                     foreach (GameObject gj in DB.enemy_units)
@@ -221,7 +252,7 @@ public class Control : MonoBehaviour
                             else if (hit.collider.gameObject.tag == "Army")
                             {
 
-
+                                AirSupCancel();
                                 if (DB.city_selected.Count != 0)
                                 {
                                     DB.city_selected[0].GetComponent<city>().City_Chosen();
@@ -262,6 +293,12 @@ public class Control : MonoBehaviour
             units.GetComponent<Unit>().End_Turn();
         
         }
+        foreach (GameObject units in DB.enemy_units)
+        {
+            units.GetComponent<Unit>().End_Turn();
+
+        }
+        
         foreach (GameObject ct in DB.all_cities)
         {
             ct.GetComponent<city>().Money_pay();
@@ -270,6 +307,21 @@ public class Control : MonoBehaviour
         if(DB.chose_unit.Count == 1)
         {
             DB.chose_unit[0].GetComponent<Unit>().Unit_Chouse();
+        }
+        GameObject.FindGameObjectWithTag("AI").GetComponent<AI_Core>().Fraction_Analiz();
+        
+        
+    }
+    public void AirSupCancel()
+    {
+        if(air_support_is_action == true)
+        {
+            air_support_is_action = false;
+        }
+        if (enemy_correct != null)
+        {
+            enemy_correct.GetComponent<Unit>().my_hex.GetComponent<HexComb>().Change(1);
+            enemy_correct = null;
         }
         
     }

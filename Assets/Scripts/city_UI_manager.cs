@@ -27,6 +27,8 @@ public class city_UI_manager : MonoBehaviour {
     public Button naym_infantry;
     public Button naym_tank;
     public Button naym_cannon;
+    public Button naym_Air;
+
 
 
     public Sprite sal_fac_lvl_one;
@@ -61,9 +63,11 @@ public class city_UI_manager : MonoBehaviour {
         naym_cannon = gameObject.transform.FindChild("Canvas").gameObject.transform.FindChild("Panel_Naym").gameObject.transform.FindChild("Cannon").gameObject.GetComponent<Button>();
         naym_tank = gameObject.transform.FindChild("Canvas").gameObject.transform.FindChild("Panel_Naym").gameObject.transform.FindChild("Tank").gameObject.GetComponent<Button>();
         naym_infantry = gameObject.transform.FindChild("Canvas").gameObject.transform.FindChild("Panel_Naym").gameObject.transform.FindChild("Infantry").gameObject.GetComponent<Button>();
+        naym_Air = gameObject.transform.FindChild("Canvas").gameObject.transform.FindChild("Panel_Naym").gameObject.transform.FindChild("Air").gameObject.GetComponent<Button>();
         naym_infantry.interactable = false;
         naym_cannon.interactable = false;
         naym_tank.interactable = false;
+        naym_Air.interactable = false;
         unit_but_1 = gameObject.transform.FindChild("Canvas").gameObject.transform.FindChild("Panel_Garnizon").gameObject.transform.FindChild("Unit_1").gameObject;
         unit_but_2 = gameObject.transform.FindChild("Canvas").gameObject.transform.FindChild("Panel_Garnizon").gameObject.transform.FindChild("Unit_2").gameObject;
         unit_but_3 = gameObject.transform.FindChild("Canvas").gameObject.transform.FindChild("Panel_Garnizon").gameObject.transform.FindChild("Unit_3").gameObject;
@@ -85,6 +89,10 @@ public class city_UI_manager : MonoBehaviour {
         if (gameObject.transform.GetComponent<city>().tank_factory == true)
         {
             naym_tank.interactable = true;
+        }
+        if(gameObject.transform.GetComponent<city>().air_field == true)
+        {
+            naym_Air.interactable = true;
         }
         
     }
@@ -201,6 +209,10 @@ public class city_UI_manager : MonoBehaviour {
         else if (index == 3)
         {
             frac.buy_unit("tank");
+        }
+        else if (index == 4)
+        {
+            frac.buy_unit("air");
         }
     }
     public void Garnizon(int index)

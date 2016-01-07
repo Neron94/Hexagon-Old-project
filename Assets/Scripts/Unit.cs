@@ -70,7 +70,6 @@ public class Unit : MonoBehaviour {
     void Start () {
         
         ctrl = GameObject.Find("Logic").GetComponent<Control>();
-       
         SM = GameObject.FindGameObjectWithTag("Logic").GetComponent<StateManager>();
         fire_effect = gameObject.transform.GetChild(4).gameObject;
         move = gameObject.transform.GetChild(5).gameObject;
@@ -82,10 +81,12 @@ public class Unit : MonoBehaviour {
         if(gameObject.tag == "player_unit")
         {
             DB.player_units.Add(gameObject);
+            GameObject.FindGameObjectWithTag("AI").GetComponent<AI_Data_Base>().unit_enemy.Add(gameObject);
         }
         else if(gameObject.tag == "Enemy")
         {
             DB.enemy_units.Add(gameObject);
+            GameObject.FindGameObjectWithTag("AI").GetComponent<AI_Data_Base>().unit_my.Add(gameObject);
         }
         
        }
@@ -217,17 +218,17 @@ public class Unit : MonoBehaviour {
        
         if(cur_hp <= 0)
         {
-            Instantiate(explosion, gameObject.transform.position, Quaternion.identity);
+            //Instantiate(explosion, gameObject.transform.position, Quaternion.identity);
             DB.enemy_units.Remove(gameObject);
             DB.player_units.Remove(gameObject);
-            Destroy(gameObject);
             if (have_barrikade)
             {
-                
                 Destroy(barrik_have);
                 unit_cur_defence -= barrikade_power;
                 have_barrikade = false;
             }
+            Destroy(gameObject);
+            
         }
     }
     public void Move()
