@@ -247,39 +247,70 @@ public class Unit : MonoBehaviour {
      } // Метод движения Юнита
     public void Unit_Chouse()
     {
-        if(unit_chosen == false)
+        if (gameObject.tag == "player_unit")
         {
-            
-            unit_chosen = true;
-            unit_selector.SetActive(unit_chosen);
-            DB.chose_unit.Add(gameObject);
-            Instantiate(navigator_obj, transform.position, Quaternion.identity);
-            if(my_hex.GetComponent<HexComb>().city_on_hex == null)
+            if (unit_chosen == false)
             {
-                if(have_barrikade == false)
+
+                unit_chosen = true;
+                unit_selector.SetActive(unit_chosen);
+                DB.chose_unit.Add(gameObject);
+                Instantiate(navigator_obj, transform.position, Quaternion.identity);
+                if (my_hex.GetComponent<HexComb>().city_on_hex == null)
                 {
-                    ui.ButtonHider("build_barrikade");
+                    if (have_barrikade == false)
+                    {
+                        ui.ButtonHider("build_barrikade");
+                    }
+
                 }
-                
+
+                ui.unitStats_method(action_points, unit_cur_fire_power, unit_cur_defence, icon, cur_hp);
+
+
+
+
             }
+            else if (unit_chosen == true)
+            {
+                unit_chosen = false;
+                unit_selector.SetActive(unit_chosen);
+                DB.chose_unit.Remove(gameObject);
+                GameObject.FindGameObjectWithTag("Navigator").GetComponent<Navigator>().Chose_another_unit();
 
-            ui.unitStats_method(action_points,unit_cur_fire_power,unit_cur_defence,icon, cur_hp);
-            
+                ui.ButtonHider("hide");
 
-            
-            
+
+
+            }
         }
-        else if(unit_chosen == true)
+        else
         {
-            unit_chosen = false;
-            unit_selector.SetActive(unit_chosen);
-            DB.chose_unit.Remove(gameObject);
-            GameObject.FindGameObjectWithTag("Navigator").GetComponent<Navigator>().Chose_another_unit();
-            
-            ui.ButtonHider("hide");
-            
-           
-            
+            if (unit_chosen == false)
+            {
+
+                unit_chosen = true;
+                DB.chose_unit.Add(gameObject);
+                Instantiate(navigator_obj, transform.position, Quaternion.identity);
+
+                
+
+
+
+
+            }
+            else if (unit_chosen == true)
+            {
+                unit_chosen = false;
+                
+                DB.chose_unit.Remove(gameObject);
+                GameObject.FindGameObjectWithTag("Navigator").GetComponent<Navigator>().Chose_another_unit();
+
+                
+
+
+
+            }
         }
     }
     public void Enemy_Chose()

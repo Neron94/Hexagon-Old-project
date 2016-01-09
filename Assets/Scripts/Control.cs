@@ -9,6 +9,7 @@ public class Control : MonoBehaviour
     #region Variables
     private DataBase DB;
     private StateManager SM;
+    private UI ui;
     private BattleCalculator BC;
     public Vector3 position_to_go; //Позиция Гекса куда нужно добраться
     public GameObject target_object; //Обьект (юнит) от которого мерится дистнция до целевого гекса
@@ -20,6 +21,7 @@ public class Control : MonoBehaviour
     #endregion
     void Start()
     {
+        ui = GameObject.FindGameObjectWithTag("myUI").GetComponent<UI>();
         DB = GameObject.FindGameObjectWithTag("Logic").GetComponent<DataBase>();
         BC = GameObject.FindGameObjectWithTag("Logic").GetComponent<BattleCalculator>();
         SM = GameObject.FindGameObjectWithTag("Logic").GetComponent<StateManager>();
@@ -287,7 +289,11 @@ public class Control : MonoBehaviour
 
     public void End_of_Turn()
     {
+        
         count_of_Turns++;
+        ui.label_of_turn.text = ("You Turn "+ count_of_Turns);
+        ui.ButtonHider("label_of_turn");
+        ui.ButtonHider("close_label");
         foreach(GameObject units in DB.player_units)
         {
             units.GetComponent<Unit>().End_Turn();
@@ -312,6 +318,7 @@ public class Control : MonoBehaviour
     }
     public void Turn_of_Enemy()
     {
+        SM.AI_moves = true;
         GameObject.FindGameObjectWithTag("AI").GetComponent<AI_Core>().Fraction_Analiz();
     }
     public void AirSupCancel()

@@ -19,6 +19,7 @@ public class UI : MonoBehaviour
 
     
     public GameObject panel_City;
+    private GameObject money_tablo;
 
     
 
@@ -50,6 +51,9 @@ public class UI : MonoBehaviour
     public Text ar_panel_1;
     public Text ar_panel_2;
     public Text ar_panel_3;
+
+    public Text label_of_turn;
+    private GameObject label_of_turn_object;
     #endregion
     public void Start()
     {
@@ -62,18 +66,24 @@ public class UI : MonoBehaviour
         defence = unitStats_panel.transform.FindChild("unitDefence").GetComponent<Text>();
         hp = unitStats_panel.transform.FindChild("hp").GetComponent<Image>();
 
+
+        label_of_turn = GameObject.Find("Canvas").gameObject.transform.FindChild("label_of_turn").GetComponent<Text>();
+        label_of_turn_object = GameObject.Find("Canvas").gameObject.transform.FindChild("label_of_turn").gameObject;
+        money_tablo = GameObject.Find("Canvas").gameObject.transform.FindChild("Text_salary").gameObject;
     }
     public void Update()
     {
-        if(SM.state_pause || SM.state_unit_movement)
+        if(SM.state_pause || SM.state_unit_movement || SM.AI_moves)
         {
             menu.interactable = false;
             next_turn.interactable = false;
+            money_tablo.SetActive(false);
         }
-        else if (!SM.state_unit_movement || !SM.state_pause)
+        else if (!SM.state_unit_movement || !SM.state_pause || SM.AI_moves)
         {
             menu.interactable = true;
             next_turn.interactable = true;
+            money_tablo.SetActive(true);
         }
         Air_sup_Button.SetActive(DB.gameObject.transform.GetComponent<Control>().air_support_is_action);
         
@@ -126,6 +136,14 @@ public class UI : MonoBehaviour
         else if(button_name == "closePanelCity")
         {
             panel_City.SetActive(false);
+        }
+        else if (button_name == "label_of_turn")
+        {
+            label_of_turn_object.SetActive(true);
+        }
+        else if(button_name == "close_label")
+        {
+            Invoke("Label_off", 2);
         }
             
        
@@ -230,6 +248,11 @@ public class UI : MonoBehaviour
 
         DB.city_selected[0].GetComponent<city_UI_manager>().MainButton(index);
 
+    }
+
+    public void Label_off()
+    {
+        label_of_turn_object.SetActive(false);
     }
 
     

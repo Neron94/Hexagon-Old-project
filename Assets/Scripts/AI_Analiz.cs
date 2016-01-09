@@ -10,6 +10,8 @@ public class AI_Analiz : MonoBehaviour {
     private GameObject cachCity;
     private GameObject cachEnemy;
 
+    private float best_dist;
+
 
     private void Start()
     {
@@ -27,7 +29,9 @@ public class AI_Analiz : MonoBehaviour {
             //ЗАХВАТ ГОРОДОВ
             if(Neutral_City_Near(unit))
             {
-                Debug.Log("Нейтрал Сити не НУЛЬ");
+                Debug.Log("Иду в город");
+                Debug.Log(cachCity);
+                Debug.Log(Vector3.Distance(unit.transform.position, cachCity.transform.position));
                 AI_COM.Comand_To_Object(unit,1, cachCity);
             }
             //АТАКА ПРОТИВНИКА
@@ -53,16 +57,36 @@ public class AI_Analiz : MonoBehaviour {
     private GameObject Neutral_City_Near(GameObject unit)
     {
         
+        // Ищем первый лучший результат
         foreach (GameObject citys in DB.city_neutral)
         {
-            if (Distance(unit.transform.position, citys.transform.position) <= 55*55)
+            if (Vector3.Distance(unit.transform.position, citys.transform.position) <= 55)
             {
-                
+                best_dist = Vector3.Distance(unit.transform.position, citys.transform.position);
                 cachCity = citys;
-                return citys;
+                break;
+                
+               
             }
         }
+        // Ищем второй лучший результат сравнивая с первым
+        foreach(GameObject citi in DB.city_neutral)
+        {
+            if(Vector3.Distance(unit.transform.position, citi.transform.position) < best_dist)
+            {
+                Debug.Log(Vector3.Distance(unit.transform.position, citi.transform.position));
+                cachCity = citi;
+                return cachCity;
+                
+            }
+        }
+        if(Vector3.Distance(cachCity.transform.position, unit.transform.position) == best_dist)
+        {
+            return cachCity;
+        }
+        best_dist = 0;
         return null;
+        
         
     }
     private GameObject Enemy_Near(GameObject unit)
@@ -81,6 +105,8 @@ public class AI_Analiz : MonoBehaviour {
     }
     private float Distance(Vector3 unit, Vector3 target)
     {
+        
+
         Vector3 disst = unit - target;
         float dist = disst.sqrMagnitude;
         

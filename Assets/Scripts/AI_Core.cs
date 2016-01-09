@@ -7,6 +7,8 @@ public class AI_Core : MonoBehaviour {
     public AI_Data_Base AI_DB;
     private AI_Analiz AI_ANLZ;
     private AI_Command AI_COM;
+    private StateManager SM;
+    
 
     public int index_unit = 0;
 
@@ -15,6 +17,8 @@ public class AI_Core : MonoBehaviour {
 
     private void Start()
     {
+        SM = GameObject.FindGameObjectWithTag("Logic").GetComponent<StateManager>();
+       
         MY_FRAC = gameObject.transform.GetComponent<Fractions>();
         AI_DB = gameObject.transform.GetComponent<AI_Data_Base>();
         AI_ANLZ = gameObject.transform.GetComponent<AI_Analiz>();
@@ -63,6 +67,8 @@ public class AI_Core : MonoBehaviour {
 
     private void End_of_AI_Turn()
     {
+        
+        SM.AI_moves = false;
         index_unit = 0;
         Debug.Log("ИИ ЗАКОНЧИЛ ХОД");
         GameObject.FindGameObjectWithTag("Logic").GetComponent<Control>().End_of_Turn();

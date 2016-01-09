@@ -115,8 +115,12 @@ public class Navigator : MonoBehaviour {
             objDist = Vector3.Distance(obj.transform.position, ctrl.target_object.transform.position);
             if(objDist == minimum)
             {
-                obj.GetComponent<HexComb>().Change(5);
-                DB.path_drawer.Add(obj);
+                if(DB.chose_unit[0].tag == "player_unit")
+                {
+                    obj.GetComponent<HexComb>().Change(5);
+                    DB.path_drawer.Add(obj);
+                }
+                
                 return obj;
                 
                 
