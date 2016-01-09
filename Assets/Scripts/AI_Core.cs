@@ -8,6 +8,8 @@ public class AI_Core : MonoBehaviour {
     private AI_Analiz AI_ANLZ;
     private AI_Command AI_COM;
 
+    public int index_unit = 0;
+
     
 
 
@@ -25,48 +27,47 @@ public class AI_Core : MonoBehaviour {
         Unit_Chose();
         
     }
-    private void Unit_Chose()
+    private  void Unit_Chose()
     {
-       
-            foreach (GameObject unit in AI_DB.unit_my)
-            {
-                if (unit.GetComponent<Unit>().action_points > 0)
-                {
-                    
-                    AI_ANLZ.Object_On_Analiz(unit);
-                    break;
-
-                }
-                else
-                {
-                    
-                    
-                }
-            }
+        if(index_unit<= AI_DB.unit_my.Count-1)
+        {
+            AI_ANLZ.Object_On_Analiz(AI_DB.unit_my[index_unit]);
+        }
+        else
+        {
+            End_of_AI_Turn();
+        }
+      
+        
      
         
-        City_Chose();
+       
     }
     private void City_Chose()
     {
-        foreach(GameObject city in AI_DB.city_my)
-        {
-            if(MY_FRAC.Salary >= 100)
+        
+            foreach (GameObject city in AI_DB.city_my)
             {
-                AI_ANLZ.Object_On_Analiz(city);
+                if (MY_FRAC.Salary >= 100)
+                {
+                    AI_ANLZ.Object_On_Analiz(city);
+                }
+                else
+                {
+
+                }
             }
-            else
-            {
-                End_of_AI_Turn();
-            }
-        }
-        End_of_AI_Turn();
+        Invoke("End_of_AI_Turn",2);
+        
     }
 
     private void End_of_AI_Turn()
     {
+        index_unit = 0;
         Debug.Log("ИИ ЗАКОНЧИЛ ХОД");
+        GameObject.FindGameObjectWithTag("Logic").GetComponent<Control>().End_of_Turn();
     }
+   
 
    
 }

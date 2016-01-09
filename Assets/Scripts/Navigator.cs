@@ -79,24 +79,27 @@ public class Navigator : MonoBehaviour {
         } // Метод запускатор Поиска пути
     private Vector3 Path_finder()   //Возвращает позицию рационального пути
     {
-        foreach(GameObject gj in DB.hex_eight)
+        if(DB.hex_eight.Count != 0)
         {
-            cif[ind] = Vector3.Distance(gj.transform.position, ctrl.target_object.transform.position);
-            ind++;
-        }
-        ind = 0;
-        try
-        {
-            return Min().gameObject.transform.position;
-            
-            
+            foreach (GameObject gj in DB.hex_eight)
+            {
+                cif[ind] = Vector3.Distance(gj.transform.position, ctrl.target_object.transform.position);
+                ind++;
+            }
+            ind = 0;
+            try
+            {
+                return Min().gameObject.transform.position;
 
+            }
+            catch
+            {
+                Debug.Log("Лист hex_eight пуст");
+            }
+            
         }
-        catch
-        {
-
-            return Path_finder();
-        }
+        return Proverochnaya_cifra; // заглушка совершенно не причем тут 
+        
         
         
      }

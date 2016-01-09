@@ -308,9 +308,11 @@ public class Control : MonoBehaviour
         {
             DB.chose_unit[0].GetComponent<Unit>().Unit_Chouse();
         }
+        
+    }
+    public void Turn_of_Enemy()
+    {
         GameObject.FindGameObjectWithTag("AI").GetComponent<AI_Core>().Fraction_Analiz();
-        
-        
     }
     public void AirSupCancel()
     {

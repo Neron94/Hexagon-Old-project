@@ -53,9 +53,9 @@ public class Unit : MonoBehaviour {
     public GameObject another_unit;
     public string unit_fraction;
     public float unit_defence;
-    [HideInInspector]
+    
     public float unit_cur_defence;
-    [HideInInspector]
+    
     public int unit_cur_fire_power;
     public int unit_fire_power;
     public int fire_distance;
