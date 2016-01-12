@@ -24,8 +24,15 @@ public class SaveLoadGameMy : MonoBehaviour
             loadUnits = BinarySaver.Load(saveUnit) as List<Units>;
             loadCitys = BinarySaver.Load(saveCitys) as List<Citys>;
             loadFrac = BinarySaver.Load(saveFra) as List<GameFractions>;
-            Load();
+            SetUnits(loadUnits.Count);
            
+        }
+    }
+    void Start()
+    {
+        if (Application.loadedLevelName == "emptyLevel")
+        {
+            Load();
         }
     }
    
@@ -47,7 +54,7 @@ public class SaveLoadGameMy : MonoBehaviour
     }
     public void Load()
     {
-        SetUnits(loadUnits.Count);
+        
         SetCitys(loadCitys.Count);
         SetFraction(loadFrac.Count);
     }
@@ -73,7 +80,7 @@ public class SaveLoadGameMy : MonoBehaviour
               GameObject obj = saveCity[i];
               toCSave.Add(new Citys(obj));
           }
-          Debug.Log("Citys " + toCSave.Count);
+          
           saveCity.Clear();
           return toCSave;
    
@@ -88,7 +95,7 @@ public class SaveLoadGameMy : MonoBehaviour
           GameObject obj = saveFrac[i];
           toQSave.Add(new GameFractions(obj));
       }
-      Debug.Log("Frac "+ toQSave.Count);
+      
       saveFrac.Clear();
       return toQSave;
 
@@ -209,9 +216,17 @@ public class SaveLoadGameMy : MonoBehaviour
         {
             foreach(GameObject cit in DB.all_cities)
             {
+                
                 if(loadCitys[i].cityName == cit.GetComponent<city>().city_name)
                 {
-                    
+                    if(DB.gameObject.transform.GetComponent<Fractions>().fraction_name == loadCitys[i].frac_name)
+                    {
+                        DB.player_cities.Add(cit);
+                    }
+                    else
+                    {
+                        DB.enemy_cities.Add(cit);
+                    }
                     cit.GetComponent<city>().switcher = loadCitys[i].switcher;
                     cit.GetComponent<city>().fraction_name = loadCitys[i].frac_name;
                     cit.GetComponent<city>().salary_factory_lvl = loadCitys[i].sal_fac_lvl;
@@ -227,21 +242,21 @@ public class SaveLoadGameMy : MonoBehaviour
     }
     public void SetFraction(int countt)
     {
+        
         int count = countt; 
         for(int i =0; i < count; i++)
         {
-            if(loadFrac[i].player)
+            if(GameObject.FindGameObjectWithTag("Logic").GetComponent<Fractions>().fraction_name == loadFrac[i].fraction_name)
             {
                 Fractions fc = GameObject.FindGameObjectWithTag("Logic").GetComponent<Fractions>();
                 fc.fraction_name = loadFrac[i].fraction_name;
                 fc.Salary = loadFrac[i].frac_salary;
-                fc.isPlayer = loadFrac[i].player;
                 GameObject.FindGameObjectWithTag("Logic").GetComponent<Control>().count_of_Turns = loadFrac[i].count_of_turns;
+                Camera.main.transform.position = new Vector3(loadFrac[i].cam_x, loadFrac[i].cam_y, loadFrac[i].cam_z);
             }
             else
             {
                 Fractions aiFc = GameObject.FindGameObjectWithTag("AI").GetComponent<Fractions>();
-                aiFc.isPlayer = loadFrac[i].player;
                 aiFc.fraction_name = loadFrac[i].fraction_name;
                 aiFc.Salary = loadFrac[i].frac_salary;
 
@@ -316,9 +331,11 @@ public class Citys
 public class GameFractions
 {
     public string fraction_name;
-    public bool player;
     public int frac_salary;
     public int count_of_turns; // кол-во ходов игры
+    public float cam_x;
+    public float cam_y;
+    public float cam_z;
     public GameFractions()
     {
 
@@ -329,7 +346,10 @@ public class GameFractions
         fraction_name = frac.GetComponent<Fractions>().fraction_name;
         frac_salary = frac.GetComponent<Fractions>().Salary;
         count_of_turns = GameObject.FindGameObjectWithTag("Logic").GetComponent<Control>().count_of_Turns;
-        player = frac.GetComponent<Fractions>().isPlayer;
+        cam_x = Camera.main.transform.position.x;
+        cam_y = Camera.main.transform.position.y;
+        cam_z = Camera.main.transform.position.z;
+
 
     }
 }

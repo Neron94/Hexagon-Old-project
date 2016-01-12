@@ -84,20 +84,36 @@ public class city_UI_manager : MonoBehaviour {
        
         if(gameObject.transform.GetComponent<city>().baracks == true)
         {
-            
+            baracks.interactable = false;
             naym_infantry.interactable = true;
         }
         if (gameObject.transform.GetComponent<city>().cannon_factory == true)
         {
+            cannon.interactable = false;
             naym_cannon.interactable = true;
         }
         if (gameObject.transform.GetComponent<city>().tank_factory == true)
         {
+            tank.interactable = false;
             naym_tank.interactable = true;
         }
         if(gameObject.transform.GetComponent<city>().air_field == true)
         {
+            air.interactable = false;
             naym_Air.interactable = true;
+        }
+
+        if(gameObject.transform.GetComponent<city>().salary_factory_lvl == 1)
+        {
+            sal_factory.sprite = sal_fac_lvl_one;
+        }
+        else if(gameObject.transform.GetComponent<city>().salary_factory_lvl == 2)
+        {
+            sal_factory.sprite = sal_fac_lvl_two;
+        }
+        else if(gameObject.transform.GetComponent<city>().salary_factory_lvl == 3)
+        {
+            sal_factory_but.interactable = false;
         }
         
     }

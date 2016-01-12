@@ -28,10 +28,15 @@ public class city : MonoBehaviour
 
     
     #endregion 
-    void Start () {
-        
+    void Awake()
+    {
         DB = GameObject.FindGameObjectWithTag("Logic").GetComponent<DataBase>();
         DB.all_cities.Add(gameObject);
+    }
+    void Start () {
+        
+        
+        
         frac = GameObject.FindGameObjectWithTag("Logic").GetComponent<Fractions>();
         ui = GameObject.FindGameObjectWithTag("myUI").GetComponent<UI>();
         Canvas = gameObject.transform.FindChild("Canvas").gameObject;
@@ -112,9 +117,9 @@ public class city : MonoBehaviour
             {
                 if(col.gameObject == gj)
                 {
-                    if(City_almost_DB(gameObject))
+                    if(!City_almost_in_Enemy_DB(gameObject))
                     {
-                        DB.player_cities.Remove(gameObject);
+                        DB.enemy_cities.Add(gameObject);
                     }
                     if(City_almost_DB(gameObject))
                     {
@@ -122,7 +127,7 @@ public class city : MonoBehaviour
                     }
                     switcher = false;
                     switcher = true;
-                    DB.enemy_cities.Add(gameObject);
+                    
                     fraction_name = gj.GetComponent<Unit>().unit_fraction;
                     frac = GameObject.FindGameObjectWithTag("AI").GetComponent<Fractions>();
                     break;

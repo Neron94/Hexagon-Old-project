@@ -54,7 +54,7 @@ public static class BinarySaver
         {
             fs.Close();
         }
-        Debug.Log("Загрузка прошла");
+        
         return obj;
     }
 }
