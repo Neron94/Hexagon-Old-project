@@ -1,14 +1,20 @@
 fileFormatVersion: 2
 guid: 2f5c2e559b721864583745eea82d1ecf
-timeCreated: 1450271790
+timeCreated: 1452523703
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
   defaultReferences:
-  - ctrl: {instanceID: 0}
-  - DB: {instanceID: 0}
-  - unit_selector: {instanceID: 0}
+  - icon: {instanceID: 0}
+  - move: {instanceID: 0}
+  - fire_effect: {instanceID: 0}
+  - explosion: {fileID: 100012, guid: 990c2328597308a46a8f3d888b380296, type: 2}
   - navigator_obj: {fileID: 174936, guid: f0f7e1fa21dead445a82275b0fed5b7f, type: 2}
+  - barrikade: {instanceID: 0}
+  - barrik_have: {instanceID: 0}
+  - another_unit: {instanceID: 0}
+  - my_hex: {instanceID: 0}
+  - target: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

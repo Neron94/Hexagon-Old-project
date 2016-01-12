@@ -51,17 +51,11 @@
     <Reference Include="UnityEngine">
       <HintPath>Library\UnityAssemblies\UnityEngine.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.Advertisements">
-      <HintPath>Library\UnityAssemblies\UnityEngine.Advertisements.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Networking">
       <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.Analytics">
-      <HintPath>Library\UnityAssemblies\UnityEngine.Analytics.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
@@ -87,21 +81,25 @@
     <Compile Include="Assets\Scripts\AI_On_Front.cs" />
     <Compile Include="Assets\Scripts\Army.cs" />
     <Compile Include="Assets\Scripts\BattleCalculator.cs" />
+    <Compile Include="Assets\Scripts\BinarySaver.cs" />
     <Compile Include="Assets\Scripts\Control.cs" />
     <Compile Include="Assets\Scripts\DataBase.cs" />
     <Compile Include="Assets\Scripts\Fractions.cs" />
     <Compile Include="Assets\Scripts\HexComb.cs" />
     <Compile Include="Assets\Scripts\Navigator.cs" />
     <Compile Include="Assets\Scripts\RulesManager.cs" />
+    <Compile Include="Assets\Scripts\SaveLoadGameMy.cs" />
     <Compile Include="Assets\Scripts\StateManager.cs" />
     <Compile Include="Assets\Scripts\UI.cs" />
     <Compile Include="Assets\Scripts\Unit.cs" />
+    <Compile Include="Assets\Scripts\XMLSave.cs" />
     <Compile Include="Assets\Scripts\cameraContr.cs" />
     <Compile Include="Assets\Scripts\canvasLook.cs" />
     <Compile Include="Assets\Scripts\city.cs" />
     <Compile Include="Assets\Scripts\city_UI_interpritator.cs" />
     <Compile Include="Assets\Scripts\city_UI_manager.cs" />
     <Compile Include="Assets\Scripts\effect_switcher.cs" />
+    <Compile Include="Assets\Scripts\partisialDestructor.cs" />
     <Compile Include="Assets\Scripts\playButton.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -185,6 +183,22 @@
     <None Include="Assets\Standard Assets\ParticleSystems\Shaders\PriorityParticleAdd.shader" />
     <None Include="Assets\Standard Assets\ParticleSystems\Shaders\PriorityParticleAddSoft.shader" />
     <None Include="Assets\Standard Assets\ParticleSystems\Shaders\PriorityParticleAlpha.shader" />
+    <None Include="Assets\WarFX\!WarFX Readme.txt" />
+    <None Include="Assets\WarFX\Shaders\WFX_S Add Scroll.shader" />
+    <None Include="Assets\WarFX\Shaders\WFX_S Alpha-Diffuse TintColor.shader" />
+    <None Include="Assets\WarFX\Shaders\WFX_S Alpha-Specular TintColor.shader" />
+    <None Include="Assets\WarFX\Shaders\WFX_S AlphaBlend Scroll.shader" />
+    <None Include="Assets\WarFX\Shaders\WFX_S Multiply Soft Scroll.shader" />
+    <None Include="Assets\WarFX\Shaders\WFX_S Multiply Soft.shader" />
+    <None Include="Assets\WarFX\Shaders\WFX_S Particle Add A8.shader" />
+    <None Include="Assets\WarFX\Shaders\WFX_S Particle AddSoft A8.shader" />
+    <None Include="Assets\WarFX\Shaders\WFX_S Particle Multiply A8.shader" />
+    <None Include="Assets\WarFX\Shaders\WFX_S Smoke Scroll.shader" />
+    <None Include="Assets\WarFX\_Effects (Mobile, Reduced Overdraw)\!Mobile differences.txt" />
+    <None Include="Assets\WarFX\_Effects (Mobile, Reduced Overdraw)\MuzzleFlashes\!MuzzleFlash Differences.txt" />
+    <None Include="Assets\WarFX\_Effects (Mobile, Regular Mesh)\!Mobile differences.txt" />
+    <None Include="Assets\WarFX\_Effects (Mobile, Regular Mesh)\MuzzleFlashes\!MuzzleFlash Differences.txt" />
+    <None Include="Assets\WarFX\_Effects\MuzzleFlashes\!MuzzleFlash Differences.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2013\UnityVS.CSharp.targets" />
 </Project>

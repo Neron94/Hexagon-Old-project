@@ -14,6 +14,10 @@ public class city_UI_manager : MonoBehaviour {
     public GameObject unit_but_2;
     public GameObject unit_but_3;
 
+    public Image unit_1;
+    public Image unit_2;
+    public Image unit_3;
+
     public Button structers;
 
     public Image sal_factory;
@@ -71,8 +75,9 @@ public class city_UI_manager : MonoBehaviour {
         unit_but_1 = gameObject.transform.FindChild("Canvas").gameObject.transform.FindChild("Panel_Garnizon").gameObject.transform.FindChild("Unit_1").gameObject;
         unit_but_2 = gameObject.transform.FindChild("Canvas").gameObject.transform.FindChild("Panel_Garnizon").gameObject.transform.FindChild("Unit_2").gameObject;
         unit_but_3 = gameObject.transform.FindChild("Canvas").gameObject.transform.FindChild("Panel_Garnizon").gameObject.transform.FindChild("Unit_3").gameObject;
-
-        
+        unit_1 = gameObject.transform.FindChild("Canvas").gameObject.transform.FindChild("Panel_Garnizon").gameObject.transform.FindChild("Unit_1").GetComponent<Image>();
+        unit_2 = gameObject.transform.FindChild("Canvas").gameObject.transform.FindChild("Panel_Garnizon").gameObject.transform.FindChild("Unit_2").GetComponent<Image>();
+        unit_3 = gameObject.transform.FindChild("Canvas").gameObject.transform.FindChild("Panel_Garnizon").gameObject.transform.FindChild("Unit_3").GetComponent<Image>();
     }
     void Update()
     {
@@ -219,9 +224,8 @@ public class city_UI_manager : MonoBehaviour {
     {
         if(index == 1)
         {
-           
-           gameObject.transform.GetComponent<city>().units_in_city[0].GetComponent<Unit>().Unit_Chouse();
-           Back_Button();
+
+            gameObject.transform.GetComponent<city>().units_in_city[0].GetComponent<Unit>().Unit_Chouse();
            gameObject.transform.GetComponent<city>().City_Chosen();
            
         }
@@ -229,14 +233,12 @@ public class city_UI_manager : MonoBehaviour {
         {
             
             gameObject.transform.GetComponent<city>().units_in_city[1].GetComponent<Unit>().Unit_Chouse();
-            Back_Button();
             gameObject.transform.GetComponent<city>().City_Chosen();
         }
         else if(index == 3)
         {
            
             gameObject.transform.GetComponent<city>().units_in_city[2].GetComponent<Unit>().Unit_Chouse();
-            Back_Button();
             gameObject.transform.GetComponent<city>().City_Chosen();
         }
     }
@@ -250,20 +252,26 @@ public class city_UI_manager : MonoBehaviour {
     public void SoldiersInCity(GameObject first)
     {
         unit_but_1.SetActive(true);
+        unit_1.sprite = first.GetComponent<Unit>().icon;
         unit_but_2.SetActive(false);
         unit_but_3.SetActive(false);
     }
     public void SoldiersInCity(GameObject first, GameObject second)
     {
         unit_but_1.SetActive(true);
+        unit_1.sprite = first.GetComponent<Unit>().icon;
         unit_but_2.SetActive(true);
+        unit_2.sprite = first.GetComponent<Unit>().icon;
         unit_but_3.SetActive(false);
     }
     public void SoldiersInCity(GameObject first, GameObject second, GameObject Third)
     {
         unit_but_1.SetActive(true);
+        unit_1.sprite = first.GetComponent<Unit>().icon;
         unit_but_2.SetActive(true);
+        unit_2.sprite = first.GetComponent<Unit>().icon;
         unit_but_3.SetActive(true);
+        unit_3.sprite = first.GetComponent<Unit>().icon;
     }
     public void  SoldiersNone()
     {

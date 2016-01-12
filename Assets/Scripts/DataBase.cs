@@ -43,6 +43,10 @@ public class DataBase : MonoBehaviour {
         {
             chose_unit[0].GetComponent<Unit>().Build_barricade();
         }
+        else if (command == "diselect")
+        {
+            chose_unit[0].GetComponent<Unit>().Unit_Chouse();
+        }
     }
     public void GameStarts()
     {
@@ -52,7 +56,8 @@ public class DataBase : MonoBehaviour {
        }
     }
 
-    void Update()
+    
+            void Update()
     {
         if(start_games == false)
         {

@@ -64,11 +64,13 @@ public class Unit : MonoBehaviour {
     public float cur_hp;
     public GameObject my_hex;
 
+    public GameObject target;
+
     #endregion
 
 
     void Start () {
-        
+        target = gameObject.transform.FindChild("target").gameObject;
         ctrl = GameObject.Find("Logic").GetComponent<Control>();
         SM = GameObject.FindGameObjectWithTag("Logic").GetComponent<StateManager>();
         fire_effect = gameObject.transform.GetChild(4).gameObject;
@@ -216,9 +218,9 @@ public class Unit : MonoBehaviour {
     {
         
        
-        if(cur_hp <= 0)
+        if(cur_hp < 1)
         {
-            //Instantiate(explosion, gameObject.transform.position, Quaternion.identity);
+            Instantiate(explosion, gameObject.transform.position, Quaternion.identity);
             DB.enemy_units.Remove(gameObject);
             DB.player_units.Remove(gameObject);
             if (have_barrikade)
@@ -264,7 +266,7 @@ public class Unit : MonoBehaviour {
                     }
 
                 }
-
+                ui.but_diselect.SetActive(true);
                 ui.unitStats_method(action_points, unit_cur_fire_power, unit_cur_defence, icon, cur_hp);
 
 
@@ -279,6 +281,8 @@ public class Unit : MonoBehaviour {
                 GameObject.FindGameObjectWithTag("Navigator").GetComponent<Navigator>().Chose_another_unit();
 
                 ui.ButtonHider("hide");
+                ui.ButtonHider("hide_stats");
+                ui.but_diselect.SetActive(false);
 
 
 
@@ -329,6 +333,7 @@ public class Unit : MonoBehaviour {
         DB.enemy_chose.Remove(gameObject);
         enemy_selector.SetActive(enemy_chose);
         ui.ButtonHider("hide");
+        ui.ButtonHider("hide_stats");
 
     }
     

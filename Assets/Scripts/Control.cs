@@ -62,6 +62,7 @@ public class Control : MonoBehaviour
                                 }
                                 if (DB.city_selected.Count != 0)
                                 {
+                                    ui.ButtonHider("hide_stats");
                                     DB.city_selected[0].GetComponent<city>().City_Chosen();
                                 }
 
@@ -182,13 +183,13 @@ public class Control : MonoBehaviour
                                                 {
 
                                                     DB.chose_unit[0].GetComponent<Unit>().Unit_rotation(enemy, enemy);
-                                                    hit.collider.gameObject.GetComponent<Unit>().my_hex.GetComponent<HexComb>().Change(4);
+                                                    hit.collider.gameObject.GetComponent<Unit>().target.SetActive(true);
                                                     if (hit.collider.gameObject == enemy_correct)
                                                     {
                                                         
                                                         BC.BattleModeller(DB.chose_unit[0], enemy);
                                                         DB.chose_unit[0].GetComponent<Unit>().Unit_Chouse();
-                                                        enemy_correct.GetComponent<Unit>().my_hex.GetComponent<HexComb>().Change(1);
+                                                        enemy_correct.GetComponent<Unit>().target.SetActive(false);
                                                         enemy_correct = null;
 
                                                     }
@@ -216,13 +217,13 @@ public class Control : MonoBehaviour
                                     }
                                 else if (air_support_is_action == true)
                                 {
-                                    hit.collider.gameObject.GetComponent<Unit>().my_hex.GetComponent<HexComb>().Change(4);
+                                    hit.collider.gameObject.GetComponent<Unit>().target.SetActive(true);
                                     if (hit.collider.gameObject == enemy_correct)
                                     {
                                         
                                         BC.AirSupportFire(hit.collider.gameObject, DB.gameObject.transform.GetComponent<Fractions>().air_power);
                                         DB.gameObject.transform.GetComponent<Fractions>().Salary_minus(DB.gameObject.transform.GetComponent<Fractions>().air_cost);
-                                        enemy_correct.GetComponent<Unit>().my_hex.GetComponent<HexComb>().Change(1);
+                                        enemy_correct.GetComponent<Unit>().target.SetActive(false);
                                         enemy_correct = null;
                                         air_support_is_action = false;
                                     }
@@ -325,6 +326,7 @@ public class Control : MonoBehaviour
     {
         if(air_support_is_action == true)
         {
+            enemy_correct.GetComponent<Unit>().target.SetActive(false);
             air_support_is_action = false;
         }
         if (enemy_correct != null)

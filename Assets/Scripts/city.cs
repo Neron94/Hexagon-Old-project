@@ -17,8 +17,6 @@ public class city : MonoBehaviour
     public string fraction_name; // название фракции города
     public int defence_bonus; // бонус к защите юнита если он в городе
     public GameObject my_hex; // сторим хекс на котором стоит город
-    private GameObject flag_spawn; // флаг фракции в городе
-    private bool flag_spawn_stop; // включатель спавна флага 
     private bool city_selected = false; // селекнут ли город
     public List<GameObject> units_in_city; //юниты в городе
     public GameObject Canvas;
@@ -34,7 +32,6 @@ public class city : MonoBehaviour
         
         DB = GameObject.FindGameObjectWithTag("Logic").GetComponent<DataBase>();
         DB.all_cities.Add(gameObject);
-        flag_spawn = gameObject.transform.FindChild("spawn_flag").gameObject;
         frac = GameObject.FindGameObjectWithTag("Logic").GetComponent<Fractions>();
         ui = GameObject.FindGameObjectWithTag("myUI").GetComponent<UI>();
         Canvas = gameObject.transform.FindChild("Canvas").gameObject;
@@ -44,20 +41,16 @@ public class city : MonoBehaviour
         }
      }
 	void Update () {
-    if(switcher)
-    {
-        Flag_spawner();
-    }
-    else
-    {
-        
-    }
+    
+    
         if(units_in_city.Count > 0)
         {
+            //вкл окопов
             gameObject.transform.GetChild(2).gameObject.SetActive(true);
         }
         else if (units_in_city.Count == 0)
         {
+            //выкл окопов
             gameObject.transform.GetChild(2).gameObject.SetActive(false);
         }
 
@@ -83,25 +76,27 @@ public class city : MonoBehaviour
         {
           
             units_in_city.Add(col.gameObject);
+            
+            //Активирует кнопки в панели Гарнизона UI города
             UnitArrived();
+            
+            //выкл тело юнита
             col.gameObject.transform.GetChild(2).gameObject.SetActive(false);
+            //не проницаем рейкастом
             col.gameObject.layer = 2;
             
-            if(flag_spawn_stop)
-            {
-                if(fraction_name != col.gameObject.GetComponent<Unit>().unit_fraction)
-                {
-                    Destroy(gameObject.transform.GetChild(5).gameObject);
-                    Flag_spawner();
-                }
-                
-            }
             switcher = false;
             switcher = true;
+            
             if(!City_almost_DB(gameObject))
             {
                 DB.player_cities.Add(gameObject);
             }
+            if (City_almost_in_Enemy_DB(gameObject))
+            {
+                DB.enemy_cities.Remove(gameObject);
+            }
+            
             
             fraction_name = DB.player_units[0].GetComponent<Unit>().unit_fraction;
             fraction_Icon = GameObject.FindGameObjectWithTag("Logic").GetComponent<Fractions>().icon_of_fraction; ;
@@ -109,17 +104,21 @@ public class city : MonoBehaviour
         }
         else if (col.gameObject.tag == "Enemy")
         {
+            units_in_city.Add(col.gameObject);
 
+            col.gameObject.transform.GetChild(2).gameObject.SetActive(false);
+            
             foreach(GameObject gj in DB.enemy_units)
             {
                 if(col.gameObject == gj)
                 {
-                    if (flag_spawn_stop)
+                    if(City_almost_DB(gameObject))
                     {
-                        if (fraction_name != col.gameObject.GetComponent<Unit>().unit_fraction)
-                        {
-                            Destroy(gameObject.transform.GetChild(5).gameObject);
-                        }
+                        DB.player_cities.Remove(gameObject);
+                    }
+                    if(City_almost_DB(gameObject))
+                    {
+                        DB.player_cities.Remove(gameObject);
                     }
                     switcher = false;
                     switcher = true;
@@ -160,7 +159,8 @@ public class city : MonoBehaviour
         }
         else if (col.gameObject.tag == "Enemy")
         {
-
+            col.gameObject.transform.GetChild(2).gameObject.SetActive(true);
+            units_in_city.Remove(col.gameObject);
             foreach (GameObject gj in DB.enemy_units)
             {
                 if (col.gameObject == gj)
@@ -175,34 +175,12 @@ public class city : MonoBehaviour
 
         }
     }
-    private void Flag_spawner()
-    {
-        if (!flag_spawn_stop)
-        {
-            if (fraction_name == "RedArmy")
-            {
-
-                GameObject flag = Instantiate(DB.unit_Pref_types[3], flag_spawn.transform.position, Quaternion.identity) as GameObject;
-                flag.transform.SetParent(gameObject.transform);
-                flag_spawn_stop = true;
-            }
-            else if (fraction_name == "Wehrmacht")
-            {
-                GameObject flag = Instantiate(DB.unit_Pref_types[4], flag_spawn.transform.position, Quaternion.identity) as GameObject;
-                flag.transform.SetParent(gameObject.transform);
-                flag_spawn_stop = true;
-            }
-        }
-        else
-        {
-
-        }
-    }
     public void City_Chosen()
     {
         if(city_selected)
         {
             ui.ButtonHider("hide");
+            
             city_selected = false;
             DB.city_selected.Remove(gameObject);
             my_hex.GetComponent<HexComb>().Change(1);
@@ -226,7 +204,7 @@ public class city : MonoBehaviour
          
         }
     }
-    public bool City_almost_DB(GameObject city)
+    private  bool City_almost_DB(GameObject city)
     {
        foreach(GameObject db in DB.player_cities)
        {
@@ -237,6 +215,17 @@ public class city : MonoBehaviour
         
        }
        return false;
+    }
+    private bool City_almost_in_Enemy_DB(GameObject city)
+    {
+        foreach(GameObject ciTy in DB.enemy_cities)
+        {
+            if(city == ciTy)
+            {
+                return true;
+            }
+        }
+        return false;
     }
     
     public void Build_Salary_Factory(int lvl)
@@ -261,6 +250,7 @@ public class city : MonoBehaviour
 
     public void UnitArrived()
     {
+        //Активирует кнопки в панели Гарнизона UI города
         if (units_in_city.Count == 1)
         {
             gameObject.transform.GetComponent<city_UI_manager>().SoldiersInCity(units_in_city[0]);

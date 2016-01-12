@@ -16,6 +16,7 @@ public class Fractions : MonoBehaviour
     public int infantry_costs; // цена пехоты
     public int air_cost; // цена воздушной поддержки
     public int air_power; // сила уудара авиации
+    public bool isPlayer;
 
     public UI ui;
     public int all_money;//Общий доход
@@ -27,7 +28,7 @@ public class Fractions : MonoBehaviour
     void Start () {
         DB = GameObject.FindGameObjectWithTag("Logic").GetComponent<DataBase>();
         ui = GameObject.FindGameObjectWithTag("myUI").GetComponent<UI>();
-	}
+       	}
 	void Update () {
         Money_from_citys();
         if(Salary <= 0)
@@ -55,8 +56,15 @@ public class Fractions : MonoBehaviour
             if(Salary >= tank_cost)
             {
                 
-                
-             spawn_Object = DB.unit_Pref_types[0];
+                if(fraction_name == "Wehrmacht")
+                {
+                    spawn_Object = DB.unit_Pref_types[0];
+                }
+                else
+                {
+                    spawn_Object = DB.unit_Pref_types[9];
+                }
+                spawn_Object = DB.unit_Pref_types[0];
                 if(DB.city_selected.Count != 0)
                 {
                     Instantiate(spawn_Object, DB.city_selected[0].transform.position, Quaternion.identity);
@@ -72,8 +80,15 @@ public class Fractions : MonoBehaviour
         {
             if(Salary >= cannon_cost)
             {
-               
-            spawn_Object = DB.unit_Pref_types[1];
+
+                if (fraction_name == "Wehrmacht")
+                {
+                    spawn_Object = DB.unit_Pref_types[1];
+                }
+                else
+                {
+                    spawn_Object = DB.unit_Pref_types[8];
+                }
             if (DB.city_selected.Count != 0)
             {
                 Instantiate(spawn_Object, DB.city_selected[0].transform.position, Quaternion.identity);
@@ -89,9 +104,15 @@ public class Fractions : MonoBehaviour
         {
             if (Salary >= infantry_costs)
             {
-                
-              
-             spawn_Object = DB.unit_Pref_types[2];
+
+                if (fraction_name == "Wehrmacht")
+                {
+                    spawn_Object = DB.unit_Pref_types[2];
+                }
+                else
+                {
+                    spawn_Object = DB.unit_Pref_types[7];
+                }
              if (DB.city_selected.Count != 0)
              {
                  Instantiate(spawn_Object, DB.city_selected[0].transform.position, Quaternion.identity);

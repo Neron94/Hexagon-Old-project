@@ -16,6 +16,7 @@ public class UI : MonoBehaviour
     public GameObject but_army_panel_1;
     public GameObject but_army_panel_2;
     public GameObject but_army_panel_3;
+    public GameObject but_diselect;
 
     
     public GameObject panel_City;
@@ -70,6 +71,7 @@ public class UI : MonoBehaviour
         label_of_turn = GameObject.Find("Canvas").gameObject.transform.FindChild("label_of_turn").GetComponent<Text>();
         label_of_turn_object = GameObject.Find("Canvas").gameObject.transform.FindChild("label_of_turn").gameObject;
         money_tablo = GameObject.Find("Canvas").gameObject.transform.FindChild("Text_salary").gameObject;
+        but_diselect = GameObject.Find("Canvas").gameObject.transform.FindChild("unitStats").gameObject.transform.FindChild("diselect").gameObject;
     }
     public void Update()
     {
@@ -95,10 +97,14 @@ public class UI : MonoBehaviour
         {
          
             but_build_barrikade.SetActive(false);
-            unitStats_panel.SetActive(false);
+            
             enemy_stats.SetActive(false);
             
             
+        }
+        else if (button_name == "hide_stats")
+        {
+            unitStats_panel.SetActive(false);
         }
         else if(button_name == "build_barrikade")
         {

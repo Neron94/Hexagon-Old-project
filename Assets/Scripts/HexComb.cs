@@ -21,6 +21,7 @@ public class HexComb : MonoBehaviour {
     public GameObject army_on_hex;
     public GameObject city_on_hex;
     public GameObject army;
+
     #endregion
 
 
@@ -28,6 +29,9 @@ public class HexComb : MonoBehaviour {
         DB = GameObject.FindGameObjectWithTag("Logic").GetComponent<DataBase>();
         DB.hex_comb.Add(gameObject);
         sp = gameObject.GetComponentInChildren<SpriteRenderer>();
+
+       
+
                   }
 	void Update () {
         
@@ -76,8 +80,6 @@ public class HexComb : MonoBehaviour {
             {
                 if (army_on_hex != null)
                 {
-
-
 
                     if (unit_on_hex.tag == "player_unit")
                     {
