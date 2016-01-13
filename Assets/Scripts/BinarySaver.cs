@@ -9,7 +9,7 @@ public static class BinarySaver
 {
     public static void Save(object obj, string fileName)
     {
-        FileStream fs = new FileStream(fileName, FileMode.Create);
+        FileStream fs = new FileStream(Application.persistentDataPath + fileName, FileMode.Create);
         BinaryFormatter formatter = new BinaryFormatter();
         try
         {
@@ -28,16 +28,16 @@ public static class BinarySaver
 
     public static object Load(string fileName)
     {
-        
-        if (!File.Exists(fileName))
+
+        if (!File.Exists(Application.persistentDataPath + fileName))
         {
             Debug.Log("Нечего грузить");
             return null;
 
         }
-            
 
-        FileStream fs = new FileStream(fileName, FileMode.Open);
+
+        FileStream fs = new FileStream(Application.persistentDataPath + fileName, FileMode.Open);
         object obj = null;
         try
         {

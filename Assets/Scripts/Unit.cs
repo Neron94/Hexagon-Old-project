@@ -392,29 +392,18 @@ public class Unit : MonoBehaviour {
       }
         
     }
-    
+
 
     private void OnTriggerEnter(Collider col)
     {
-        if(col.gameObject.tag == "Hex")
+        if (col.gameObject.tag == "Hex")
         {
             my_hex = col.gameObject;
             Bonus_Calculating();
-            if(gameObject.tag == "player_unit")
-            {
-               // my_hex.GetComponent<HexComb>().Change(2);
-            }
-            else if(gameObject.tag == "Enemy")
-            {
-               // my_hex.GetComponent<HexComb>().Change(3);
-            }
-            
-        }
-        else if (col.gameObject.tag == "player_unit")
-        {
 
         }
     }
+
     private void OnTriggerExit(Collider col)
     {
         if(col.gameObject.tag == "Hex")

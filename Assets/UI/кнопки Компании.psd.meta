@@ -1,0 +1,89 @@
+fileFormatVersion: 2
+guid: 0e4d550baedec3e4eb43455bddc167de
+timeCreated: 1452705847
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: "\u043A\u043D\u043E\u043F\u043A\u0438 \u041A\u043E\u043C\u043F\u0430\u043D\u0438\u0438_0"
+    21300002: "\u043A\u043D\u043E\u043F\u043A\u0438 \u041A\u043E\u043C\u043F\u0430\u043D\u0438\u0438_1"
+    21300004: "\u043A\u043D\u043E\u043F\u043A\u0438 \u041A\u043E\u043C\u043F\u0430\u043D\u0438\u0438_2"
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: "\u043A\u043D\u043E\u043F\u043A\u0438 \u041A\u043E\u043C\u043F\u0430\u043D\u0438\u0438_0"
+      rect:
+        serializedVersion: 2
+        x: 157
+        y: 82
+        width: 1168
+        height: 1803
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: "\u043A\u043D\u043E\u043F\u043A\u0438 \u041A\u043E\u043C\u043F\u0430\u043D\u0438\u0438_1"
+      rect:
+        serializedVersion: 2
+        x: 1335
+        y: 1155
+        width: 7
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: "\u043A\u043D\u043E\u043F\u043A\u0438 \u041A\u043E\u043C\u043F\u0430\u043D\u0438\u0438_2"
+      rect:
+        serializedVersion: 2
+        x: 1633
+        y: 141
+        width: 1195
+        height: 1759
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

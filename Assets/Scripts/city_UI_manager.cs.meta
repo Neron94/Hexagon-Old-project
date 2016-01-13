@@ -1,10 +1,33 @@
 fileFormatVersion: 2
 guid: 9b190dc3efa79e640aaa8ed0a1f9bb84
-timeCreated: 1451309281
+timeCreated: 1452691488
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - panel_main: {instanceID: 0}
+  - panel_structers: {instanceID: 0}
+  - panel_naym: {instanceID: 0}
+  - panel_garnizon: {instanceID: 0}
+  - unit_but_1: {instanceID: 0}
+  - unit_but_2: {instanceID: 0}
+  - unit_but_3: {instanceID: 0}
+  - unit_1: {instanceID: 0}
+  - unit_2: {instanceID: 0}
+  - unit_3: {instanceID: 0}
+  - structers: {instanceID: 0}
+  - sal_factory: {instanceID: 0}
+  - sal_factory_but: {instanceID: 0}
+  - baracks: {instanceID: 0}
+  - cannon: {instanceID: 0}
+  - tank: {instanceID: 0}
+  - air: {instanceID: 0}
+  - naym_infantry: {instanceID: 0}
+  - naym_tank: {instanceID: 0}
+  - naym_cannon: {instanceID: 0}
+  - naym_Air: {instanceID: 0}
+  - sal_fac_lvl_one: {fileID: 21300036, guid: 944c9677c6e0f9d4abdffe2ffe0ff93b, type: 3}
+  - sal_fac_lvl_two: {fileID: 21300038, guid: 944c9677c6e0f9d4abdffe2ffe0ff93b, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

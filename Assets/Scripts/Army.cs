@@ -6,7 +6,6 @@ public class Army : MonoBehaviour
 {
 
     #region Variables
-   
     public List<GameObject> army_contain;
     private bool army_chose = false;
     public GameObject army_selector;

@@ -1,24 +1,30 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 
 public class SaveLoadGameMy : MonoBehaviour
 {
     private DataBase DB;
 
-    public string saveUnit = "unitsSave.xml";
-    public string saveFra = "fracSave.xml";
-    public string saveCitys = "citysSave.xml";
+    public string saveUnit = "/unitsSave.asg";
+    public string saveFra = "/fracSave.asg";
+    public string saveCitys = "/citysSave.asg";
     public List<GameObject> saveUnits;
     public List<GameObject> saveCity;
     public List<GameObject> saveFrac;
     List<Units> loadUnits;
     List<Citys> loadCitys;
     List<GameFractions> loadFrac;
-
+ 
     void Awake()
     {
-        DB = GameObject.FindGameObjectWithTag("Logic").GetComponent<DataBase>();
+        
+        if(Application.loadedLevelName != "MainMenu")
+        {
+            DB = GameObject.FindGameObjectWithTag("Logic").GetComponent<DataBase>();
+        }
+        
         if(Application.loadedLevelName == "emptyLevel")
         {
             loadUnits = BinarySaver.Load(saveUnit) as List<Units>;
@@ -35,6 +41,7 @@ public class SaveLoadGameMy : MonoBehaviour
             Load();
         }
     }
+  
    
     public void Save_Press()
     {
@@ -42,13 +49,16 @@ public class SaveLoadGameMy : MonoBehaviour
        BinarySaver.Save(GetUnitsToSave(), saveUnit);
        BinarySaver.Save(GetCitysToSave(), saveCitys);
        BinarySaver.Save(GetFracToSave(), saveFra);
-       
+       Debug.Log("Сохранение");
   
     }
     public void Load_Press()
     {
+        if(File.Exists(Application.persistentDataPath + saveUnit))
+        {
+            Application.LoadLevel(0);
+        }
         
-        Application.LoadLevel(0);
         
         
     }

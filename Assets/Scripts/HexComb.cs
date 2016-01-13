@@ -89,6 +89,10 @@ public class HexComb : MonoBehaviour {
                             col.gameObject.transform.GetChild(2).gameObject.SetActive(false);
                         }
                     }
+                    else if (unit_on_hex.tag == "Enemy")
+                    {
+                        
+                    }
 
 
                 }
@@ -111,22 +115,18 @@ public class HexComb : MonoBehaviour {
                         }
                     }
                     else if (unit_on_hex.tag == "Enemy")
-                    {
-                        if (col.gameObject.tag == "Enemy")
-                        {
-                            //process sozdaniya dlia vragov poshol dlia vragov
-                        }
-                        else
-                        {
-
-                        }
-                    }
+                            {
+                               
+                            }
+                    
+                    
 
                 }
             }  
         }
         
     }
+
 
     private void OnTriggerExit(Collider col)
     {
@@ -138,11 +138,7 @@ public class HexComb : MonoBehaviour {
                 army.GetComponent<Army>().army_contain.Remove(col.gameObject);
                 
             }
-            else if (col.gameObject.tag == "Enemy")
-            {
-                col.gameObject.transform.GetChild(2).gameObject.SetActive(true);
-                unit_on_hex = null;
-            }
+            
         }
         if(unit_on_hex != null)
         {

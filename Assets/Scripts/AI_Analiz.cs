@@ -84,8 +84,13 @@ public class AI_Analiz : MonoBehaviour {
         {
             return cachCity;
         }
-        best_dist = 0;
-        return null;
+        else
+        {
+            best_dist = 0;
+            return null;
+        }
+        
+        
         
         
     }

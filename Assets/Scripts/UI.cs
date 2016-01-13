@@ -126,7 +126,7 @@ public class UI : MonoBehaviour
         }    
         else if (button_name == "exit")
         {
-            Application.Quit();
+            Application.LoadLevel(2);
         }
         else if (button_name == "hide_army")
         {
