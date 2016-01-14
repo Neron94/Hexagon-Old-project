@@ -20,19 +20,31 @@ public class cameraContr : MonoBehaviour {
     private  Vector3 zoom_start;
     private  Vector3 zoom_end;
     public  float speed = 3;
+
+    public Vector3 cameraMove;
+    public Vector3 zoom;
+
+
+
     #endregion
 
     void Start () {
         camera_object = Camera.main.gameObject;
         SM = GameObject.FindGameObjectWithTag("Logic").GetComponent<StateManager>();
         DB = GameObject.FindGameObjectWithTag("Logic").GetComponent<DataBase>();
+        cameraMove = camera_object.transform.position;
+        zoom = camera_object.transform.position;
 	}
+
 	void Update () {
+
+
         
         if(SM.state_unit_movement)
-        {          
-            Camera.main.gameObject.transform.position = new Vector3(DB.unit_is_moving[0].transform.position.x, Camera.main.gameObject.transform.position.y, DB.unit_is_moving[0].transform.position.z);
-            
+        {
+            cameraMove = camera_object.transform.position;
+            camera_object.transform.position = new Vector3(DB.unit_is_moving[0].transform.position.x, zoom.y, DB.unit_is_moving[0].transform.position.z);
+            cameraMove = camera_object.transform.position;
         }
      
         Ray first_ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -54,16 +66,19 @@ public class cameraContr : MonoBehaviour {
 
                 if (distance >= 0.1)
                 {
-
-                    camera_object.transform.position += start_point - end_point;
-
-
-
-
+                   
+                    
+                    cameraMove += start_point - end_point;
+                    camera_object.transform.position = new Vector3(cameraMove.x = Mathf.Clamp(cameraMove.x, -5.0f, 275.0f), camera_object.transform.position.y, cameraMove.z = Mathf.Clamp(cameraMove.z, 32.0f, 334.0f));
+                   
+                   
                 }
 
             }
         }
+            
+           
+        
         else if (Input.touchCount == 2)
         {
             Touch touchzero = Input.GetTouch(0);
@@ -76,8 +91,9 @@ public class cameraContr : MonoBehaviour {
             float touchdeltaMag = (touchzero.position - toucheone.position).magnitude;
 
             float deltaMagnitudeDiff = prevTouchDeltaMag - touchdeltaMag;
-
-            Camera.main.fieldOfView += deltaMagnitudeDiff * speed;
+            
+            zoom.y += deltaMagnitudeDiff * speed;
+            camera_object.transform.position = new Vector3(camera_object.transform.position.x,zoom.y = Mathf.Clamp(zoom.y,52.0f,115.0f),camera_object.transform.position.z);
             Camera.main.fieldOfView = Mathf.Clamp(Camera.main.fieldOfView, 41.9f, 86.9f);
         }
            
